@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ML Kit cn</string>
+    <string name="picture">图片</string>
+    <string name="help_text">
+      <b>HDR Viewfinder Demo:</b>\n\n
+
+      Tap viewfinder to switch modes.\n\n
+
+      <b>Normal:</b> Standard camera preview\n
+      <b>Split:</b> Manual exposure control\n
+      <b>HDR:</b> Fused HDR viewfinder\n\n
+
+      Swipe up/down in Split/HDR modes to change manual exposure
+      values.\n\n
+
+      The left half of the viewfinder controls exposure time for
+      even-numbered frames, and the right half of the viewfinder
+      controls exposure time for odd-numbered frames
+    </string>
+
+    <string name="info">信息</string>
+
+    <string name="camera_permission_rationale">示例应用需要相机和存储权限</string>
+    <string name="storage_permission_rationale">示例应用需要存储权限</string>
+    <string name="camera_no_good">没有可用的后置摄像头！</string>
+    <string name="camera_disabled">相机已通过设备策略禁用</string>
+    <string name="camera_disconnected">相机在打开前已断开连接</string>
+    <string name="camera_error">相机服务报告了错误</string>
+    <string name="camera_unknown">未知相机错误: %s</string>
+    <string name="camera_permission_denied_explanation">您已拒绝该应用需要其核心功能的权限。 如果您选择过不再询问，则需要使用“设置”重新启用权限。</string>
+
+    <string name="ok">OK</string>
+    <string name="settings">设置</string>
+    <string name="cancel">取消</string>
+    <string name="permission_camera_rationale">需要访问相机进行检测</string>
+    <string name="no_camera_permission">该应用程序没有摄像头权限，因此无法运行。 应用程序现在将退出。</string>
+    <string name="low_storage_error">由于设备存储空间不足，无法下载人脸检测器依赖性</string>
+    <string name="toggle_turn_on">前摄像头</string>
+    <string name="toggle_turn_off">后摄像头</string>
+    <string name="desc_camera_source_activity">视觉探测器演示与实时摄像机预览</string>
+    <string name="desc_still_image_activity">视觉检测器演示静态图像</string>
+
+    <string name="detector_live">实时检测</string>
+    <string name="detector_still">图像检测</string>
+
+    <string name="cloud_classification">云端图像分类</string>
+    <string name="cloud_text">云端文字识别</string>
+    <string name="select_from_album">从相册选择图像</string>
+    <string name="take_photo">拍照</string>
+    <string name="idcard_recognition">身份证识别</string>
+    <string name="detector_still_desc">云端图像识别</string>
+    <string name="detector_live_desc">相机实时连续识别</string>
+    <string name="more_face_datas">采集更多人脸数据</string>
+    <string name="versions">版本号：</string>
+    <string name="language_setting">语言</string>
+    <string name="language_notice">文字识别语言设置</string>
+    <string name="simplified_chinese">简体中文</string>
+    <string name="english_choose">英文</string>
+    <string name="japanese_choose">日文</string>
+    <string name="korean_choose">韩文</string>
+    <string name="latin_choose">拉丁文</string>
+    <string name="get_data_failed">获取数据失败</string>
+    <string name="loading_data">加载中…</string>
+    <string name="load_pictures">加载图片</string>
+
+    <string name="image_segmentation_s">图像分割</string>
+    <string name="document_recognition_s">文档识别</string>
+    <string name="photographed_shopping_s">拍照购</string>
+    <string name="face_detection_s">人脸识别</string>
+    <string name="object_detection_s">对象检测</string>
+    <string name="image_classification_s">图片分类</string>
+    <string name="landmark_s">地标识别</string>
+    <string name="text_detection_s">文字识别</string>
+    <string name="idcard_recognition_s">身份证识别</string>
+
+    <string name="image_segmentation">图像分割</string>
+    <string name="translate">翻译</string>
+    <string name="photographed_shopping">拍照购</string>
+    <string name="face_detection">人脸识别</string>
+    <string name="object_detection">对象检测</string>
+    <string name="image_classification">图片分类</string>
+    <string name="landmark">地标识别</string>
+    <string name="text_detection">文字识别</string>
+    <string name="document_recognition">文档识别</string>
+    <string name="all">所有</string>
+    <string name="coming_soon">敬请期待</string>
+    <string name="back">返回</string>
+    <string name="translate_v">翻译</string>
+    <string name="language_recognition">语种识别</string>
+    <string name="elapsed_time">耗时： </string>
+    <string name="zero_character"> 0 字符</string>
+    <string name="image_category">视觉类</string>
+    <string name="language_category">语言类</string>
+    <string name="other_category">其他类</string>
+    <string name="translate_text_hint">机器学习</string>
+    <string name="background_substitution">背景替换</string>
+    <string name="cutout">人像抠图</string>
+    <string name="select_picture">选择图片</string>
+    <string name="cut">剪切</string>
+    <string name="replace_background">背景</string>
+    <string name="save">保存</string>
+    <string name="cut_success">剪切成功</string>
+    <string name="save_success">保存成功</string>
+
+    <string name="please_select_picture">请选择一张要处理的图片~</string>
+    <string name="click_add_picture">点击添加图片~</string>
+    <string name="no_pic_neededSave">没有可保存的图片</string>
+    <string name="target_object">目标</string>
+    <string name="color">颜色</string>
+
+    <string name="rn_eid_upload_self_photo" priority="translator">"请上传本人身份证照片"</string>
+    <string name="rn_eid_upload_face" priority="translator">"上传人像面"</string>
+    <string name="rn_eid_upload_back" priority="translator">"上传国徽面"</string>
+    <string name="rn_eid_hint_upload_valid_photo" priority="translator">"请上传有效身份证照片"</string>
+    <string name="rn_eid_hint_image_not_complete" priority="translator">"智能检测识别到图片可能存在部分遮挡，如果清晰可见请忽略"</string>
+    <string name="rn_eid_hint_ensure_user_info_security" priority="translator">"我们将依法保护您的个人信息安全"</string>
+    <string name="rn_eid_take_origin_card" priority="translator">"检测结果"</string>
+    <string name="device_side">端侧</string>
+    <string name="cloud_side">云侧</string>
+
+    <string name="similar_products">相似商品</string>
+    <string name="empty">无</string>
+
+    <string name="idcard_mark">注：只用于中国大陆地区</string>
+</resources>

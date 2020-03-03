@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#000000</color>
+    <color name="common_line_color">#D9D9D9</color>
+    <color name="primary_text_color">#A9A9A9</color>
+    <color name="secondary_text_color">#626262</color>
+    <color name="logo_background">#003853</color>
+    <color name="primary_background">#f2f2f2</color>
+    <color name="button_background">#5CACEE</color>
+    <color name="white">#ffffff</color>
+    <color name="black_color">#1d1d1d</color>
+    <color name="color_gray_word">#cc696969</color>
+    <color name="white_color">#E3E7F0</color>
+    <!--标题蓝色背景颜色-->
+    <color name="blue_title_color">#2E5C8D</color>
+    <!--dialog边框颜色-->
+    <color name="frame_dialog_color">#646464</color>
+    <!--浅绿色-->
+    <color name="color_light_green">#BBE0E3</color>
+    <!--绿色-->
+    <color name="color_green">#008000</color>
+    <!--灰色框-->
+    <color name="color_gray">#c2c2c2</color>
+    <!--红色-->
+    <color name="color_red">#FF0000</color>
+    <color name="color_red_card">#FFFA2A2D</color>
+    <!--黄颜色-->
+    <color name="color_yellow">#FFE557</color>
+    <!--蓝色字体-->
+    <color name="color_blue_text">#60B2BE</color>
+    <color name="blue_color">#182E46</color>
+
+</resources>

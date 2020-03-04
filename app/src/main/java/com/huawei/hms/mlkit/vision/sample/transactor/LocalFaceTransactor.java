@@ -76,12 +76,8 @@ public class LocalFaceTransactor extends BaseTransactor<List<MLFace>> {
             CameraImageGraphic imageGraphic = new CameraImageGraphic(graphicOverlay, originalCameraImage);
             graphicOverlay.addGraphic(imageGraphic);
         }
-        for (int i = 0; i < faces.size(); ++i) {
-            MLFace face = faces.get(i);
-
-            LocalFaceGraphic hmsMLLocalFaceGraphic = new LocalFaceGraphic(graphicOverlay, face, this.isLandScape, this.isOpenFeatures);
-            graphicOverlay.addGraphic(hmsMLLocalFaceGraphic);
-        }
+        LocalFaceGraphic hmsMLLocalFaceGraphic = new LocalFaceGraphic(graphicOverlay, faces, this.isLandScape, this.isOpenFeatures);
+        graphicOverlay.addGraphic(hmsMLLocalFaceGraphic);
         graphicOverlay.postInvalidate();
 
     }

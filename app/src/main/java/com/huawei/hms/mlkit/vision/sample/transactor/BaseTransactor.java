@@ -103,7 +103,7 @@ public abstract class BaseTransactor<T> implements ImageTransactor {
             if (this.isFaceDetection()) {
                 ByteBuffer resizeImage = ByteBuffer.allocate((CameraConfiguration.DEFAULT_WIDTH * CameraConfiguration.DEFAULT_HEIGHT * 3) / 2 + 1);
                 CommonUtils.handleByteBuffer(this.transactingImage, resizeImage,
-                        CameraConfiguration.MAX_WIDTH, CameraConfiguration.MAX_HEIGHT,
+                        this.transactingMetaData.getWidth(), this.transactingMetaData.getHeight(),
                         CameraConfiguration.DEFAULT_WIDTH,CameraConfiguration.DEFAULT_HEIGHT);
                 this.detectInVisionImage(
                         bitmap, MLFrame.fromByteBuffer(resizeImage, metadata), this.transactingMetaData, graphicOverlay);

@@ -83,18 +83,18 @@
 
    Ability called by the sample:
     1. Face Recognition
-		a. MLAnalyzerFactory.getInstance().GetFaceAnalyzer (MLFaceAnalyzerSetting): Create a face recognizer. This is the most core class of face recognition.
-		b. MLFaceAnalyzer.setTransactor(): Set the face recognition result processor for subsequent processing of the recognition result.
-		c. MLFaceAnalyzerSetting.Factory().SetFeatureType (MLFaceAnalyzerSetting.TYPE_FEATURES): Turn on facial expression and feature detection, including smile, eyes open, beard and age.
-		d. MLFaceAnalyzerSetting.Factory().AllowTracing (): Whether to start face tracking mode
-		e. LensEngine: camera source that generates continuous image data for detection.
-	2. Text Recognition
-		a. MLAnalyzerFactory.getInstance().getLocalTextAnalyzer()：Create a device text recognizer.
-		b. MLAnalyzerFactory.getInstance().getRemoteTextAnalyzer()：Create a cloud text recognizer.
-		c. MLAnalyzerFactory.getInstance().getRemoteDocumentAnalyzer()：Create a cloud document recognizer.
-		d. MLTextAnalyzer.asyncAnalyseFrame(frame): Parse text information in pictures.
-		e. MLDocumentAnalyzer.asyncAnalyseFrame(frame): Parse document information in pictures.
-		f. MLText.getBlocks(): Get text blocks. Generally, a text block represents one line. There is also a case where a text block corresponds to multiple lines.
+        a. MLAnalyzerFactory.getInstance().GetFaceAnalyzer (MLFaceAnalyzerSetting): Create a face recognizer. This is the most core class of face recognition.
+	b. MLFaceAnalyzer.setTransactor(): Set the face recognition result processor for subsequent processing of the recognition result.
+	c. MLFaceAnalyzerSetting.Factory().SetFeatureType (MLFaceAnalyzerSetting.TYPE_FEATURES): Turn on facial expression and feature detection, including smile, eyes open, beard and age.
+	d. MLFaceAnalyzerSetting.Factory().AllowTracing (): Whether to start face tracking mode
+	e. LensEngine: camera source that generates continuous image data for detection.
+    2. Text Recognition
+	a. MLAnalyzerFactory.getInstance().getLocalTextAnalyzer()：Create a device text recognizer.
+	b. MLAnalyzerFactory.getInstance().getRemoteTextAnalyzer()：Create a cloud text recognizer.
+	c. MLAnalyzerFactory.getInstance().getRemoteDocumentAnalyzer()：Create a cloud document recognizer.
+	d. MLTextAnalyzer.asyncAnalyseFrame(frame): Parse text information in pictures.
+	e. MLDocumentAnalyzer.asyncAnalyseFrame(frame): Parse document information in pictures.
+	f. MLText.getBlocks(): Get text blocks. Generally, a text block represents one line. There is also a case where a text block corresponds to multiple lines.
 		g. MLText.Block.getContents(): Get list of text lines(MLText.TextLine).
 		h. MLText.TextLine.getContents(): Get the text content of each line(MLText.Word, The device text analyzer returns contains spaced, the cloud text analyzer does not).
 		i. MLText.Word.getStringValue(): Gets the word of each line.

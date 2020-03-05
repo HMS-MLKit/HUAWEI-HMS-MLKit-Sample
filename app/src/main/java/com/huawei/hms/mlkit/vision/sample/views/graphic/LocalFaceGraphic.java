@@ -42,17 +42,16 @@ public class LocalFaceGraphic extends BaseGraphic {
 
     private final GraphicOverlay overlay;
 
-    private final Paint landmarkPaint;
-
-    private final Paint facePaint;
     private final Paint eyePaint;
     private final Paint eyebrowPaint;
     private final Paint lipPaint;
     private final Paint nosePaint;
     private final Paint noseBasePaint;
     private final Paint textPaint;
+    private final Paint facePaint;
     private final Paint faceFeaturePaintText;
     private final Paint faceFeaturePaint;
+    private final Paint landmarkPaint;
     private boolean isLandScape;
     private boolean isOpenFeatures;
 

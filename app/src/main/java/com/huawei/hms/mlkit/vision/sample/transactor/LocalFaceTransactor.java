@@ -70,7 +70,6 @@ public class LocalFaceTransactor extends BaseTransactor<List<MLFace>> {
             @NonNull List<MLFace> faces,
             @NonNull FrameMetadata frameMetadata,
             @NonNull GraphicOverlay graphicOverlay) {
-
         graphicOverlay.clear();
         if (originalCameraImage != null) {
             CameraImageGraphic imageGraphic = new CameraImageGraphic(graphicOverlay, originalCameraImage);
@@ -79,7 +78,6 @@ public class LocalFaceTransactor extends BaseTransactor<List<MLFace>> {
         LocalFaceGraphic hmsMLLocalFaceGraphic = new LocalFaceGraphic(graphicOverlay, faces, this.isLandScape, this.isOpenFeatures);
         graphicOverlay.addGraphic(hmsMLLocalFaceGraphic);
         graphicOverlay.postInvalidate();
-
     }
 
     @Override

@@ -56,7 +56,6 @@ public class LocalFaceGraphic extends BaseGraphic {
     private boolean isOpenFeatures;
 
     private volatile List<MLFace> faces;
-    private volatile MLFace facePaintEmotion;
 
     public LocalFaceGraphic(GraphicOverlay overlay, List<MLFace> faces, boolean isLandScape, boolean isOpenFeatures) {
         super(overlay);

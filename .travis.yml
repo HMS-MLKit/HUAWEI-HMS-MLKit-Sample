@@ -25,4 +25,4 @@ deploy:
   on:
     # tags set to true means only deployed if there are tags
     tags: false
-    all_branches: true
+    branch: master

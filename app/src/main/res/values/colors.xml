@@ -11,22 +11,23 @@
     <color name="black_color">#1d1d1d</color>
     <color name="color_gray_word">#cc696969</color>
     <color name="white_color">#E3E7F0</color>
-    <!--标题蓝色背景颜色-->
+    <!--Header background color-blue-->
     <color name="blue_title_color">#2E5C8D</color>
-    <!--dialog边框颜色-->
+    <!--Dialog border color-->
     <color name="frame_dialog_color">#646464</color>
-    <!--浅绿色-->
+    <!--Light green-->
     <color name="color_light_green">#BBE0E3</color>
-    <!--绿色-->
+    <!--Green-->
     <color name="color_green">#008000</color>
-    <!--灰色框-->
+    <!--Gray-->
     <color name="color_gray">#c2c2c2</color>
-    <!--红色-->
+    <!--Red-->
     <color name="color_red">#FF0000</color>
     <color name="color_red_card">#FFFA2A2D</color>
-    <!--黄颜色-->
+    <color name="color_red_cancel">#EE6A50</color>
+    <!--Yellow-->
     <color name="color_yellow">#FFE557</color>
-    <!--蓝色字体-->
+    <!--Blue text-->
     <color name="color_blue_text">#60B2BE</color>
     <color name="blue_color">#182E46</color>
 

@@ -1,17 +1,17 @@
 /**
  * Copyright 2020. Huawei Technologies Co., Ltd. All rights reserved.
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
  */
 
 package com.huawei.hms.mlkit.vision.sample.views.graphic;
@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -42,37 +44,38 @@ public class LocalFaceGraphic extends BaseGraphic {
 
     private final GraphicOverlay overlay;
 
+    private final Paint landmarkPaint;
+
+    private final Paint facePaint;
     private final Paint eyePaint;
     private final Paint eyebrowPaint;
     private final Paint lipPaint;
     private final Paint nosePaint;
     private final Paint noseBasePaint;
     private final Paint textPaint;
-    private final Paint facePaint;
     private final Paint faceFeaturePaintText;
     private final Paint faceFeaturePaint;
-    private final Paint landmarkPaint;
-    private boolean isLandScape;
     private boolean isOpenFeatures;
 
     private volatile List<MLFace> faces;
+    private Context mContext;
 
-    public LocalFaceGraphic(GraphicOverlay overlay, List<MLFace> faces, boolean isLandScape, boolean isOpenFeatures) {
+    public LocalFaceGraphic(GraphicOverlay overlay, List<MLFace> faces, Context context, boolean isOpenFeatures) {
         super(overlay);
 
-        this.isLandScape = isLandScape;
+        this.mContext = context;
         this.faces = faces;
         this.overlay = overlay;
         this.isOpenFeatures = isOpenFeatures;
 
         this.textPaint = new Paint();
         this.textPaint.setColor(Color.WHITE);
-        this.textPaint.setTextSize(24);
+        this.textPaint.setTextSize(this.dp2px(this.mContext, 6));
         this.textPaint.setTypeface(Typeface.DEFAULT);
 
         this.faceFeaturePaintText = new Paint();
         this.faceFeaturePaintText.setColor(Color.WHITE);
-        this.faceFeaturePaintText.setTextSize(35);
+        this.faceFeaturePaintText.setTextSize(this.dp2px(this.mContext,11));
         this.faceFeaturePaintText.setTypeface(Typeface.DEFAULT);
 
         this.faceFeaturePaint = new Paint();
@@ -88,7 +91,7 @@ public class LocalFaceGraphic extends BaseGraphic {
         this.landmarkPaint = new Paint();
         this.landmarkPaint.setColor(Color.RED);
         this.landmarkPaint.setStyle(Paint.Style.FILL);
-        this.landmarkPaint.setStrokeWidth(10f);
+        this.landmarkPaint.setStrokeWidth(this.dp2px(this.mContext, 2));
 
         this.eyePaint = new Paint();
         this.eyePaint.setColor(Color.parseColor("#00ccff"));
@@ -141,14 +144,14 @@ public class LocalFaceGraphic extends BaseGraphic {
         if (this.faces == null) {
             return;
         }
-        float start = 270f;
+        float start = this.dp2px(this.mContext, 110);
         float x = start;
         float width = this.overlay.getWidth() / 2.0f - start;
         float y;
-        if (this.isLandScape) {
-            y = this.overlay.getHeight() - 420.0f;
+        if (this.isLandScape()) {
+            y = this.overlay.getHeight() - this.dp2px(this.mContext,130);
         } else {
-            y = this.overlay.getHeight() - 180.0f;
+            y = this.overlay.getHeight() - this.dp2px(this.mContext,60);
         }
         // Show all features mode.
         if (this.isOpenFeatures) {
@@ -156,7 +159,7 @@ public class LocalFaceGraphic extends BaseGraphic {
                 List<MLFace> faceFeatures = new ArrayList<MLFace>();
                 List<MLFace> faceOthers = new ArrayList<MLFace>();
                 faceFeatures.add(this.faces.get(0));
-                this.paintFeature(faceFeatures, canvas, x, y, width);
+                this.paintFeatures(faceFeatures, canvas, x, y, width);
                 for (int i = 1; i < this.faces.size(); i++) {
                     // Paint all points in face.
                     List<MLPosition> points = this.faces.get(i).getAllPoints();
@@ -183,8 +186,9 @@ public class LocalFaceGraphic extends BaseGraphic {
      * @param y Y-coordinate of rectangular frame showing face feature information.
      * @param width The width of the rectangular frame displaying the facial feature information.
      */
-    private void paintFeature(List<MLFace> faces, Canvas canvas, float x, float y, float width) {
+    private void paintFeatures(List<MLFace> faces, Canvas canvas, float x, float y, float width) {
         float start = x;
+        float space = this.dp2px(this.mContext, 12);
         for (MLFace face : faces) {
             HashMap<String, Float> emotions = new HashMap<>();
             emotions.put("Smiling", face.possibilityOfSmiling());
@@ -197,33 +201,32 @@ public class LocalFaceGraphic extends BaseGraphic {
             List<String> result = this.sortHashMap(emotions);
             DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
-            canvas.drawText("Hat Probability: " + decimalFormat.format(face.getFeatures().getHatProbability()), x, y, this.faceFeaturePaintText);
+            canvas.drawText("Glass Probability: " + decimalFormat.format(face.getFeatures().getSunGlassProbability()), x, y, this.faceFeaturePaintText);
             x = x + width;
             String sex = (face.getFeatures().getSexProbability() > 0.5f) ? "Female" : "Male";
             canvas.drawText("Gender: " + sex, x, y, this.faceFeaturePaintText);
-            y = y - 40.0f;
+            y = y - space;
             x = start;
-            canvas.drawText("Age: " + face.getFeatures().getAge(), x, y, this.faceFeaturePaintText);
-            x = x + width;
-            canvas.drawText("Glass Probability: " + decimalFormat.format(face.getFeatures().getSunGlassProbability()), x, y, this.faceFeaturePaintText);
-            y = y - 40.0f;
-            x = start;
-            canvas.drawText("Left eye open Probability: " + decimalFormat.format(face.opennessOfLeftEye()), x, y, this.faceFeaturePaintText);
-            x = x + width;
-            canvas.drawText("Right eye open Probability: " + decimalFormat.format(face.opennessOfRightEye()), x, y, this.faceFeaturePaintText);
-            x = start;
-            y = y - 40.0f;
-            canvas.drawText("Moustache Probability: " + decimalFormat.format(face.getFeatures().getMoustacheProbability()), x, y, this.faceFeaturePaintText);
-            x = x + width;
             canvas.drawText("EulerAngleY: " + decimalFormat.format(face.getRotationAngleY()), x, y, this.faceFeaturePaintText);
-            y = y - 40.0f;
+            x = x + width;
+            canvas.drawText("EulerAngleX: " + decimalFormat.format(face.getRotationAngleX()), x, y, this.faceFeaturePaintText);
+            y = y - space;
             x = start;
             canvas.drawText("EulerAngleZ: " + decimalFormat.format(face.getRotationAngleZ()), x, y, this.faceFeaturePaintText);
             x = x + width;
-            canvas.drawText("EulerAngleX: " + decimalFormat.format(face.getRotationAngleX()), x, y, this.faceFeaturePaintText);
-            y = y - 40.0f;
+            canvas.drawText("Emotion: " + result.get(0), x, y, this.faceFeaturePaintText);
             x = start;
-            canvas.drawText(result.get(0), x, y, this.faceFeaturePaintText);
+            y = y - space;
+            canvas.drawText("Hat Probability: " + decimalFormat.format(face.getFeatures().getHatProbability()), x, y, this.faceFeaturePaintText);
+            x = x + width;
+            canvas.drawText("Age: " + face.getFeatures().getAge(), x, y, this.faceFeaturePaintText);
+            y = y - space;
+            x = start;
+            canvas.drawText("Moustache Probability: " + decimalFormat.format(face.getFeatures().getMoustacheProbability()), x, y, this.faceFeaturePaintText);
+            y = y - space;
+            canvas.drawText("Right eye open Probability: " + decimalFormat.format(face.opennessOfRightEye()), x, y, this.faceFeaturePaintText);
+            y = y - space;
+            canvas.drawText("Left eye open Probability: " + decimalFormat.format(face.opennessOfLeftEye()), x, y, this.faceFeaturePaintText);
             // Paint all points in face.
             List<MLPosition> points = face.getAllPoints();
             for (int i = 0; i < points.size(); i++) {
@@ -257,11 +260,11 @@ public class LocalFaceGraphic extends BaseGraphic {
                     if (i != (points.size() - 1)) {
                         MLPosition next = points.get(i + 1);
                         if (point.getX() != null && point.getY() != null) {
+                            canvas.drawLines(new float[]{this.translateX(point.getX().floatValue()), this.translateY(point.getY().floatValue()),
+                                    this.translateX(next.getX().floatValue()), this.translateY(next.getY().floatValue())}, this.getPaint(contour));
                             if (i % 3 == 0) {
                                 canvas.drawText(i + 1 + "", this.translateX(point.getX().floatValue()), this.translateY(point.getY().floatValue()), this.textPaint);
                             }
-                            canvas.drawLines(new float[]{this.translateX(point.getX().floatValue()), this.translateY(point.getY().floatValue()),
-                                    this.translateX(next.getX().floatValue()), this.translateY(next.getY().floatValue())}, this.getPaint(contour));
                         }
                     }
                 }
@@ -276,6 +279,16 @@ public class LocalFaceGraphic extends BaseGraphic {
                 }
             }
         }
+    }
+
+    private float dp2px(Context context, float dipValue) {
+        return dipValue * context.getResources().getDisplayMetrics().density + 0.5f;
+    }
+
+    private boolean isLandScape() {
+        Configuration configuration = this.mContext.getResources().getConfiguration(); // Get the configuration information.
+        int ori = configuration.orientation; // Get screen orientation.
+        return ori == Configuration.ORIENTATION_LANDSCAPE;
     }
 
     private Paint getPaint(MLFaceShape contour) {

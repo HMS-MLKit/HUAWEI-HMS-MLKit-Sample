@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="@dimen/toolbar_height"
         android:layout_marginBottom="0dp">
 
         <com.huawei.hms.mlkit.vision.sample.views.overlay.GraphicOverlay
@@ -25,44 +24,42 @@
             android:layout_alignParentBottom="true" />
     </com.huawei.hms.mlkit.vision.sample.camera.LensEnginePreview>
 
+    <ImageButton
+        android:id="@+id/face_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/button_circle_background"
+        android:src="@drawable/black_back" />
+
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/toolbar_height"
-        android:background="#000">
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_alignParentRight="true">
 
-        <ImageButton
-            android:id="@+id/face_back"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
-            android:background="@drawable/white_back"></ImageButton>
-
-        <LinearLayout
-            android:id="@+id/switch_button_layout"
+        <TextView
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_toLeftOf="@+id/switch_button_view"
+            android:text="@string/more_face_datas"
+            android:layout_centerVertical="true"
+            android:textColor="@color/white"
+            android:layout_marginRight="10dp"
+            android:textSize="15sp" />
+
+        <com.huawei.hms.mlkit.vision.sample.views.SwitchButton
+            android:id="@+id/switch_button_view"
+            android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_centerInParent="true"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="5dp"
-                android:gravity="center"
-                android:text="@string/more_face_datas"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-
-            <com.huawei.hms.mlkit.vision.sample.views.SwitchButton
-                android:id="@+id/switch_button_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical" />
-        </LinearLayout>
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
 
     </RelativeLayout>
+
 
     <ToggleButton
         android:id="@+id/face_facingSwitch"

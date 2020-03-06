@@ -12,8 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="40dp">
+        android:layout_alignParentTop="true">
 
         <com.huawei.hms.mlkit.vision.sample.views.overlay.GraphicOverlay
             android:id="@+id/classification_overlay"
@@ -24,37 +23,25 @@
             android:layout_alignParentBottom="true" />
     </com.huawei.hms.mlkit.vision.sample.camera.LensEnginePreview>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/toolbar_height"
-        android:background="#26000000">
+    <ImageButton
+        android:id="@+id/classification_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/button_circle_background"
+        android:src="@drawable/black_back" />
 
-        <ImageButton
-            android:id="@+id/classification_back"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
-            android:background="@drawable/white_back"></ImageButton>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/image_classification"
-            android:textColor="@color/white"
-            android:textSize="16sp"></TextView>
-
-        <ImageButton
-            android:id="@+id/imageSwitch"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:background="@mipmap/photo_album" />
-
-    </RelativeLayout>
+    <ImageButton
+        android:id="@+id/imageSwitch"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/button_circle_background"
+        android:tint="@color/secondary_text_color"
+        android:src="@mipmap/album_round" />
 
 
     <ToggleButton

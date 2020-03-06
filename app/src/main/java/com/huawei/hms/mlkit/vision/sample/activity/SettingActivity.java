@@ -16,7 +16,6 @@
 
 package com.huawei.hms.mlkit.vision.sample.activity;
 
-import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -27,10 +26,10 @@ import androidx.annotation.Nullable;
 
 import com.huawei.hms.mlkit.vision.sample.R;
 import com.huawei.hms.mlkit.vision.sample.util.Constant;
-import com.huawei.hms.mlkit.vision.sample.util.SharedPreferencesUtil;
+import com.huawei.hms.mlsdk.common.internal.client.SmartLog;
 
 public class SettingActivity extends BaseActivity implements View.OnClickListener {
-    private TextView mSelectLanguage;
+    private static final String TAG = "SettingActivity";
 
     private TextView mVersion;
 
@@ -38,60 +37,17 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
-        mSelectLanguage = findViewById(R.id.select_language);
         mVersion = findViewById(R.id.version);
         mVersion.setText(getVersionName());
-        findViewById(R.id.language_item).setOnClickListener(this);
         findViewById(R.id.back).setOnClickListener(this);
-        initData();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1000 && resultCode == 1001) {
-            String content = data.getStringExtra("language_result");
-            mSelectLanguage.setText(content);
-        }
-    }
-
-    private void initData() {
-        String spPostion = SharedPreferencesUtil.getInstance(this).getStringValue(Constant.POSITION_KEY);
-        switch (spPostion) {
-            case Constant.POSITION_CN:
-                mSelectLanguage.setText(getString(R.string.simplified_chinese));
-                break;
-            case Constant.POSITION_JA:
-                mSelectLanguage.setText(getString(R.string.japanese_choose));
-                break;
-            case Constant.POSITION_KO:
-                mSelectLanguage.setText(getString(R.string.korean_choose));
-                break;
-            case Constant.POSITION_LA:
-                mSelectLanguage.setText(getString(R.string.latin_choose));
-                break;
-            case Constant.POSITION_EN:
-                mSelectLanguage.setText(getString(R.string.english_choose));
-                break;
-            default:
-                if (Constant.IS_CHINESE) {
-                    mSelectLanguage.setText(getString(R.string.simplified_chinese));
-                } else {
-                    mSelectLanguage.setText(getString(R.string.english_choose));
-                }
-                break;
-        }
-    }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.back:
                 finish();
-                break;
-            case R.id.language_item:
-                Intent intent = new Intent(SettingActivity.this, LanguageSettingActivity.class);
-                startActivityForResult(intent, 1000);
                 break;
             default:
                 break;
@@ -110,9 +66,8 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             String mVersionName = packageInfo.versionName;
             return mVersionName;
         } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
+            SmartLog.e(TAG, "Failed to get package version: " + e.getMessage());
         }
-        return "1.0.3.300";
-
+        return Constant.DEFAULT_VERSION;
     }
 }

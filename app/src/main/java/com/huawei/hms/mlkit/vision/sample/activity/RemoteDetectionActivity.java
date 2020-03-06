@@ -33,8 +33,6 @@ import android.os.Message;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.GestureDetector;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -43,10 +41,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.view.menu.MenuPopupHelper;
-import androidx.appcompat.widget.PopupMenu;
-
 import com.huawei.hms.mlkit.vision.sample.R;
+import com.huawei.hms.mlkit.vision.sample.activity.dialog.AddPictureDialog;
 import com.huawei.hms.mlkit.vision.sample.callback.CouldInfoResultCallBack;
 import com.huawei.hms.mlkit.vision.sample.manager.CloudDataManager;
 import com.huawei.hms.mlkit.vision.sample.util.BitmapUtils;
@@ -58,12 +54,10 @@ import com.huawei.hms.mlkit.vision.sample.transactor.RemoteImageClassificationTr
 import com.huawei.hms.mlkit.vision.sample.transactor.RemoteLandmarkTransactor;
 import com.huawei.hms.mlkit.vision.sample.transactor.DocumentTextTransactor;
 import com.huawei.hms.mlkit.vision.sample.transactor.RemoteTextTransactor;
-import com.huawei.hms.mlsdk.common.internal.client.SmartLog;
 import com.huawei.hms.mlsdk.document.MLDocument;
 import com.huawei.hms.mlsdk.text.MLText;
 
 import java.lang.ref.WeakReference;
-import java.lang.reflect.Field;
 
 public final class RemoteDetectionActivity extends BaseActivity implements OnClickListener {
     private static final String TAG = "RemoteDetectionActivity";
@@ -101,6 +95,8 @@ public final class RemoteDetectionActivity extends BaseActivity implements OnCli
     private boolean flag = true;
 
     private CloudDataManager cloudDataManager;
+
+    private AddPictureDialog addPictureDialog;
 
     private CouldInfoResultCallBack textResultCallBack = new MyCouldInfoResultCallBack();
 
@@ -167,9 +163,11 @@ public final class RemoteDetectionActivity extends BaseActivity implements OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = this.getIntent();
+        String type = null;
         try {
             this.selectedMode = intent.getStringExtra(Constant.MODEL_TYPE);
-        }catch (RuntimeException e){
+            type = intent.getStringExtra(Constant.ADD_PICTURE_TYPE);
+        } catch (RuntimeException e) {
             Log.e(TAG, "Get intent value failed: " + e.getMessage());
         }
         if (savedInstanceState != null) {
@@ -189,9 +187,16 @@ public final class RemoteDetectionActivity extends BaseActivity implements OnCli
         this.getImageButton.setOnClickListener(this);
         this.changeImageView.setOnDoubleTapListener(this.onDoubleTapListener);
         this.createImageTransactor();
+        this.createDialog();
         this.isLandScape = (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE);
         this.setStatusBar();
-        this.selectLocalImage();
+        if (type == null) {
+            selectLocalImage();
+        } else if (type.equals(Constant.TYPE_SELECT_IMAGE)) {
+            this.selectLocalImage();
+        } else {
+            this.startCamera();
+        }
     }
 
     private void initTitle() {
@@ -224,40 +229,31 @@ public final class RemoteDetectionActivity extends BaseActivity implements OnCli
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.getImageButton) {
-            PopupMenu popupMenu = new PopupMenu(RemoteDetectionActivity.this, view);
-            popupMenu.setOnMenuItemClickListener(
-                    new PopupMenu.OnMenuItemClickListener() {
-                        @Override
-                        public boolean onMenuItemClick(MenuItem menuItem) {
-                            switch (menuItem.getItemId()) {
-                                case R.id.load_local_images:
-                                    RemoteDetectionActivity.this.selectLocalImage();
-                                    return true;
-                                case R.id.take_photo:
-                                    RemoteDetectionActivity.this.startCamera();
-                                    return true;
-                                default:
-                                    return false;
-                            }
-                        }
-                    });
-            MenuInflater inflater = popupMenu.getMenuInflater();
-            inflater.inflate(R.menu.camera_button_menu, popupMenu.getMenu());
-            // Use reflection to force display menu icons.
-            try {
-                Field field = popupMenu.getClass().getDeclaredField("mPopupMenu");
-                field.setAccessible(true);
-                MenuPopupHelper menuPopupHelper = (MenuPopupHelper) field.get(popupMenu);
-                menuPopupHelper.setForceShowIcon(true);
-            } catch (IllegalAccessException e) {
-                SmartLog.e(TAG, e.getMessage());
-            } catch (NoSuchFieldException e) {
-                SmartLog.e(TAG, e.getMessage());
-            }
-            popupMenu.show();
+            showDialog();
         } else if (view.getId() == R.id.back) {
             this.finish();
         }
+    }
+
+    private void createDialog(){
+        addPictureDialog = new AddPictureDialog(this);
+        final Intent intent = new Intent(RemoteDetectionActivity.this, RemoteDetectionActivity.class);
+        intent.putExtra(Constant.MODEL_TYPE, Constant.CLOUD_IMAGE_CLASSIFICATION);
+        addPictureDialog.setClickListener(new AddPictureDialog.ClickListener() {
+            @Override
+            public void takePicture() {
+                startCamera();
+            }
+
+            @Override
+            public void selectImage() {
+                selectLocalImage();
+            }
+        });
+    }
+
+    private void showDialog() {
+        addPictureDialog.show();
     }
 
     @Override
@@ -411,7 +407,7 @@ public final class RemoteDetectionActivity extends BaseActivity implements OnCli
             RemoteDetectionActivity.this.changeImageView.setVisibility(View.VISIBLE);
             RemoteDetectionActivity.this.bitmapCopy = Bitmap.createBitmap(originalCameraImage).copy(Bitmap.Config.ARGB_8888, true);
             RemoteDetectionActivity.this.bitmapCopyForTap = Bitmap.createBitmap(originalCameraImage).copy(Bitmap.Config.ARGB_8888, true);
-            RemoteDetectionActivity.this.cloudDataManager = new CloudDataManager(graphicOverlay, bitmapCopyForTap,text);
+            RemoteDetectionActivity.this.cloudDataManager = new CloudDataManager(graphicOverlay, bitmapCopyForTap, text);
             RemoteDetectionActivity.this.changeImageView.setImageBitmap(RemoteDetectionActivity.this.bitmapCopy);
             Canvas canvas = new Canvas(RemoteDetectionActivity.this.bitmapCopy);
             RemoteDetectionActivity.this.cloudDataManager.drawView(canvas, true);

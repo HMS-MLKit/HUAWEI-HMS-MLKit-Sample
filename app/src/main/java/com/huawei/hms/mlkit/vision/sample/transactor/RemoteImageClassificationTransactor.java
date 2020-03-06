@@ -36,7 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RemoteImageClassificationTransactor extends BaseTransactor<List<MLImageClassification>> {
-    private static final String TAG = "hyh";
+    private static final String TAG = "RemoteImgClassification";
 
     private final MLImageClassificationAnalyzer detector;
 

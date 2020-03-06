@@ -169,7 +169,7 @@ public final class StartActivity extends BaseActivity
         for (int i = 0; i < permissions.length; i++) {
             if ((permissions[i].equals(Manifest.permission.CAMERA) && grantResults[i] != PackageManager.PERMISSION_GRANTED)
                     || (permissions[i].equals(Manifest.permission.READ_EXTERNAL_STORAGE) && grantResults[i] != PackageManager.PERMISSION_GRANTED)) {
-                // 如果相机或者存储权限没有授权，则需要弹出授权提示框
+                // If the camera or storage permissions are not authorized, need to pop up an authorization prompt box.
                 isNeedShowDiag = true;
             }
         }
@@ -180,7 +180,8 @@ public final class StartActivity extends BaseActivity
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                            intent.setData(Uri.parse("package:" + StartActivity.this.getPackageName())); // 根据包名打开对应的设置界面
+							// Open the corresponding setting interface according to the package name.
+                            intent.setData(Uri.parse("package:" + StartActivity.this.getPackageName()));
                             StartActivity.this.startActivityForResult(intent, 200);
                             StartActivity.this.startActivity(intent);
                         }

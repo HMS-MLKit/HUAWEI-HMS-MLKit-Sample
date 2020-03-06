@@ -16,6 +16,7 @@
 
 package com.huawei.hms.mlkit.vision.sample.activity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -25,13 +26,17 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
-import android.widget.CompoundButton;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.huawei.hms.mlkit.vision.sample.R;
+import com.huawei.hms.mlkit.vision.sample.activity.dialog.AddPictureDialog;
 import com.huawei.hms.mlkit.vision.sample.camera.CameraConfiguration;
 import com.huawei.hms.mlkit.vision.sample.camera.LensEngine;
 import com.huawei.hms.mlkit.vision.sample.camera.LensEnginePreview;
@@ -39,6 +44,7 @@ import com.huawei.hms.mlkit.vision.sample.util.BitmapUtils;
 import com.huawei.hms.mlkit.vision.sample.manager.LocalDataManager;
 import com.huawei.hms.mlkit.vision.sample.transactor.LocalTextTransactor;
 import com.huawei.hms.mlkit.vision.sample.util.Constant;
+import com.huawei.hms.mlkit.vision.sample.util.SharedPreferencesUtil;
 import com.huawei.hms.mlkit.vision.sample.views.overlay.ZoomImageView;
 import com.huawei.hms.mlkit.vision.sample.views.overlay.GraphicOverlay;
 
@@ -48,8 +54,7 @@ import java.lang.ref.WeakReference;
 import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
 
 public final class TextRecognitionActivity extends BaseActivity
-        implements OnRequestPermissionsResultCallback,
-        CompoundButton.OnCheckedChangeListener, View.OnClickListener {
+        implements OnRequestPermissionsResultCallback, View.OnClickListener {
     private static final String TAG = "TextRecognitionActivity";
     private LensEngine lensEngine = null;
     private LensEnginePreview preview;
@@ -66,6 +71,14 @@ public final class TextRecognitionActivity extends BaseActivity
     private Bitmap bitmap, bitmapCopy;
     private LocalTextTransactor localTextTransactor;
     private Handler mHandler = new MsgHandler(this);
+    private Dialog languageDialog;
+    private AddPictureDialog addPictureDialog;
+    private TextView textCN;
+    private TextView textEN;
+    private TextView textJN ;
+    private TextView textKN;
+    private TextView textLN;
+    private String textType = Constant.POSITION_CN;
 
     private static class MsgHandler extends Handler {
         WeakReference<TextRecognitionActivity> mMainActivityWeakReference;
@@ -110,12 +123,6 @@ public final class TextRecognitionActivity extends BaseActivity
             this.facing = savedInstanceState.getInt(Constant.CAMERA_FACING);
         }
         this.preview = this.findViewById(R.id.live_preview);
-        this.findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                TextRecognitionActivity.this.finish();
-            }
-        });
         this.graphicOverlay = this.findViewById(R.id.live_overlay);
         this.cameraConfiguration = new CameraConfiguration();
         this.cameraConfiguration.setCameraFacing(this.facing);
@@ -135,6 +142,10 @@ public final class TextRecognitionActivity extends BaseActivity
         this.zoomImageView = this.findViewById(R.id.take_picture_overlay);
         this.zoomImageClose = this.findViewById(R.id.zoomImageClose);
         this.zoomImageClose.setOnClickListener(this);
+        this.findViewById(R.id.back).setOnClickListener(this);
+        this.findViewById(R.id.language_setting).setOnClickListener(this);
+        this.createLanguageDialog();
+        this.createAddPictureDialog();
     }
 
     @Override
@@ -145,9 +156,54 @@ public final class TextRecognitionActivity extends BaseActivity
             this.zoomImageLayout.setVisibility(View.GONE);
             this.recycleBitmap();
         } else if (view.getId() == R.id.text_imageSwitch) {
-            Intent intent = new Intent(TextRecognitionActivity.this, RemoteDetectionActivity.class);
-            intent.putExtra(Constant.MODEL_TYPE, Constant.CLOUD_TEXT_DETECTION);
-            this.startActivity(intent);
+            showAddPictureDialog();
+        } else if (view.getId() == R.id.language_setting) {
+            this.showLanguageDialog();
+        } else if (view.getId() == R.id.simple_cn) {
+            SharedPreferencesUtil.getInstance(this).
+                    putStringValue(Constant.POSITION_KEY, Constant.POSITION_CN);
+            languageDialog.dismiss();
+            restartLensEngine(Constant.POSITION_CN);
+        } else if (view.getId() == R.id.english) {
+            SharedPreferencesUtil.getInstance(this).
+                    putStringValue(Constant.POSITION_KEY, Constant.POSITION_EN);
+            languageDialog.dismiss();
+            restartLensEngine(Constant.POSITION_EN);
+        } else if (view.getId() == R.id.japanese) {
+            SharedPreferencesUtil.getInstance(this).
+                    putStringValue(Constant.POSITION_KEY, Constant.POSITION_JA);
+            languageDialog.dismiss();
+            restartLensEngine(Constant.POSITION_JA);
+        } else if (view.getId() == R.id.korean) {
+            SharedPreferencesUtil.getInstance(this).
+                    putStringValue(Constant.POSITION_KEY, Constant.POSITION_KO);
+            languageDialog.dismiss();
+            restartLensEngine(Constant.POSITION_KO);
+        } else if (view.getId() == R.id.latin) {
+            SharedPreferencesUtil.getInstance(this).
+                    putStringValue(Constant.POSITION_KEY, Constant.POSITION_LA);
+            languageDialog.dismiss();
+            restartLensEngine(Constant.POSITION_LA);
+        } else if (view.getId() == R.id.back) {
+            finish();
+        }
+    }
+
+    private void restartLensEngine(String type) {
+        if(textType.equals(type)){
+            return;
+        }
+        lensEngine.release();
+        lensEngine = null;
+        createLensEngine();
+        startLensEngine();
+        if (null != this.lensEngine) {
+            this.mCamera = this.lensEngine.getCamera();
+            try {
+                this.mCamera.setPreviewDisplay(this.preview.getSurfaceHolder());
+            } catch (IOException e) {
+                Log.d(TextRecognitionActivity.TAG, "initViews IOException");
+            }
         }
     }
 
@@ -161,28 +217,84 @@ public final class TextRecognitionActivity extends BaseActivity
         }
     }
 
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (this.lensEngine != null) {
-            if (isChecked) {
-                this.facing = CameraConfiguration.CAMERA_FACING_FRONT;
-                this.cameraConfiguration.setCameraFacing(this.facing);
-            } else {
-                this.facing = CameraConfiguration.CAMERA_FACING_BACK;
-                this.cameraConfiguration.setCameraFacing(this.facing);
-            }
-        }
-        this.preview.stop();
-        this.startLensEngine();
-        if (null != this.lensEngine) {
-            this.mCamera = this.lensEngine.getCamera();
-            try {
-                this.mCamera.setPreviewDisplay(this.preview.getSurfaceHolder());
-            } catch (IOException e) {
-                Log.d(TextRecognitionActivity.TAG, "initViews IOException");
-            }
-        }
+    private void createLanguageDialog(){
+        languageDialog = new Dialog(this, R.style.MyDialogStyle);
+        View view = View.inflate(this, R.layout.dialog_language_setting, null);
+        // Set up a custom layout
+        languageDialog.setContentView(view);
+        textCN = view.findViewById(R.id.simple_cn);
+        textCN.setOnClickListener(this);
+        textEN = view.findViewById(R.id.english);
+        textEN.setOnClickListener(this);
+        textJN = view.findViewById(R.id.japanese);
+        textJN.setOnClickListener(this);
+        textKN = view.findViewById(R.id.korean);
+        textKN.setOnClickListener(this);
+        textLN = view.findViewById(R.id.latin);
+        textLN.setOnClickListener(this);
+        languageDialog.setCanceledOnTouchOutside(true);
+        // Set the size of the dialog
+        Window dialogWindow = languageDialog.getWindow();
+        WindowManager.LayoutParams layoutParams = dialogWindow.getAttributes();
+        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+        layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        layoutParams.gravity = Gravity.BOTTOM;
+        dialogWindow.setAttributes(layoutParams);
+    }
 
+    private void showLanguageDialog() {
+        initDialogViews();
+        languageDialog.show();
+    }
+
+    private void createAddPictureDialog(){
+        addPictureDialog = new AddPictureDialog(this);
+        final Intent intent = new Intent(TextRecognitionActivity.this, RemoteDetectionActivity.class);
+        intent.putExtra(Constant.MODEL_TYPE, Constant.CLOUD_TEXT_DETECTION);
+        addPictureDialog.setClickListener(new AddPictureDialog.ClickListener() {
+            @Override
+            public void takePicture() {
+                intent.putExtra(Constant.ADD_PICTURE_TYPE, Constant.TYPE_TAKE_PHOTO);
+                startActivity(intent);
+            }
+
+            @Override
+            public void selectImage() {
+                intent.putExtra(Constant.ADD_PICTURE_TYPE, Constant.TYPE_SELECT_IMAGE);
+                startActivity(intent);
+            }
+        });
+    }
+    private void showAddPictureDialog() {
+        addPictureDialog.show();
+    }
+
+    private void initDialogViews() {
+        String position = SharedPreferencesUtil.getInstance(this).getStringValue(Constant.POSITION_KEY);
+        textType = position;
+        textCN.setSelected(false);
+        textEN.setSelected(false);
+        textJN.setSelected(false);
+        textLN.setSelected(false);
+        textKN.setSelected(false);
+        switch (position) {
+            case Constant.POSITION_CN:
+                textCN.setSelected(true);
+                break;
+            case Constant.POSITION_EN:
+                textEN.setSelected(true);
+                break;
+            case Constant.POSITION_LA:
+                textLN.setSelected(true);
+                break;
+            case Constant.POSITION_JA:
+                textJN.setSelected(true);
+                break;
+            case Constant.POSITION_KO:
+                textKN.setSelected(true);
+                break;
+            default:
+        }
     }
 
     @Override

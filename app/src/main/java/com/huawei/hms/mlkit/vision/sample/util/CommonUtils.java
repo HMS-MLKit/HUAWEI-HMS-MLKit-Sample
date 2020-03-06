@@ -66,7 +66,7 @@ public class CommonUtils {
                 try {
                     dst.put((x + dst_y_slice), src.get(src_y_slice + srcx));
                 } catch (Exception e) {
-                    Log.d(TAG, "nv12_Resize Exception1");
+                    Log.d(TAG, "nv12_Resize Exception1" + e.getMessage());
                 }
 
                 if ((y & 1) == 0) {
@@ -77,14 +77,14 @@ public class CommonUtils {
                         try {
                             dst.put(sp, src.get(dp));
                         } catch (Exception e) {
-                            Log.d(TAG, "nv12_Resize Exception2");
+                            Log.d(TAG, "nv12_Resize Exception2" + e.getMessage());
                         }
                         ++sp;
                         ++dp;
                         try {
                             dst.put(sp, src.get(dp));
                         } catch (Exception e) {
-                            Log.d(TAG, "nv12_Resize Exception3");
+                            Log.d(TAG, "nv12_Resize Exception3" + e.getMessage());
                         }
                     }
                 }

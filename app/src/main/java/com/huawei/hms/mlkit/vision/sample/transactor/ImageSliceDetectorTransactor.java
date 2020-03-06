@@ -126,6 +126,9 @@ public class ImageSliceDetectorTransactor extends BaseTransactor<MLImageSegmenta
             return;
         }
         byte[] masks = results.getMasks();
+        if(masks == null){
+            return;
+        }
         // Replace background.
         if (this.isBackgroundReplaced) {
             this.foregroundBitmap = originalCameraImage;

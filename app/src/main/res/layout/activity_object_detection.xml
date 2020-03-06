@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="@dimen/toolbar_height"
         android:layout_marginBottom="0dp">
 
         <com.huawei.hms.mlkit.vision.sample.views.overlay.GraphicOverlay
@@ -25,28 +24,14 @@
             android:layout_alignParentBottom="true" />
     </com.huawei.hms.mlkit.vision.sample.camera.LensEnginePreview>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/toolbar_height"
-        android:background="#26000000">
-
-        <ImageButton
-            android:id="@+id/object_back"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
-            android:background="@drawable/white_back"></ImageButton>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/object_detection_s"
-            android:textColor="@color/white"
-            android:textSize="17sp"></TextView>
-
-    </RelativeLayout>
+    <ImageButton
+        android:id="@+id/object_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/button_circle_background"
+        android:src="@drawable/black_back" />
 
     <ToggleButton
         android:id="@+id/object_facingSwitch"

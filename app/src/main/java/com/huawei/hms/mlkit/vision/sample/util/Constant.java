@@ -50,6 +50,11 @@ public class Constant {
     public static final String CLOUD_DOCUMENT_TEXT_DETECTION = "Doc Text";
     public static final String MODEL_TYPE = "model_type";
 
+    public static final String ADD_PICTURE_TYPE = "picture_type";
+    public static final String TYPE_TAKE_PHOTO = "take photo";
+    public static final String TYPE_SELECT_IMAGE = "select image";
+
+    public static final String DEFAULT_VERSION = "1.0.3.300";
     public static final boolean IS_CHINESE = false;
 
     public static int[] IMAGES = {R.mipmap.img_001, R.mipmap.img_002, R.mipmap.img_003, R.mipmap.img_004,

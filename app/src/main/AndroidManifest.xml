@@ -36,9 +36,6 @@
         <activity
             android:name=".activity.SettingActivity"
             android:exported="true" />
-        <activity
-            android:name=".activity.LanguageSettingActivity"
-            android:exported="true" />
         <activity android:name=".activity.TranslatorActivity" />
 
         <activity
@@ -55,10 +52,6 @@
 
         <activity
             android:name=".activity.imgseg.StillCutPhotoActivity"
-            android:exported="true" />
-
-        <activity
-            android:name=".activity.ProductVisionSearchActivity"
             android:exported="true" />
 
         <activity android:name=".activity.IDCardRecognitionActivity"

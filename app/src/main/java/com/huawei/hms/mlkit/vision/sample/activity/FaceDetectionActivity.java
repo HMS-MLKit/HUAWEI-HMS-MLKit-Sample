@@ -16,7 +16,6 @@
 
 package com.huawei.hms.mlkit.vision.sample.activity;
 
-import android.content.res.Configuration;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.util.Log;
@@ -94,15 +93,8 @@ public final class FaceDetectionActivity extends BaseActivity
                     .setKeyPointType(MLFaceAnalyzerSetting.TYPE_KEYPOINTS)
                     .create();
         }
-        this.lensEngine.setMachineLearningFrameTransactor(new LocalFaceTransactor(detectorOptions, this.isLandScape(), isOpen));
+        this.lensEngine.setMachineLearningFrameTransactor(new LocalFaceTransactor(detectorOptions, getApplicationContext(), isOpen));
     }
-
-    private boolean isLandScape() {
-        Configuration configuration = this.getResources().getConfiguration(); // Get the configuration information.
-        int ori = configuration.orientation; // Get screen orientation.
-        return ori == Configuration.ORIENTATION_LANDSCAPE;
-    }
-
 
     @Override
     public void onClick(View view) {

@@ -16,6 +16,7 @@
 
 package com.huawei.hms.mlkit.vision.sample.transactor;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
 
@@ -41,13 +42,13 @@ public class LocalFaceTransactor extends BaseTransactor<List<MLFace>> {
     private static final String TAG = "LocalFaceTransactor";
 
     private final MLFaceAnalyzer detector;
-    private boolean isLandScape;
     private boolean isOpenFeatures;
+    private Context mContext;
 
-    public LocalFaceTransactor(MLFaceAnalyzerSetting options, boolean isLandScape, boolean isOpenFeatures) {
+    public LocalFaceTransactor(MLFaceAnalyzerSetting options, Context context, boolean isOpenFeatures) {
         this.detector = MLAnalyzerFactory.getInstance().getFaceAnalyzer(options);
-        this.isLandScape = isLandScape;
         this.isOpenFeatures = isOpenFeatures;
+        this.mContext = context;
     }
 
     @Override
@@ -75,7 +76,7 @@ public class LocalFaceTransactor extends BaseTransactor<List<MLFace>> {
             CameraImageGraphic imageGraphic = new CameraImageGraphic(graphicOverlay, originalCameraImage);
             graphicOverlay.addGraphic(imageGraphic);
         }
-        LocalFaceGraphic hmsMLLocalFaceGraphic = new LocalFaceGraphic(graphicOverlay, faces, this.isLandScape, this.isOpenFeatures);
+        LocalFaceGraphic hmsMLLocalFaceGraphic = new LocalFaceGraphic(graphicOverlay, faces, mContext, this.isOpenFeatures);
         graphicOverlay.addGraphic(hmsMLLocalFaceGraphic);
         graphicOverlay.postInvalidate();
     }

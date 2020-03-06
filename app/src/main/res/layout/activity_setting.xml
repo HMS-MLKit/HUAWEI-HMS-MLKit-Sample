@@ -42,55 +42,6 @@
         android:orientation="vertical">
 
         <RelativeLayout
-            android:id="@+id/language_item"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true">
-
-                <TextView
-                    android:id="@+id/language_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:text="@string/language_setting"
-                    android:textColor="@color/secondary_text_color"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/language_notice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/language_text"
-                    android:gravity="center_vertical"
-                    android:text="@string/language_notice"
-                    android:textColor="@color/primary_text_color"
-                    android:textSize="13sp" />
-
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/select_language"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:drawableRight="@mipmap/right_arraw"
-                android:gravity="center_vertical"
-                android:text=""
-                android:textColor="@color/secondary_text_color"
-                android:textSize="14sp" />
-        </RelativeLayout>
-
-        <View style="@style/common_line" />
-
-        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginStart="16dp"
@@ -111,11 +62,14 @@ s
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:text="2.0.0.100"
+                android:text="2.0.0.101"
                 android:textColor="@color/secondary_text_color"
                 android:textSize="14sp" />
 
         </RelativeLayout>
+        <View style="@style/common_line"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"/>
     </LinearLayout>
 
 

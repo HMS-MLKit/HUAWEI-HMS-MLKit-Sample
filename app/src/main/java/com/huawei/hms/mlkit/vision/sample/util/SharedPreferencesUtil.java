@@ -48,7 +48,7 @@ public class SharedPreferencesUtil {
     }
 
     public String getStringValue(String key) {
-        return mPreferences.getString(key, "");
+        return mPreferences.getString(key, Constant.POSITION_EN);
     }
 
     public void putIntValue(String key, int value) {

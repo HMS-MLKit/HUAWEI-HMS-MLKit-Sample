@@ -28,6 +28,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.huawei.hms.mlkit.vision.sample.R;
+import com.huawei.hms.mlkit.vision.sample.activity.dialog.AddPictureDialog;
 import com.huawei.hms.mlkit.vision.sample.camera.CameraConfiguration;
 import com.huawei.hms.mlkit.vision.sample.camera.LensEngine;
 import com.huawei.hms.mlkit.vision.sample.camera.LensEnginePreview;
@@ -52,6 +53,7 @@ public final class ImageClassificationActivity extends BaseActivity
     CameraConfiguration cameraConfiguration = null;
     private int facing = CameraConfiguration.CAMERA_FACING_BACK;
     private Camera mCamera;
+    private AddPictureDialog addPictureDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +74,7 @@ public final class ImageClassificationActivity extends BaseActivity
         if (Camera.getNumberOfCameras() == 1) {
             this.facingSwitch.setVisibility(View.GONE);
         }
+        this.crateDialog();
         this.createLensEngine();
         this.startLensEngine();
         this.setStatusBar();
@@ -82,12 +85,32 @@ public final class ImageClassificationActivity extends BaseActivity
         if (view.getId() == R.id.classification_back) {
             this.finish();
         } else if (view.getId() == R.id.imageSwitch) {
-            Intent intent = new Intent(ImageClassificationActivity.this, RemoteDetectionActivity.class);
-            intent.putExtra(Constant.MODEL_TYPE, Constant.CLOUD_IMAGE_CLASSIFICATION);
-            this.startActivity(intent);
+            showDialog();
         }
     }
 
+    private void crateDialog(){
+        addPictureDialog = new AddPictureDialog(this);
+        final Intent intent = new Intent(ImageClassificationActivity.this, RemoteDetectionActivity.class);
+        intent.putExtra(Constant.MODEL_TYPE, Constant.CLOUD_IMAGE_CLASSIFICATION);
+        addPictureDialog.setClickListener(new AddPictureDialog.ClickListener() {
+            @Override
+            public void takePicture() {
+                intent.putExtra(Constant.ADD_PICTURE_TYPE, Constant.TYPE_TAKE_PHOTO);
+                startActivity(intent);
+            }
+
+            @Override
+            public void selectImage() {
+                intent.putExtra(Constant.ADD_PICTURE_TYPE, Constant.TYPE_SELECT_IMAGE);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void showDialog() {
+        addPictureDialog.show();
+    }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

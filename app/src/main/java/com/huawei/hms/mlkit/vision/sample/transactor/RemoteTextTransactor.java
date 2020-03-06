@@ -35,7 +35,7 @@ import com.huawei.hms.mlsdk.text.MLTextAnalyzer;
 
 public class RemoteTextTransactor extends BaseTransactor<MLText> {
 
-    private static final String TAG = "CloudTextRecProc";
+    private static final String TAG = "CloudTextTransactor";
 
     private final MLTextAnalyzer detector;
 

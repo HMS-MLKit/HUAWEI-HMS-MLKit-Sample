@@ -22,15 +22,14 @@
             android:layout_alignParentBottom="true" />
     </com.huawei.hms.mlkit.vision.sample.camera.LensEnginePreview>>
 
-    <ImageView
-        android:id="@+id/back"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_margin="10dp"
-        android:padding="5dp"
-        android:background="@color/primary_background"
-        android:onClick="onBackPressed"
-        android:src="@drawable/black_back" />
+   <ImageButton
+    android:id="@+id/back"
+    android:layout_width="30dp"
+    android:layout_height="30dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginTop="15dp"
+    android:background="@drawable/button_circle_background"
+    android:src="@drawable/black_back" />
 
     <HorizontalScrollView
         android:id="@+id/scroll_view"
@@ -60,12 +59,12 @@
         <ImageButton
             android:id="@+id/img_pic"
             android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_height="24dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="30dp"
             android:layout_centerHorizontal="true"
-            android:background="@null"
-            android:src="@mipmap/photo_album" />
+            android:background="@drawable/black_album"
+            android:backgroundTint="@color/white" />
 
         <ImageButton
             android:id="@+id/img_takePhoto"

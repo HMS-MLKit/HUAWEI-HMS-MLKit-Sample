@@ -60,7 +60,6 @@ public class SwitchButton extends View {
         mSwitchIconWidth = mSwitchIcon.getWidth();
         mPaint = new Paint();
         mPaint.setStyle(Paint.Style.FILL);
-        mPaint.setColor(Color.parseColor("#E4E4E4"));
         mPaint.setAntiAlias(true);
         mPaint.setStrokeWidth(2);
         // init value
@@ -81,7 +80,7 @@ public class SwitchButton extends View {
             mPaint.setColor(getResources().getColor(R.color.button_background));
             mSwitchIconXPision = mSwitchIconWidth - 1;
         } else {
-            mPaint.setColor(Color.parseColor("#D3D1D1"));
+            mPaint.setColor(getResources().getColor(R.color.white));
             mSwitchIconXPision = 0;
         }
         canvas.drawRoundRect(re3, mSwitchIconWidth / 2.0f, mSwitchIconWidth / 2.0f, mPaint);

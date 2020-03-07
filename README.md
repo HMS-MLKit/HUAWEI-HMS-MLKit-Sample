@@ -2,7 +2,7 @@
 
 
 ## build status
-[![Build Status](https://travis-ci.org/HMS-MLKit/ai_mlkit_sample.svg?branch=master)
+![Build Status](https://travis-ci.org/HMS-MLKit/ai_mlkit_sample.svg?branch=master)
 
 
 ## Table of Contents

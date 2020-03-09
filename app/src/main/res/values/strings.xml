@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ML Kit cn</string>
+    <string name="app_name">ML Kit</string>
     <string name="picture">Picture</string>
     <string name="help_text">
       <b>HDR Viewfinder Demo:</b>\n\n

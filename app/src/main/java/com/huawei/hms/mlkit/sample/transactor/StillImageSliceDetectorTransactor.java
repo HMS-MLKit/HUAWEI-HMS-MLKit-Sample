@@ -1,0 +1,228 @@
+/**
+ * Copyright 2020. Huawei Technologies Co., Ltd. All rights reserved.
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
+package com.huawei.hms.mlkit.sample.transactor;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.util.Log;
+import android.util.SparseArray;
+import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.huawei.hmf.tasks.Task;
+import com.huawei.hms.mlkit.sample.callback.ImageSegmentationResultCallBack;
+import com.huawei.hms.mlkit.sample.camera.FrameMetadata;
+import com.huawei.hms.mlkit.sample.util.ImageUtils;
+import com.huawei.hms.mlkit.sample.views.overlay.GraphicOverlay;
+import com.huawei.hms.mlsdk.MLAnalyzerFactory;
+import com.huawei.hms.mlsdk.common.MLFrame;
+import com.huawei.hms.mlsdk.imgseg.MLImageSegmentation;
+import com.huawei.hms.mlsdk.imgseg.MLImageSegmentationAnalyzer;
+import com.huawei.hms.mlsdk.imgseg.MLImageSegmentationSetting;
+
+import java.io.IOException;
+
+public class StillImageSliceDetectorTransactor extends BaseTransactor<MLImageSegmentation> {
+
+    private static final String TAG = StillImageSliceDetectorTransactor.class.getSimpleName();
+
+    private final MLImageSegmentationAnalyzer detector;
+    private Context context;
+    private Bitmap originBitmap, backgroundBitmap;
+    private ImageView imageView;
+    private int detectCategory;
+    private int color;
+    private ImageSegmentationResultCallBack imageSegmentationResultCallBack;
+
+    /**
+     * @param context          Context.
+     * @param options          Options.
+     * @param originBitmap     Foreground, picture to replace.
+     * @param imageView        ImageView.
+     * @param detectCategory -1 represents all detections, others represent the type of replacement color currently detected.
+     */
+    public StillImageSliceDetectorTransactor(Context context, MLImageSegmentationSetting options, Bitmap originBitmap, ImageView imageView, int detectCategory) {
+        this.context = context;
+        this.detector = MLAnalyzerFactory.getInstance().getImageSegmentationAnalyzer(options);
+        this.originBitmap = originBitmap;
+        this.backgroundBitmap = null;
+        this.imageView = imageView;
+        this.detectCategory = detectCategory;
+        this.color = Color.WHITE;
+    }
+
+    /**
+     * Replace background.
+    *
+     * @param context          Context.
+     * @param options          Options.
+     * @param originBitmap     Foreground, picture to replace.
+     * @param backgroundBitmap Background.
+     * @param imageView        ImageView.
+     * @param detectCategory   -1 represents all detections, others represent the type of replacement color currently detected.
+     */
+    public StillImageSliceDetectorTransactor(Context context, MLImageSegmentationSetting options, Bitmap originBitmap, Bitmap backgroundBitmap, ImageView imageView, int detectCategory) {
+        this.context = context;
+        this.detector = MLAnalyzerFactory.getInstance().getImageSegmentationAnalyzer(options);
+        this.originBitmap = originBitmap;
+        this.backgroundBitmap = backgroundBitmap;
+        this.imageView = imageView;
+        this.detectCategory = detectCategory;
+        this.color = Color.WHITE;
+    }
+
+    // Sets the drawn color of detected features.
+    public void setColor(int color) {
+        this.color = color;
+    }
+
+    // Interface for obtaining processed image data.
+    public void setImageSegmentationResultCallBack(ImageSegmentationResultCallBack imageSegmentationResultCallBack) {
+        this.imageSegmentationResultCallBack = imageSegmentationResultCallBack;
+    }
+
+    @Override
+    public void stop() {
+        super.stop();
+        try {
+            this.detector.stop();
+        } catch (IOException e) {
+            Log.e(StillImageSliceDetectorTransactor.TAG, "Exception thrown while trying to close object detector!", e);
+        }
+    }
+
+    @Override
+    protected Task<MLImageSegmentation> detectInImage(MLFrame frame) {
+        Task<MLImageSegmentation> task = this.detector.asyncAnalyseFrame(frame);
+        return task;
+    }
+
+    protected SparseArray<MLImageSegmentation> analyseFrame(MLFrame frame) {
+        return this.detector.analyseFrame(frame);
+    }
+
+
+    @Override
+    protected void onSuccess(
+            @Nullable Bitmap originalCameraImage,
+            @NonNull MLImageSegmentation results,
+            @NonNull FrameMetadata frameMetadata,
+            @NonNull GraphicOverlay graphicOverlay) {
+        graphicOverlay.clear();
+        int[] pixels;
+        if(results == null){
+            Log.i(StillImageSliceDetectorTransactor.TAG, "detection failed");
+            return;
+        }
+        if(results.getMasks() == null){
+            Log.i(StillImageSliceDetectorTransactor.TAG, "detection failed, none mask return");
+            return;
+        }
+        if (this.detectCategory == -1) {
+            pixels = this.byteArrToIntArr(results.getMasks());
+        } else if (this.backgroundBitmap == null) {
+            pixels = this.changeColor(results.getMasks());
+        } else {
+            pixels = this.changeBackground(results.getMasks());
+        }
+        Bitmap processedBitmap = Bitmap.createBitmap(pixels, 0, this.originBitmap.getWidth(), this.originBitmap.getWidth(), this.originBitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        this.imageView.setImageBitmap(processedBitmap);
+        if (this.imageSegmentationResultCallBack != null) {
+            this.imageSegmentationResultCallBack.callResultBitmap(processedBitmap);
+        }
+        graphicOverlay.postInvalidate();
+    }
+
+    @Override
+    protected void onFailure(@NonNull Exception e) {
+        Log.e(StillImageSliceDetectorTransactor.TAG, "Object detection failed!", e);
+    }
+
+    private int[] byteArrToIntArr(byte[] masks) {
+        int[] results = new int[masks.length];
+        for (int i = 0; i < masks.length; i++) {
+            if (masks[i] == 1) {
+                results[i] = Color.BLACK;
+            } else if (masks[i] == 2) {
+                results[i] = Color.BLUE;
+            } else if (masks[i] == 3) {
+                results[i] = Color.DKGRAY;
+            } else if (masks[i] == 4) {
+                results[i] = Color.YELLOW;
+            } else if (masks[i] == 5) {
+                results[i] = Color.LTGRAY;
+            } else if (masks[i] == 6) {
+                results[i] = Color.CYAN;
+            } else if (masks[i] == 7) {
+                results[i] = Color.RED;
+            } else if (masks[i] == 8) {
+                results[i] = Color.GRAY;
+            } else if (masks[i] == 9) {
+                results[i] = Color.MAGENTA;
+            } else if (masks[i] == 10) {
+                results[i] = Color.GREEN;
+            } else {
+                results[i] = Color.WHITE;
+            }
+        }
+        return results;
+    }
+
+    // Cut out the desired element, the background is white.
+    private int[] changeColor(byte[] masks) {
+        int[] results = new int[masks.length];
+        int[] orginPixels = new int[this.originBitmap.getWidth() * this.originBitmap.getHeight()];
+        this.originBitmap.getPixels(orginPixels, 0, this.originBitmap.getWidth(), 0, 0, this.originBitmap.getWidth(), this.originBitmap.getHeight());
+        for (int i = 0; i < masks.length; i++) {
+            if (masks[i] == this.detectCategory) {
+                results[i] = this.color;
+            } else {
+                results[i] = orginPixels[i];
+            }
+        }
+        return results;
+    }
+
+    // Replace background image.
+    private int[] changeBackground(byte[] masks) {
+        // Make the background and foreground images the same size.
+        if (this.backgroundBitmap != null) {
+            if (!ImageUtils.equalImageSize(this.originBitmap, this.backgroundBitmap)) {
+                this.backgroundBitmap = ImageUtils.resizeImageToForegroundImage(this.originBitmap, this.backgroundBitmap);
+            }
+        }
+        int[] results = new int[masks.length];
+        int[] originPixels = new int[this.originBitmap.getWidth() * this.originBitmap.getHeight()];
+        int[] backgroundPixels = new int[originPixels.length];
+        this.originBitmap.getPixels(originPixels, 0, this.originBitmap.getWidth(), 0, 0, this.originBitmap.getWidth(), this.originBitmap.getHeight());
+        if (null != this.backgroundBitmap) {
+            this.backgroundBitmap.getPixels(backgroundPixels, 0, this.originBitmap.getWidth(), 0, 0, this.originBitmap.getWidth(), this.originBitmap.getHeight());
+        }
+        for (int i = 0; i < masks.length; i++) {
+            if (masks[i] == this.detectCategory) {
+                results[i] = backgroundPixels[i];
+            } else {
+                results[i] = originPixels[i];
+            }
+        }
+        return results;
+    }
+
+}

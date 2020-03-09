@@ -7,7 +7,7 @@
     android:keepScreenOn="true"
     android:orientation="vertical">
 
-    <com.huawei.hms.mlkit.vision.sample.camera.LensEnginePreview
+    <com.huawei.hms.mlkit.sample.camera.LensEnginePreview
         android:id="@+id/face_preview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,14 +15,14 @@
         android:layout_alignParentTop="true"
         android:layout_marginBottom="0dp">
 
-        <com.huawei.hms.mlkit.vision.sample.views.overlay.GraphicOverlay
+        <com.huawei.hms.mlkit.sample.views.overlay.GraphicOverlay
             android:id="@+id/face_overlay"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true" />
-    </com.huawei.hms.mlkit.vision.sample.camera.LensEnginePreview>
+    </com.huawei.hms.mlkit.sample.camera.LensEnginePreview>
 
     <ImageButton
         android:id="@+id/face_back"
@@ -51,7 +51,7 @@
             android:layout_marginRight="10dp"
             android:textSize="15sp" />
 
-        <com.huawei.hms.mlkit.vision.sample.views.SwitchButton
+        <com.huawei.hms.mlkit.sample.views.SwitchButton
             android:id="@+id/switch_button_view"
             android:layout_width="40dp"
             android:layout_height="40dp"

@@ -17,7 +17,7 @@
  *                 Huawei Technologies Co., Ltd.
  */
 
-package com.huawei.hms.mlkit.sample.camera;
+package com.huawei.hms.mlkit.vision.sample.camera;
 
 import android.app.Activity;
 import android.content.Context;

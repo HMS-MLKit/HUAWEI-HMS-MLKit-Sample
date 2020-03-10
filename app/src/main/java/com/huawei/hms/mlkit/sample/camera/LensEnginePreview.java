@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.camera;
+package com.huawei.hms.mlkit.vision.sample.camera;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

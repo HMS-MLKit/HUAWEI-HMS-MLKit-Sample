@@ -14,15 +14,15 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.views.graphic;
+package com.huawei.hms.mlkit.vision.sample.views.graphic;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-import com.huawei.hms.mlkit.sample.util.CommonUtils;
-import com.huawei.hms.mlkit.sample.views.overlay.GraphicOverlay;
+import com.huawei.hms.mlkit.vision.sample.util.CommonUtils;
+import com.huawei.hms.mlkit.vision.sample.views.overlay.GraphicOverlay;
 import com.huawei.hms.mlsdk.classification.MLImageClassification;
 
 import java.util.List;

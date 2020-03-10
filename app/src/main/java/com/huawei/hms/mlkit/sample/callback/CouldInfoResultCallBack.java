@@ -14,11 +14,11 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.callback;
+package com.huawei.hms.mlkit.vision.sample.callback;
 
 import android.graphics.Bitmap;
 
-import com.huawei.hms.mlkit.sample.views.overlay.GraphicOverlay;
+import com.huawei.hms.mlkit.vision.sample.views.overlay.GraphicOverlay;
 import com.huawei.hms.mlsdk.document.MLDocument;
 import com.huawei.hms.mlsdk.text.MLText;
 

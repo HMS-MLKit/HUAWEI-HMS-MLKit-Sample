@@ -14,15 +14,15 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.activity.fragment;
+package com.huawei.hms.mlkit.vision.sample.activity.fragment;
 
 import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 
-import com.huawei.hms.mlkit.sample.R;
-import com.huawei.hms.mlkit.sample.activity.TranslatorActivity;
-import com.huawei.hms.mlkit.sample.activity.entity.GridViewItem;
+import com.huawei.hms.mlkit.vision.sample.R;
+import com.huawei.hms.mlkit.vision.sample.activity.TranslatorActivity;
+import com.huawei.hms.mlkit.vision.sample.activity.entity.GridViewItem;
 
 import java.util.ArrayList;
 

@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.transactor;
+package com.huawei.hms.mlkit.vision.sample.transactor;
 
 import android.graphics.Bitmap;
 import android.os.Handler;
@@ -24,10 +24,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.huawei.hmf.tasks.Task;
-import com.huawei.hms.mlkit.sample.callback.CouldInfoResultCallBack;
-import com.huawei.hms.mlkit.sample.camera.FrameMetadata;
-import com.huawei.hms.mlkit.sample.util.Constant;
-import com.huawei.hms.mlkit.sample.views.overlay.GraphicOverlay;
+import com.huawei.hms.mlkit.vision.sample.callback.CouldInfoResultCallBack;
+import com.huawei.hms.mlkit.vision.sample.camera.FrameMetadata;
+import com.huawei.hms.mlkit.vision.sample.util.Constant;
+import com.huawei.hms.mlkit.vision.sample.views.overlay.GraphicOverlay;
 import com.huawei.hms.mlsdk.MLAnalyzerFactory;
 import com.huawei.hms.mlsdk.common.MLFrame;
 import com.huawei.hms.mlsdk.document.MLDocument;

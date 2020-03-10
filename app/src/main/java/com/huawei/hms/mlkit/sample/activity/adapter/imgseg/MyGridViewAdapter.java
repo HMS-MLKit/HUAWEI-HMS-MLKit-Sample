@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.activity.adapter.imgseg;
+package com.huawei.hms.mlkit.vision.sample.activity.adapter.imgseg;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -24,8 +24,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.huawei.hms.mlkit.sample.R;
-import com.huawei.hms.mlkit.sample.activity.entity.Entity;
+import com.huawei.hms.mlkit.vision.sample.R;
+import com.huawei.hms.mlkit.vision.sample.activity.entity.Entity;
 import com.huawei.hms.mlsdk.common.internal.client.SmartLog;
 
 import java.util.ArrayList;

@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.camera;
+package com.huawei.hms.mlkit.vision.sample.camera;
 
 public class FrameMetadata {
   private final int width;

@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.activity;
+package com.huawei.hms.mlkit.vision.sample.activity;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -41,19 +41,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.huawei.hms.mlkit.sample.R;
-import com.huawei.hms.mlkit.sample.activity.dialog.AddPictureDialog;
-import com.huawei.hms.mlkit.sample.callback.CouldInfoResultCallBack;
-import com.huawei.hms.mlkit.sample.manager.CloudDataManager;
-import com.huawei.hms.mlkit.sample.util.BitmapUtils;
-import com.huawei.hms.mlkit.sample.util.Constant;
-import com.huawei.hms.mlkit.sample.views.overlay.ZoomImageView;
-import com.huawei.hms.mlkit.sample.views.overlay.GraphicOverlay;
-import com.huawei.hms.mlkit.sample.transactor.ImageTransactor;
-import com.huawei.hms.mlkit.sample.transactor.RemoteImageClassificationTransactor;
-import com.huawei.hms.mlkit.sample.transactor.RemoteLandmarkTransactor;
-import com.huawei.hms.mlkit.sample.transactor.DocumentTextTransactor;
-import com.huawei.hms.mlkit.sample.transactor.RemoteTextTransactor;
+import com.huawei.hms.mlkit.vision.sample.R;
+import com.huawei.hms.mlkit.vision.sample.activity.dialog.AddPictureDialog;
+import com.huawei.hms.mlkit.vision.sample.callback.CouldInfoResultCallBack;
+import com.huawei.hms.mlkit.vision.sample.manager.CloudDataManager;
+import com.huawei.hms.mlkit.vision.sample.util.BitmapUtils;
+import com.huawei.hms.mlkit.vision.sample.util.Constant;
+import com.huawei.hms.mlkit.vision.sample.views.overlay.ZoomImageView;
+import com.huawei.hms.mlkit.vision.sample.views.overlay.GraphicOverlay;
+import com.huawei.hms.mlkit.vision.sample.transactor.ImageTransactor;
+import com.huawei.hms.mlkit.vision.sample.transactor.RemoteImageClassificationTransactor;
+import com.huawei.hms.mlkit.vision.sample.transactor.RemoteLandmarkTransactor;
+import com.huawei.hms.mlkit.vision.sample.transactor.DocumentTextTransactor;
+import com.huawei.hms.mlkit.vision.sample.transactor.RemoteTextTransactor;
 import com.huawei.hms.mlsdk.document.MLDocument;
 import com.huawei.hms.mlsdk.text.MLText;
 

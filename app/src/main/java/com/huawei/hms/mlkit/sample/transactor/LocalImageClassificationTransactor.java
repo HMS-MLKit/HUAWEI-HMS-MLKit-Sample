@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.transactor;
+package com.huawei.hms.mlkit.vision.sample.transactor;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -26,10 +26,10 @@ import android.os.Build;
 import android.util.Log;
 
 import com.huawei.hmf.tasks.Task;
-import com.huawei.hms.mlkit.sample.views.graphic.CameraImageGraphic;
-import com.huawei.hms.mlkit.sample.views.graphic.LocalImageClassificationGraphic;
-import com.huawei.hms.mlkit.sample.camera.FrameMetadata;
-import com.huawei.hms.mlkit.sample.views.overlay.GraphicOverlay;
+import com.huawei.hms.mlkit.vision.sample.views.graphic.CameraImageGraphic;
+import com.huawei.hms.mlkit.vision.sample.views.graphic.LocalImageClassificationGraphic;
+import com.huawei.hms.mlkit.vision.sample.camera.FrameMetadata;
+import com.huawei.hms.mlkit.vision.sample.views.overlay.GraphicOverlay;
 import com.huawei.hms.mlsdk.MLAnalyzerFactory;
 import com.huawei.hms.mlsdk.common.MLFrame;
 import com.huawei.hms.mlsdk.classification.MLImageClassification;

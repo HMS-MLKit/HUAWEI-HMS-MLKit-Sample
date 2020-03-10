@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.activity.imgseg;
+package com.huawei.hms.mlkit.vision.sample.activity.imgseg;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -31,13 +31,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.huawei.hms.mlkit.sample.R;
-import com.huawei.hms.mlkit.sample.activity.BaseActivity;
-import com.huawei.hms.mlkit.sample.transactor.ImageTransactor;
-import com.huawei.hms.mlkit.sample.transactor.StillImageSegmentationTransactor;
-import com.huawei.hms.mlkit.sample.util.BitmapUtils;
-import com.huawei.hms.mlkit.sample.views.color.ColorSelector;
-import com.huawei.hms.mlkit.sample.views.overlay.GraphicOverlay;
+import com.huawei.hms.mlkit.vision.sample.R;
+import com.huawei.hms.mlkit.vision.sample.activity.BaseActivity;
+import com.huawei.hms.mlkit.vision.sample.transactor.ImageTransactor;
+import com.huawei.hms.mlkit.vision.sample.transactor.StillImageSegmentationTransactor;
+import com.huawei.hms.mlkit.vision.sample.util.BitmapUtils;
+import com.huawei.hms.mlkit.vision.sample.views.color.ColorSelector;
+import com.huawei.hms.mlkit.vision.sample.views.overlay.GraphicOverlay;
 import com.huawei.hms.mlsdk.imgseg.MLImageSegmentationSetting;
 
 import java.util.Locale;

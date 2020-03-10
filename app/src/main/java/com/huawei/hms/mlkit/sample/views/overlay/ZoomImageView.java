@@ -19,7 +19,7 @@
  *  ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
  */
 
-package com.huawei.hms.mlkit.sample.views.overlay;
+package com.huawei.hms.mlkit.vision.sample.views.overlay;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;

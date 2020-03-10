@@ -14,11 +14,11 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.util;
+package com.huawei.hms.mlkit.vision.sample.util;
 
 import android.graphics.Color;
 
-import com.huawei.hms.mlkit.sample.R;
+import com.huawei.hms.mlkit.vision.sample.R;
 
 public class Constant {
 

@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.activity;
+package com.huawei.hms.mlkit.vision.sample.activity;
 
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -24,8 +24,8 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.huawei.hms.mlkit.sample.R;
-import com.huawei.hms.mlkit.sample.util.Constant;
+import com.huawei.hms.mlkit.vision.sample.R;
+import com.huawei.hms.mlkit.vision.sample.util.Constant;
 import com.huawei.hms.mlsdk.common.internal.client.SmartLog;
 
 public class SettingActivity extends BaseActivity implements View.OnClickListener {

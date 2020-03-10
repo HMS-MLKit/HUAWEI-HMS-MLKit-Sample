@@ -18,13 +18,13 @@
  *                  Huawei Technologies Co., Ltd.
  */
 
-package com.huawei.hms.mlkit.sample.transactor;
+package com.huawei.hms.mlkit.vision.sample.transactor;
 
 import android.graphics.Bitmap;
 
 
-import com.huawei.hms.mlkit.sample.camera.FrameMetadata;
-import com.huawei.hms.mlkit.sample.views.overlay.GraphicOverlay;
+import com.huawei.hms.mlkit.vision.sample.camera.FrameMetadata;
+import com.huawei.hms.mlkit.vision.sample.views.overlay.GraphicOverlay;
 
 import java.nio.ByteBuffer;
 

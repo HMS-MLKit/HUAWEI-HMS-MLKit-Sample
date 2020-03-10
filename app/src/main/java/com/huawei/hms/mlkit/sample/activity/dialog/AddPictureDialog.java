@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.activity.dialog;
+package com.huawei.hms.mlkit.vision.sample.activity.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -26,7 +26,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.huawei.hms.mlkit.sample.R;
+import com.huawei.hms.mlkit.vision.sample.R;
 
 public class AddPictureDialog extends Dialog implements View.OnClickListener {
     private TextView tvTakePicture;

@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.util;
+package com.huawei.hms.mlkit.vision.sample.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;

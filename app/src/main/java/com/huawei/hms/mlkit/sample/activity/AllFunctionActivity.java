@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.activity;
+package com.huawei.hms.mlkit.vision.sample.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -22,11 +22,11 @@ import android.view.View;
 
 import android.widget.TextView;
 
-import com.huawei.hms.mlkit.sample.R;
-import com.huawei.hms.mlkit.sample.activity.adapter.TabFragmentAdapter;
-import com.huawei.hms.mlkit.sample.activity.fragment.LanguageCategoryFragment;
-import com.huawei.hms.mlkit.sample.activity.fragment.OtherCategoryFragment;
-import com.huawei.hms.mlkit.sample.activity.fragment.PictureCategoryFragment;
+import com.huawei.hms.mlkit.vision.sample.R;
+import com.huawei.hms.mlkit.vision.sample.activity.adapter.TabFragmentAdapter;
+import com.huawei.hms.mlkit.vision.sample.activity.fragment.LanguageCategoryFragment;
+import com.huawei.hms.mlkit.vision.sample.activity.fragment.OtherCategoryFragment;
+import com.huawei.hms.mlkit.vision.sample.activity.fragment.PictureCategoryFragment;
 
 import java.util.ArrayList;
 import java.util.List;

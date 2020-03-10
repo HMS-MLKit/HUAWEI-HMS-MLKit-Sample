@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.activity.imgseg;
+package com.huawei.hms.mlkit.vision.sample.activity.imgseg;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -32,16 +32,16 @@ import android.widget.ToggleButton;
 
 import androidx.core.app.ActivityCompat;
 
-import com.huawei.hms.mlkit.sample.R;
-import com.huawei.hms.mlkit.sample.activity.BaseActivity;
-import com.huawei.hms.mlkit.sample.callback.ImageSegmentationResultCallBack;
-import com.huawei.hms.mlkit.sample.camera.CameraConfiguration;
-import com.huawei.hms.mlkit.sample.camera.LensEngine;
-import com.huawei.hms.mlkit.sample.camera.LensEnginePreview;
-import com.huawei.hms.mlkit.sample.transactor.ImageSegmentationTransactor;
-import com.huawei.hms.mlkit.sample.util.Constant;
-import com.huawei.hms.mlkit.sample.util.ImageUtils;
-import com.huawei.hms.mlkit.sample.views.overlay.GraphicOverlay;
+import com.huawei.hms.mlkit.vision.sample.R;
+import com.huawei.hms.mlkit.vision.sample.activity.BaseActivity;
+import com.huawei.hms.mlkit.vision.sample.callback.ImageSegmentationResultCallBack;
+import com.huawei.hms.mlkit.vision.sample.camera.CameraConfiguration;
+import com.huawei.hms.mlkit.vision.sample.camera.LensEngine;
+import com.huawei.hms.mlkit.vision.sample.camera.LensEnginePreview;
+import com.huawei.hms.mlkit.vision.sample.transactor.ImageSegmentationTransactor;
+import com.huawei.hms.mlkit.vision.sample.util.Constant;
+import com.huawei.hms.mlkit.vision.sample.util.ImageUtils;
+import com.huawei.hms.mlkit.vision.sample.views.overlay.GraphicOverlay;
 import com.huawei.hms.mlsdk.common.internal.client.SmartLog;
 import com.huawei.hms.mlsdk.imgseg.MLImageSegmentationSetting;
 

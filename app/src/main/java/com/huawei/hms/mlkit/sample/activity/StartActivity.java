@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.activity;
+package com.huawei.hms.mlkit.vision.sample.activity;
 
 import android.Manifest;
 import android.content.Context;
@@ -29,8 +29,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.huawei.hms.mlkit.sample.R;
-import com.huawei.hms.mlkit.sample.activity.imgseg.ImageSegmentationActivity;
+import com.huawei.hms.mlkit.vision.sample.R;
+import com.huawei.hms.mlkit.vision.sample.activity.imgseg.ImageSegmentationActivity;
 
 import java.util.ArrayList;
 import java.util.List;

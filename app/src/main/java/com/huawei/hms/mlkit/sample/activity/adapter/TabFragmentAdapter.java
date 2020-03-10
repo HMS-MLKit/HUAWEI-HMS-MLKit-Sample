@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.activity.adapter;
+package com.huawei.hms.mlkit.vision.sample.activity.adapter;
 
 import android.view.ViewGroup;
 

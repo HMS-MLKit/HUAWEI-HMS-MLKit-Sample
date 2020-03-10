@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.activity;
+package com.huawei.hms.mlkit.vision.sample.activity;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -30,8 +30,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.huawei.hms.mlkit.sample.R;
-import com.huawei.hms.mlkit.sample.views.SwitchButton;
+import com.huawei.hms.mlkit.vision.sample.R;
+import com.huawei.hms.mlkit.vision.sample.views.SwitchButton;
 import com.huawei.hms.mlplugin.card.icr.cn.MLCnIcrCapture;
 import com.huawei.hms.mlplugin.card.icr.cn.MLCnIcrCaptureConfig;
 import com.huawei.hms.mlplugin.card.icr.cn.MLCnIcrCaptureFactory;

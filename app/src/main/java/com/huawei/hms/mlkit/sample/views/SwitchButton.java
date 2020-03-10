@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.views;
+package com.huawei.hms.mlkit.vision.sample.views;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -27,7 +27,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.huawei.hms.mlkit.sample.R;
+import com.huawei.hms.mlkit.vision.sample.R;
 
 /**
  * Custom switch controls

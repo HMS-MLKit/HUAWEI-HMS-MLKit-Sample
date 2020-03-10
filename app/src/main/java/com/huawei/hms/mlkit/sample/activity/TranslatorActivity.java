@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.activity;
+package com.huawei.hms.mlkit.vision.sample.activity;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -32,7 +32,7 @@ import android.widget.TextView;
 import com.huawei.hmf.tasks.OnFailureListener;
 import com.huawei.hmf.tasks.OnSuccessListener;
 import com.huawei.hmf.tasks.Task;
-import com.huawei.hms.mlkit.sample.R;
+import com.huawei.hms.mlkit.vision.sample.R;
 import com.huawei.hms.mlsdk.langdetect.MLDetectedLang;
 import com.huawei.hms.mlsdk.langdetect.MLLangDetectorFactory;
 import com.huawei.hms.mlsdk.langdetect.cloud.MLRemoteLangDetector;

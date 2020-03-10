@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.activity.fragment;
+package com.huawei.hms.mlkit.vision.sample.activity.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,9 +22,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
-import com.huawei.hms.mlkit.sample.R;
-import com.huawei.hms.mlkit.sample.activity.adapter.GridViewAdapter;
-import com.huawei.hms.mlkit.sample.activity.entity.GridViewItem;
+import com.huawei.hms.mlkit.vision.sample.R;
+import com.huawei.hms.mlkit.vision.sample.activity.adapter.GridViewAdapter;
+import com.huawei.hms.mlkit.vision.sample.activity.entity.GridViewItem;
 
 
 import java.util.ArrayList;

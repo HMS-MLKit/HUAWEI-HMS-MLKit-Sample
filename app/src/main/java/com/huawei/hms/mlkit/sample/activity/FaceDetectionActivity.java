@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.activity;
+package com.huawei.hms.mlkit.vision.sample.activity;
 
 import android.hardware.Camera;
 import android.os.Bundle;
@@ -24,14 +24,14 @@ import android.widget.CompoundButton;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.huawei.hms.mlkit.sample.R;
-import com.huawei.hms.mlkit.sample.camera.CameraConfiguration;
-import com.huawei.hms.mlkit.sample.camera.LensEngine;
-import com.huawei.hms.mlkit.sample.camera.LensEnginePreview;
-import com.huawei.hms.mlkit.sample.transactor.LocalFaceTransactor;
-import com.huawei.hms.mlkit.sample.util.Constant;
-import com.huawei.hms.mlkit.sample.views.SwitchButton;
-import com.huawei.hms.mlkit.sample.views.overlay.GraphicOverlay;
+import com.huawei.hms.mlkit.vision.sample.R;
+import com.huawei.hms.mlkit.vision.sample.camera.CameraConfiguration;
+import com.huawei.hms.mlkit.vision.sample.camera.LensEngine;
+import com.huawei.hms.mlkit.vision.sample.camera.LensEnginePreview;
+import com.huawei.hms.mlkit.vision.sample.transactor.LocalFaceTransactor;
+import com.huawei.hms.mlkit.vision.sample.util.Constant;
+import com.huawei.hms.mlkit.vision.sample.views.SwitchButton;
+import com.huawei.hms.mlkit.vision.sample.views.overlay.GraphicOverlay;
 import com.huawei.hms.mlsdk.face.MLFaceAnalyzerSetting;
 
 import java.io.IOException;

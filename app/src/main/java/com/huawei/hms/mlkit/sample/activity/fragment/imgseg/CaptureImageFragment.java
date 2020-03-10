@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.activity.fragment.imgseg;
+package com.huawei.hms.mlkit.vision.sample.activity.fragment.imgseg;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,8 +25,8 @@ import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 
-import com.huawei.hms.mlkit.sample.R;
-import com.huawei.hms.mlkit.sample.activity.imgseg.StillCutPhotoActivity;
+import com.huawei.hms.mlkit.vision.sample.R;
+import com.huawei.hms.mlkit.vision.sample.activity.imgseg.StillCutPhotoActivity;
 
 public class CaptureImageFragment extends Fragment {
     private ImageView mLoadPhoto;

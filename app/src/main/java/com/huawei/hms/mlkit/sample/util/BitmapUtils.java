@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.util;
+package com.huawei.hms.mlkit.vision.sample.util;
 
 import android.app.Activity;
 import android.database.Cursor;
@@ -30,7 +30,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
 
-import com.huawei.hms.mlkit.sample.camera.FrameMetadata;
+import com.huawei.hms.mlkit.vision.sample.camera.FrameMetadata;
 import com.huawei.hms.mlsdk.common.MLFrame;
 import com.huawei.hms.mlsdk.common.internal.client.SmartLog;
 

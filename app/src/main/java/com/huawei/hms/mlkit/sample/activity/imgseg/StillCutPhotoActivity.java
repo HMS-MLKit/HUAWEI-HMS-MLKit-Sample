@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.activity.imgseg;
+package com.huawei.hms.mlkit.vision.sample.activity.imgseg;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -34,12 +34,12 @@ import android.widget.Toast;
 import com.huawei.hmf.tasks.OnFailureListener;
 import com.huawei.hmf.tasks.OnSuccessListener;
 import com.huawei.hmf.tasks.Task;
-import com.huawei.hms.mlkit.sample.R;
-import com.huawei.hms.mlkit.sample.activity.BaseActivity;
-import com.huawei.hms.mlkit.sample.callback.ImageSegmentationResultCallBack;
-import com.huawei.hms.mlkit.sample.util.BitmapUtils;
-import com.huawei.hms.mlkit.sample.util.ImageUtils;
-import com.huawei.hms.mlkit.sample.views.overlay.GraphicOverlay;
+import com.huawei.hms.mlkit.vision.sample.R;
+import com.huawei.hms.mlkit.vision.sample.activity.BaseActivity;
+import com.huawei.hms.mlkit.vision.sample.callback.ImageSegmentationResultCallBack;
+import com.huawei.hms.mlkit.vision.sample.util.BitmapUtils;
+import com.huawei.hms.mlkit.vision.sample.util.ImageUtils;
+import com.huawei.hms.mlkit.vision.sample.views.overlay.GraphicOverlay;
 import com.huawei.hms.mlsdk.MLAnalyzerFactory;
 import com.huawei.hms.mlsdk.common.MLFrame;
 import com.huawei.hms.mlsdk.common.internal.client.SmartLog;

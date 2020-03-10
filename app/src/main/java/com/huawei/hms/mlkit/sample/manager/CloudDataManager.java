@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.manager;
+package com.huawei.hms.mlkit.vision.sample.manager;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -24,7 +24,7 @@ import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.Rect;
 
-import com.huawei.hms.mlkit.sample.views.overlay.GraphicOverlay;
+import com.huawei.hms.mlkit.vision.sample.views.overlay.GraphicOverlay;
 import com.huawei.hms.mlsdk.common.LensEngine;
 import com.huawei.hms.mlsdk.document.MLDocument;
 import com.huawei.hms.mlsdk.text.MLText;

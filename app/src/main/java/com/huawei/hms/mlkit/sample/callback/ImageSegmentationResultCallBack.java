@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.callback;
+package com.huawei.hms.mlkit.vision.sample.callback;
 
 import android.graphics.Bitmap;
 

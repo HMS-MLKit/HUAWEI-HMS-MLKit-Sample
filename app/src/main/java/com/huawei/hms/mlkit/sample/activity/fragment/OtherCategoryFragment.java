@@ -14,11 +14,11 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.activity.fragment;
+package com.huawei.hms.mlkit.vision.sample.activity.fragment;
 
 import android.view.View;
 
-import com.huawei.hms.mlkit.sample.activity.entity.GridViewItem;
+import com.huawei.hms.mlkit.vision.sample.activity.entity.GridViewItem;
 
 
 import java.util.ArrayList;

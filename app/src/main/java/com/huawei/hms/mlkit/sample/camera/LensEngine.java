@@ -16,7 +16,7 @@
  *                  Huawei Technologies Co., Ltd.
  */
 
-package com.huawei.hms.mlkit.sample.camera;
+package com.huawei.hms.mlkit.vision.sample.camera;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -30,8 +30,8 @@ import android.util.Log;
 import androidx.annotation.RequiresPermission;
 
 import com.huawei.hms.common.size.Size;
-import com.huawei.hms.mlkit.sample.transactor.ImageTransactor;
-import com.huawei.hms.mlkit.sample.views.overlay.GraphicOverlay;
+import com.huawei.hms.mlkit.vision.sample.transactor.ImageTransactor;
+import com.huawei.hms.mlkit.vision.sample.views.overlay.GraphicOverlay;
 
 import java.io.IOException;
 import java.lang.Thread.State;

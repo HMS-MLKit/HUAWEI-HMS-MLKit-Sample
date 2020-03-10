@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.activity.adapter;
+package com.huawei.hms.mlkit.vision.sample.activity.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -24,8 +24,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.huawei.hms.mlkit.sample.R;
-import com.huawei.hms.mlkit.sample.activity.entity.GridViewItem;
+import com.huawei.hms.mlkit.vision.sample.R;
+import com.huawei.hms.mlkit.vision.sample.activity.entity.GridViewItem;
 import com.huawei.hms.mlsdk.common.internal.client.SmartLog;
 
 import java.util.ArrayList;

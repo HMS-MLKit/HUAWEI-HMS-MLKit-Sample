@@ -14,23 +14,23 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.activity.fragment;
+package com.huawei.hms.mlkit.vision.sample.activity.fragment;
 
 import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
-import com.huawei.hms.mlkit.sample.R;
-import com.huawei.hms.mlkit.sample.activity.RemoteDetectionActivity;
-import com.huawei.hms.mlkit.sample.activity.FaceDetectionActivity;
-import com.huawei.hms.mlkit.sample.activity.IDCardRecognitionActivity;
-import com.huawei.hms.mlkit.sample.activity.ImageClassificationActivity;
-import com.huawei.hms.mlkit.sample.activity.ObjectDetectionActivity;
-import com.huawei.hms.mlkit.sample.activity.TextRecognitionActivity;
-import com.huawei.hms.mlkit.sample.activity.entity.GridViewItem;
-import com.huawei.hms.mlkit.sample.activity.imgseg.ImageSegmentationActivity;
-import com.huawei.hms.mlkit.sample.util.Constant;
+import com.huawei.hms.mlkit.vision.sample.R;
+import com.huawei.hms.mlkit.vision.sample.activity.RemoteDetectionActivity;
+import com.huawei.hms.mlkit.vision.sample.activity.FaceDetectionActivity;
+import com.huawei.hms.mlkit.vision.sample.activity.IDCardRecognitionActivity;
+import com.huawei.hms.mlkit.vision.sample.activity.ImageClassificationActivity;
+import com.huawei.hms.mlkit.vision.sample.activity.ObjectDetectionActivity;
+import com.huawei.hms.mlkit.vision.sample.activity.TextRecognitionActivity;
+import com.huawei.hms.mlkit.vision.sample.activity.entity.GridViewItem;
+import com.huawei.hms.mlkit.vision.sample.activity.imgseg.ImageSegmentationActivity;
+import com.huawei.hms.mlkit.vision.sample.util.Constant;
 
 import java.util.ArrayList;
 

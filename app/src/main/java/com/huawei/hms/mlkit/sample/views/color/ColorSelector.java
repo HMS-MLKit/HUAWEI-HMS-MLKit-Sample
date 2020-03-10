@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.views.color;
+package com.huawei.hms.mlkit.vision.sample.views.color;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -34,8 +34,8 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import com.huawei.hms.mlkit.sample.R;
-import com.huawei.hms.mlkit.sample.util.Constant;
+import com.huawei.hms.mlkit.vision.sample.R;
+import com.huawei.hms.mlkit.vision.sample.util.Constant;
 
 public class ColorSelector extends View {
     // By default, the ratio of long edge to short edge is 6:1.

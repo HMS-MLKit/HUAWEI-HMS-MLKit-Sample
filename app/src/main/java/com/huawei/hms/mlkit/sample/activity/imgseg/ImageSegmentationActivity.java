@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.activity.imgseg;
+package com.huawei.hms.mlkit.vision.sample.activity.imgseg;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -24,12 +24,12 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import com.huawei.hms.mlkit.sample.R;
-import com.huawei.hms.mlkit.sample.activity.BaseActivity;
-import com.huawei.hms.mlkit.sample.activity.adapter.TabFragmentAdapter;
-import com.huawei.hms.mlkit.sample.activity.fragment.imgseg.BackgroundChangeFragment;
-import com.huawei.hms.mlkit.sample.activity.fragment.imgseg.CaptureImageFragment;
-import com.huawei.hms.mlkit.sample.activity.fragment.imgseg.SliceImageFragment;
+import com.huawei.hms.mlkit.vision.sample.R;
+import com.huawei.hms.mlkit.vision.sample.activity.BaseActivity;
+import com.huawei.hms.mlkit.vision.sample.activity.adapter.TabFragmentAdapter;
+import com.huawei.hms.mlkit.vision.sample.activity.fragment.imgseg.BackgroundChangeFragment;
+import com.huawei.hms.mlkit.vision.sample.activity.fragment.imgseg.CaptureImageFragment;
+import com.huawei.hms.mlkit.vision.sample.activity.fragment.imgseg.SliceImageFragment;
 
 import java.util.ArrayList;
 import java.util.List;

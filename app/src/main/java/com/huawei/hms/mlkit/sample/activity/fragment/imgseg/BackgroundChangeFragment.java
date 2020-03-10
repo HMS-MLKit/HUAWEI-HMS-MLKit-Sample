@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.activity.fragment.imgseg;
+package com.huawei.hms.mlkit.vision.sample.activity.fragment.imgseg;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,13 +27,13 @@ import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 
-import com.huawei.hms.mlkit.sample.R;
+import com.huawei.hms.mlkit.vision.sample.R;
 
-import com.huawei.hms.mlkit.sample.activity.adapter.imgseg.MyGridViewAdapter;
-import com.huawei.hms.mlkit.sample.activity.imgseg.TakePhotoActivity;
-import com.huawei.hms.mlkit.sample.activity.entity.Entity;
-import com.huawei.hms.mlkit.sample.util.Constant;
-import com.huawei.hms.mlkit.sample.util.SharedPreferencesUtil;
+import com.huawei.hms.mlkit.vision.sample.activity.adapter.imgseg.MyGridViewAdapter;
+import com.huawei.hms.mlkit.vision.sample.activity.imgseg.TakePhotoActivity;
+import com.huawei.hms.mlkit.vision.sample.activity.entity.Entity;
+import com.huawei.hms.mlkit.vision.sample.util.Constant;
+import com.huawei.hms.mlkit.vision.sample.util.SharedPreferencesUtil;
 
 import java.util.ArrayList;
 

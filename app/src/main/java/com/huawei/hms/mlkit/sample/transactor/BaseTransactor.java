@@ -30,7 +30,7 @@
  *                   Huawei Technologies Co., Ltd.
  */
 
-package com.huawei.hms.mlkit.sample.transactor;
+package com.huawei.hms.mlkit.vision.sample.transactor;
 
 import android.graphics.Bitmap;
 import android.graphics.ImageFormat;
@@ -38,11 +38,11 @@ import android.graphics.ImageFormat;
 import com.huawei.hmf.tasks.OnFailureListener;
 import com.huawei.hmf.tasks.OnSuccessListener;
 import com.huawei.hmf.tasks.Task;
-import com.huawei.hms.mlkit.sample.camera.CameraConfiguration;
-import com.huawei.hms.mlkit.sample.util.BitmapUtils;
-import com.huawei.hms.mlkit.sample.camera.FrameMetadata;
-import com.huawei.hms.mlkit.sample.util.CommonUtils;
-import com.huawei.hms.mlkit.sample.views.overlay.GraphicOverlay;
+import com.huawei.hms.mlkit.vision.sample.camera.CameraConfiguration;
+import com.huawei.hms.mlkit.vision.sample.util.BitmapUtils;
+import com.huawei.hms.mlkit.vision.sample.camera.FrameMetadata;
+import com.huawei.hms.mlkit.vision.sample.util.CommonUtils;
+import com.huawei.hms.mlkit.vision.sample.views.overlay.GraphicOverlay;
 import com.huawei.hms.mlsdk.common.MLFrame;
 
 import java.nio.ByteBuffer;

@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.views.graphic;
+package com.huawei.hms.mlkit.vision.sample.views.graphic;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -23,7 +23,7 @@ import android.graphics.Paint.Style;
 import android.graphics.Rect;
 import android.graphics.RectF;
 
-import com.huawei.hms.mlkit.sample.views.overlay.GraphicOverlay;
+import com.huawei.hms.mlkit.vision.sample.views.overlay.GraphicOverlay;
 import com.huawei.hms.mlsdk.common.MLCoordinate;
 import com.huawei.hms.mlsdk.landmark.MLRemoteLandmark;
 

@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.huawei.hms.mlkit.sample.activity.entity;
+package com.huawei.hms.mlkit.vision.sample.activity.entity;
 
 public class Entity {
     private int resourceId;

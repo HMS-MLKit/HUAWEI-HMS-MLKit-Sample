@@ -13,10 +13,10 @@ android {
     }
     signingConfigs {
         release {
-                storeFile file("./mlkit.jks")
-                storePassword 'hwmlkit'
+                storeFile file("./mlkitSampleTest.jks")
+                storePassword '111111'
                 keyAlias 'mlkit'
-                keyPassword 'hwmlkit'
+                keyPassword '111111'
                 v2SigningEnabled false
         }
     }

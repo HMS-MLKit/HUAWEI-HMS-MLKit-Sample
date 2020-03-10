@@ -12,7 +12,7 @@
     <application
         android:allowBackup="false"
         android:icon="@drawable/icon"
-        android:label="ML Kit eu"
+        android:label="ML Kit"
         android:theme="@style/MaterialTheme">
         <activity android:name=".activity.AllFunctionActivity"></activity>
         <activity android:name=".activity.ImageClassificationActivity" />

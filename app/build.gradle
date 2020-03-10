@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     buildToolsVersion "28.0.3"
     defaultConfig {
-        applicationId "com.huawei.hms.mlkit.sample"
+        applicationId "com.huawei.hms.mlkit.vision.sample.cn"
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
@@ -13,10 +13,10 @@ android {
     }
     signingConfigs {
         release {
-                storeFile file("./mlkitSampleTest.jks")
-                storePassword '111111'
+                storeFile file("./mlkit.jks")
+                storePassword 'hwmlkit'
                 keyAlias 'mlkit'
-                keyPassword '111111'
+                keyPassword 'hwmlkit'
                 v2SigningEnabled false
         }
     }

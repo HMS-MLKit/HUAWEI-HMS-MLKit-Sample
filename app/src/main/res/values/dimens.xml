@@ -30,4 +30,10 @@
     <dimen name="sm_1">1.5999756px</dimen>
     <dimen name="sm_5">8.0px</dimen>
     <dimen name="idcard_margin">24dp</dimen>
+    <dimen name="idcard_result_margin">24dp</dimen>
+    <dimen name="circle_stroke_radius">65dp</dimen>
+
+    <dimen name="start_logo_height">250dp</dimen>
+    <dimen name="start_logo_margin">230dp</dimen>
+    <dimen name="start_margin_top">70dp</dimen>
 </resources>

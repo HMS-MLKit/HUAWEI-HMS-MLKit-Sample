@@ -68,7 +68,6 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/translate_switch"
-            android:backgroundTint="@color/button_background"
             app:layout_constraintEnd_toStartOf="@+id/spDestType"
             app:layout_constraintStart_toEndOf="@+id/spSourceType"
             app:layout_constraintTop_toTopOf="@id/spSourceType" />

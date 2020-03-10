@@ -32,7 +32,6 @@ import com.huawei.hmf.tasks.Task;
 import com.huawei.hms.mlkit.vision.sample.callback.ImageSegmentationResultCallBack;
 import com.huawei.hms.mlkit.vision.sample.camera.CameraConfiguration;
 import com.huawei.hms.mlkit.vision.sample.camera.FrameMetadata;
-import com.huawei.hms.mlkit.vision.sample.util.EdgeDetection;
 import com.huawei.hms.mlkit.vision.sample.views.graphic.CameraImageGraphic;
 import com.huawei.hms.mlkit.vision.sample.views.overlay.GraphicOverlay;
 import com.huawei.hms.mlsdk.MLAnalyzerFactory;
@@ -53,7 +52,6 @@ public class ImageSegmentationTransactor extends BaseTransactor<MLImageSegmentat
     private final MLImageSegmentationAnalyzer detector;
     private Context context;
     private Bitmap foregroundBitmap, backgroundBitmap;
-    private boolean[] resultArray;
     private String savePath = "";
     private ImageSegmentationResultCallBack imageSegmentationResultCallBack;
 
@@ -180,15 +178,6 @@ public class ImageSegmentationTransactor extends BaseTransactor<MLImageSegmentat
 
         //todo;
         int[] masks = this.byteArrToIntArr(maskByte);
-        int[][] twoMasks = this.oneToTwoArray(masks);
-        boolean[][] detectArray = new boolean[twoMasks.length][twoMasks[0].length];
-        EdgeDetection edgeDetection = new EdgeDetection(twoMasks, detectArray);
-        edgeDetection.setArray(twoMasks);
-        edgeDetection.setLabel(1);
-        this.resultArray = edgeDetection.detect();
-        Log.i(ImageSegmentationTransactor.TAG, "foreground width:" + this.foregroundBitmap.getWidth() + ",foreground height:" + this.foregroundBitmap.getHeight());
-        Log.i(ImageSegmentationTransactor.TAG, "background width:" + this.backgroundBitmap.getWidth() + ",foreground height:" + this.backgroundBitmap.getHeight());
-
         int[] foregroundPixels = new int[this.foregroundBitmap.getWidth() * this.foregroundBitmap.getHeight()];
         int[] backgroundPixels = new int[this.backgroundBitmap.getWidth() * this.backgroundBitmap.getHeight()];
         this.foregroundBitmap.getPixels(foregroundPixels, 0, this.foregroundBitmap.getWidth(), 0, 0, this.foregroundBitmap.getWidth(), this.foregroundBitmap.getHeight());
@@ -232,19 +221,6 @@ public class ImageSegmentationTransactor extends BaseTransactor<MLImageSegmentat
             results[i] = masks[i];
         }
         return results;
-    }
-
-    /**
-     * One-dimensional array converted into two-dimensional image coordinates.
-     */
-    private int[][] oneToTwoArray(int[] one) {
-        int[][] two = new int[this.foregroundBitmap.getHeight()][this.foregroundBitmap.getWidth()];
-        for (int index = 0; index < one.length; index++) {
-            int row = index / this.foregroundBitmap.getWidth();
-            int col = index % this.foregroundBitmap.getWidth();
-            two[row][col] = one[index];
-        }
-        return two;
     }
 
     /**

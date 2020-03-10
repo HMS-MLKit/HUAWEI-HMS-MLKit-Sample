@@ -20,7 +20,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.hardware.Camera;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -30,11 +33,12 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
 
 import com.huawei.hms.mlkit.vision.sample.R;
 import com.huawei.hms.mlkit.vision.sample.activity.BaseActivity;
 import com.huawei.hms.mlkit.vision.sample.callback.ImageSegmentationResultCallBack;
+import com.huawei.hms.mlkit.vision.sample.callback.ImageUtilCallBack;
 import com.huawei.hms.mlkit.vision.sample.camera.CameraConfiguration;
 import com.huawei.hms.mlkit.vision.sample.camera.LensEngine;
 import com.huawei.hms.mlkit.vision.sample.camera.LensEnginePreview;
@@ -45,6 +49,7 @@ import com.huawei.hms.mlkit.vision.sample.views.overlay.GraphicOverlay;
 import com.huawei.hms.mlsdk.common.internal.client.SmartLog;
 import com.huawei.hms.mlsdk.imgseg.MLImageSegmentationSetting;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -68,6 +73,8 @@ public class TakePhotoActivity extends BaseActivity implements CompoundButton.On
     private Bitmap background, processImage;
     private ImageSegmentationTransactor transactor;
     private MLImageSegmentationSetting setting;
+    private String imgPath;
+    private ImageUtilCallBack imageUtilCallBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +87,7 @@ public class TakePhotoActivity extends BaseActivity implements CompoundButton.On
         try {
             this.index = intent.getIntExtra(Constant.VALUE_KEY, -1);
         } catch (RuntimeException e) {
-            Log.e(TakePhotoActivity.TAG, "Get intent value failed:" + e.getMessage());
+            Log.e(TAG, "Get intent value failed:" + e.getMessage());
         }
         if (this.index < 0) {
             Toast.makeText(this.getApplicationContext(), R.string.please_select_picture, Toast.LENGTH_SHORT).show();
@@ -116,8 +123,8 @@ public class TakePhotoActivity extends BaseActivity implements CompoundButton.On
 
     private void initAction() {
         this.facingSwitch.setOnCheckedChangeListener(this);
-        this.img_back.setOnClickListener(this);
-        this.img_pic.setOnClickListener(this);
+        img_back.setOnClickListener(this);
+        img_pic.setOnClickListener(this);
         // Set the display effect when the takePhoto button is clicked.
         this.img_takePhoto.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -138,8 +145,20 @@ public class TakePhotoActivity extends BaseActivity implements CompoundButton.On
                 if (TakePhotoActivity.this.processImage == null) {
                     SmartLog.e(TakePhotoActivity.TAG, "The image is null, unable to save.");
                 } else {
+                    // save current image to gallery.
                     ImageUtils imageUtils = new ImageUtils(TakePhotoActivity.this.getApplicationContext());
+                    imageUtils.setImageUtilCallBack(new ImageUtilCallBack() {
+                        @Override
+                        public void callSavePath(String path) {
+                            imgPath = path;
+                            Log.i(TAG, "PATH:" + path);
+                        }
+                    });
                     imageUtils.saveToAlbum(TakePhotoActivity.this.processImage);
+                    Matrix matrix = new Matrix();
+                    matrix.postScale(0.3f, 0.3f);
+                    Bitmap resizedBitmap = Bitmap.createBitmap(processImage,0, 0, processImage.getWidth(), processImage.getHeight(),matrix, true);
+                    img_pic.setImageBitmap(resizedBitmap);
                 }
             }
         });
@@ -148,9 +167,25 @@ public class TakePhotoActivity extends BaseActivity implements CompoundButton.On
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.back){
-            this.finish();
-        }else if(view.getId() == R.id.img_pic){
-            this.finish();
+            finish();
+        }else if(view.getId() == R.id.img_pic) {
+            if (imgPath == null) {
+                Toast.makeText(getApplicationContext(), "please save a picture", Toast.LENGTH_SHORT).show();
+            } else {
+                Intent intent = new Intent();
+                File imgFile = new File(imgPath);
+                if (Build.VERSION.SDK_INT < 19) {
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    intent.setType("image/*");
+                } else {
+                    intent = new Intent(Intent.ACTION_VIEW);
+                    Uri imgUri = FileProvider.getUriForFile(this, getPackageName()+".provider", imgFile);
+                    Log.i(TAG, "image uri:" + imgUri.toString());
+                    intent.setDataAndType(imgUri, "image/*");
+                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                }
+                startActivity(intent);
+            }
         }
     }
 
@@ -190,6 +225,7 @@ public class TakePhotoActivity extends BaseActivity implements CompoundButton.On
                 Log.e(TakePhotoActivity.TAG, "Unable to start lensEngine.", e);
                 this.lensEngine.release();
                 this.lensEngine = null;
+                this.imgPath = null;
             }
         }
     }
@@ -217,7 +253,7 @@ public class TakePhotoActivity extends BaseActivity implements CompoundButton.On
                 this.facing = CameraConfiguration.CAMERA_FACING_BACK;
             }
             this.cameraConfiguration.setCameraFacing(this.facing);
-            this.setting = new MLImageSegmentationSetting.Factory().setAnalyzerType(0).create();
+            this.setting = new MLImageSegmentationSetting.Factory().setAnalyzerType(MLImageSegmentationSetting.BODY_SEG).create();
             this.transactor = new ImageSegmentationTransactor(this.getApplicationContext(), this.setting, this.background);
             this.transactor.setImageSegmentationResultCallBack(this);
             this.lensEngine.setMachineLearningFrameTransactor(this.transactor);
@@ -252,6 +288,7 @@ public class TakePhotoActivity extends BaseActivity implements CompoundButton.On
         if (this.transactor != null) {
             this.transactor.stop();
         }
+        this.imgPath = null;
         this.facing = CameraConfiguration.CAMERA_FACING_BACK;
         this.cameraConfiguration.setCameraFacing(this.facing);
     }
@@ -260,5 +297,4 @@ public class TakePhotoActivity extends BaseActivity implements CompoundButton.On
     public void callResultBitmap(Bitmap bitmap) {
         this.processImage = bitmap;
     }
-
 }

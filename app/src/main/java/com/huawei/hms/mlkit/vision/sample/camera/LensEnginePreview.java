@@ -123,7 +123,7 @@ public class LensEnginePreview extends ViewGroup {
         @Override
         public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
             Log.d(LensEnginePreview.TAG, "surfaceChanged");
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
                 if (!LensEnginePreview.this.isSynchronous) {
                     Camera camera = LensEnginePreview.this.lensEngine.getCamera();
                     try {

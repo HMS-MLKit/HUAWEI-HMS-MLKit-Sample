@@ -74,7 +74,7 @@ public class LocalImageClassificationTransactor extends BaseTransactor<List<MLIm
             @NonNull FrameMetadata frameMetadata,
             @NonNull GraphicOverlay graphicOverlay) {
         graphicOverlay.clear();
-        if ((Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) && originalCameraImage != null) {
+        if ((Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) && originalCameraImage != null) {
             CameraImageGraphic imageGraphic = new CameraImageGraphic(graphicOverlay, originalCameraImage);
             graphicOverlay.addGraphic(imageGraphic);
         }

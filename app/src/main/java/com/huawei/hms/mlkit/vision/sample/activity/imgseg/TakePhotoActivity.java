@@ -87,7 +87,7 @@ public class TakePhotoActivity extends BaseActivity implements CompoundButton.On
         try {
             this.index = intent.getIntExtra(Constant.VALUE_KEY, -1);
         } catch (RuntimeException e) {
-            Log.e(TAG, "Get intent value failed:" + e.getMessage());
+            Log.e(TakePhotoActivity.TAG, "Get intent value failed:" + e.getMessage());
         }
         if (this.index < 0) {
             Toast.makeText(this.getApplicationContext(), R.string.please_select_picture, Toast.LENGTH_SHORT).show();
@@ -123,8 +123,8 @@ public class TakePhotoActivity extends BaseActivity implements CompoundButton.On
 
     private void initAction() {
         this.facingSwitch.setOnCheckedChangeListener(this);
-        img_back.setOnClickListener(this);
-        img_pic.setOnClickListener(this);
+        this.img_back.setOnClickListener(this);
+        this.img_pic.setOnClickListener(this);
         // Set the display effect when the takePhoto button is clicked.
         this.img_takePhoto.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -150,15 +150,15 @@ public class TakePhotoActivity extends BaseActivity implements CompoundButton.On
                     imageUtils.setImageUtilCallBack(new ImageUtilCallBack() {
                         @Override
                         public void callSavePath(String path) {
-                            imgPath = path;
-                            Log.i(TAG, "PATH:" + path);
+                            TakePhotoActivity.this.imgPath = path;
+                            Log.i(TakePhotoActivity.TAG, "PATH:" + path);
                         }
                     });
                     imageUtils.saveToAlbum(TakePhotoActivity.this.processImage);
                     Matrix matrix = new Matrix();
                     matrix.postScale(0.3f, 0.3f);
-                    Bitmap resizedBitmap = Bitmap.createBitmap(processImage,0, 0, processImage.getWidth(), processImage.getHeight(),matrix, true);
-                    img_pic.setImageBitmap(resizedBitmap);
+                    Bitmap resizedBitmap = Bitmap.createBitmap(TakePhotoActivity.this.processImage,0, 0, TakePhotoActivity.this.processImage.getWidth(), TakePhotoActivity.this.processImage.getHeight(),matrix, true);
+                    TakePhotoActivity.this.img_pic.setImageBitmap(resizedBitmap);
                 }
             }
         });
@@ -167,24 +167,24 @@ public class TakePhotoActivity extends BaseActivity implements CompoundButton.On
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.back){
-            finish();
+            this.finish();
         }else if(view.getId() == R.id.img_pic) {
-            if (imgPath == null) {
-                Toast.makeText(getApplicationContext(), "please save a picture", Toast.LENGTH_SHORT).show();
+            if (this.imgPath == null) {
+                Toast.makeText(this.getApplicationContext(), "please save a picture", Toast.LENGTH_SHORT).show();
             } else {
                 Intent intent = new Intent();
-                File imgFile = new File(imgPath);
-                if (Build.VERSION.SDK_INT < 19) {
+                File imgFile = new File(this.imgPath);
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
                     intent.setAction(Intent.ACTION_GET_CONTENT);
                     intent.setType("image/*");
                 } else {
                     intent = new Intent(Intent.ACTION_VIEW);
-                    Uri imgUri = FileProvider.getUriForFile(this, getPackageName()+".provider", imgFile);
-                    Log.i(TAG, "image uri:" + imgUri.toString());
+                    Uri imgUri = FileProvider.getUriForFile(this, this.getPackageName()+".provider", imgFile);
+                    Log.i(TakePhotoActivity.TAG, "image uri:" + imgUri.toString());
                     intent.setDataAndType(imgUri, "image/*");
                     intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 }
-                startActivity(intent);
+                this.startActivity(intent);
             }
         }
     }

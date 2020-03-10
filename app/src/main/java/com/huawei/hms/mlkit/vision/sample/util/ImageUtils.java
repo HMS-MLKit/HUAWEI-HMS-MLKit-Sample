@@ -24,9 +24,8 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
-import android.provider.MediaStore;
-import android.util.Log;
 
+import com.huawei.hms.mlkit.vision.sample.callback.ImageUtilCallBack;
 import com.huawei.hms.mlsdk.common.internal.client.SmartLog;
 
 import java.io.File;
@@ -37,9 +36,14 @@ import java.io.IOException;
 public class ImageUtils {
     private static final String TAG = "ImageUtils";
     private  Context context;
+    private ImageUtilCallBack imageUtilCallBack;
 
     public ImageUtils(Context context){
         this.context = context;
+    }
+
+    public void setImageUtilCallBack(ImageUtilCallBack imageUtilCallBack){
+        this.imageUtilCallBack = imageUtilCallBack;
     }
 
     // Save the picture to the system album and refresh it.
@@ -70,20 +74,12 @@ public class ImageUtils {
                 SmartLog.e(ImageUtils.TAG, e.getMessage());
             }
         }
-
-        // Insert pictures into the system gallery.
-        try {
-            if (null != file) {
-                MediaStore.Images.Media.insertImage(this.context.getContentResolver(), file.getCanonicalPath(), fileName, null);
-            }
-        } catch (IOException e) {
-            SmartLog.e(ImageUtils.TAG, e.getMessage());
-        }
-
-        if (file == null) {
+        if(file == null){
             return;
         }
-
+        if(imageUtilCallBack != null) {
+            imageUtilCallBack.callSavePath(file.getAbsolutePath());
+        }
         // Gallery refresh.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             String path = null;
@@ -128,9 +124,9 @@ public class ImageUtils {
      */
     public static Bitmap resizeImageToForegroundImage(Bitmap foregroundBitmap, Bitmap backgroundBitmap) {
         float scaleWidth = ((float) foregroundBitmap.getWidth() / backgroundBitmap.getWidth());
-        float scaleHeigth = ((float) foregroundBitmap.getHeight() / backgroundBitmap.getHeight());
+        float scaleHeight = ((float) foregroundBitmap.getHeight() / backgroundBitmap.getHeight());
         Matrix matrix = new Matrix();
-        matrix.postScale(scaleWidth, scaleHeigth);
+        matrix.postScale(scaleWidth, scaleHeight);
 
         backgroundBitmap = Bitmap.createBitmap(backgroundBitmap, 0, 0, backgroundBitmap.getWidth(), backgroundBitmap.getHeight(), matrix, true);
         return backgroundBitmap;

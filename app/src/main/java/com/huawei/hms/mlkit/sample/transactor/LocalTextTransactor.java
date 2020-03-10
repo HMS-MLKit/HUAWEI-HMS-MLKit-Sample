@@ -18,6 +18,7 @@ package com.huawei.hms.mlkit.sample.transactor;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Handler;
 import android.util.Log;
 
@@ -26,6 +27,7 @@ import com.huawei.hms.mlkit.sample.camera.FrameMetadata;
 import com.huawei.hms.mlkit.sample.util.Constant;
 import com.huawei.hms.mlkit.sample.util.SharedPreferencesUtil;
 import com.huawei.hms.mlkit.sample.views.graphic.BaseGraphic;
+import com.huawei.hms.mlkit.sample.views.graphic.CameraImageGraphic;
 import com.huawei.hms.mlkit.sample.views.graphic.LocalTextGraphic;
 import com.huawei.hms.mlkit.sample.views.overlay.GraphicOverlay;
 import com.huawei.hms.mlsdk.MLAnalyzerFactory;
@@ -97,7 +99,8 @@ public class LocalTextTransactor extends BaseTransactor<MLText> {
         try {
             this.detector.close();
         } catch (IOException e) {
-            Log.e(LocalTextTransactor.TAG, "Exception thrown while trying to close Text Detector: " + e);
+            Log.e(LocalTextTransactor.TAG,
+                    "Exception thrown while trying to close text transactor: " + e.getMessage());
         }
     }
 
@@ -130,6 +133,10 @@ public class LocalTextTransactor extends BaseTransactor<MLText> {
         this.latestImageMetaData = frameMetadata;
         graphicOverlay.clear();
         List<MLText.Block> blocks = results.getBlocks();
+        if ((Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) && originalCameraImage != null) {
+            CameraImageGraphic imageGraphic = new CameraImageGraphic(graphicOverlay, originalCameraImage);
+            graphicOverlay.addGraphic(imageGraphic);
+        }
         if (blocks.size() > 0) {
             this.mCount = 0;
             this.mHandler.sendEmptyMessage(Constant.SHOW_TAKE_PHOTO_BUTTON);
@@ -155,6 +162,6 @@ public class LocalTextTransactor extends BaseTransactor<MLText> {
 
     @Override
     protected void onFailure(@NonNull Exception e) {
-        Log.w(LocalTextTransactor.TAG, "Text detection failed." + e);
+        Log.e(LocalTextTransactor.TAG, "Text detection failed: " + e.getMessage());
     }
 }

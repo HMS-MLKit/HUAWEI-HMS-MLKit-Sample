@@ -16,14 +16,17 @@
 
 package com.huawei.hms.mlkit.sample.transactor;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import android.os.Build;
 import android.util.Log;
 
 import com.huawei.hmf.tasks.Task;
+import com.huawei.hms.mlkit.sample.views.graphic.CameraImageGraphic;
 import com.huawei.hms.mlkit.sample.views.graphic.LocalImageClassificationGraphic;
 import com.huawei.hms.mlkit.sample.camera.FrameMetadata;
 import com.huawei.hms.mlkit.sample.views.overlay.GraphicOverlay;
@@ -42,7 +45,10 @@ public class LocalImageClassificationTransactor extends BaseTransactor<List<MLIm
 
     private final MLImageClassificationAnalyzer detector;
 
-    public LocalImageClassificationTransactor() {
+    private Context mContext;
+
+    public LocalImageClassificationTransactor(Context context) {
+        this.mContext = context;
         this.detector = MLAnalyzerFactory.getInstance().getLocalImageClassificationAnalyzer();
     }
 
@@ -51,7 +57,8 @@ public class LocalImageClassificationTransactor extends BaseTransactor<List<MLIm
         try {
             this.detector.stop();
         } catch (IOException e) {
-            Log.e(LocalImageClassificationTransactor.TAG, "Exception thrown while trying to close Text Detector: " + e);
+            Log.e(LocalImageClassificationTransactor.TAG,
+                    "Exception thrown while trying to close image classification transactor: " + e.getMessage());
         }
     }
 
@@ -67,13 +74,18 @@ public class LocalImageClassificationTransactor extends BaseTransactor<List<MLIm
             @NonNull FrameMetadata frameMetadata,
             @NonNull GraphicOverlay graphicOverlay) {
         graphicOverlay.clear();
-        LocalImageClassificationGraphic hmsMLLocalImageClassificationGraphic = new LocalImageClassificationGraphic(graphicOverlay, classifications);
+        if ((Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) && originalCameraImage != null) {
+            CameraImageGraphic imageGraphic = new CameraImageGraphic(graphicOverlay, originalCameraImage);
+            graphicOverlay.addGraphic(imageGraphic);
+        }
+        LocalImageClassificationGraphic hmsMLLocalImageClassificationGraphic =
+                new LocalImageClassificationGraphic(graphicOverlay, this.mContext, classifications);
         graphicOverlay.addGraphic(hmsMLLocalImageClassificationGraphic);
         graphicOverlay.postInvalidate();
     }
 
     @Override
     protected void onFailure(@NonNull Exception e) {
-        Log.w(LocalImageClassificationTransactor.TAG, "Image classification failed." + e);
+        Log.e(LocalImageClassificationTransactor.TAG, "Image classification failed: " + e.getMessage());
     }
 }

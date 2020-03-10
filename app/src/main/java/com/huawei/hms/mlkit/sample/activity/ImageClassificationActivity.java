@@ -97,13 +97,13 @@ public final class ImageClassificationActivity extends BaseActivity
             @Override
             public void takePicture() {
                 intent.putExtra(Constant.ADD_PICTURE_TYPE, Constant.TYPE_TAKE_PHOTO);
-                startActivity(intent);
+                ImageClassificationActivity.this.startActivity(intent);
             }
 
             @Override
             public void selectImage() {
                 intent.putExtra(Constant.ADD_PICTURE_TYPE, Constant.TYPE_SELECT_IMAGE);
-                startActivity(intent);
+                ImageClassificationActivity.this.startActivity(intent);
             }
         });
     }
@@ -149,7 +149,7 @@ public final class ImageClassificationActivity extends BaseActivity
             this.lensEngine = new LensEngine(this, this.cameraConfiguration, this.graphicOverlay);
         }
         try {
-            this.lensEngine.setMachineLearningFrameTransactor(new LocalImageClassificationTransactor());
+            this.lensEngine.setMachineLearningFrameTransactor(new LocalImageClassificationTransactor(this.getApplicationContext()));
         } catch (Exception e) {
             Toast.makeText(
                     this,

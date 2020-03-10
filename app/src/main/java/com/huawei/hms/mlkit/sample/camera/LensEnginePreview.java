@@ -22,6 +22,7 @@ import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.hardware.Camera;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -122,12 +123,14 @@ public class LensEnginePreview extends ViewGroup {
         @Override
         public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
             Log.d(LensEnginePreview.TAG, "surfaceChanged");
-            if (!LensEnginePreview.this.isSynchronous) {
-                Camera camera = LensEnginePreview.this.lensEngine.getCamera();
-                try {
-                    camera.setPreviewDisplay(LensEnginePreview.this.surfaceView.getHolder());
-                } catch (IOException e) {
-                    Log.e(LensEnginePreview.TAG, "IOException", e);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                if (!LensEnginePreview.this.isSynchronous) {
+                    Camera camera = LensEnginePreview.this.lensEngine.getCamera();
+                    try {
+                        camera.setPreviewDisplay(LensEnginePreview.this.surfaceView.getHolder());
+                    } catch (IOException e) {
+                        Log.e(LensEnginePreview.TAG, "IOException", e);
+                    }
                 }
             }
         }
@@ -138,7 +141,7 @@ public class LensEnginePreview extends ViewGroup {
         try {
             this.startLensEngine();
         } catch (IOException e) {
-            Log.e(LensEnginePreview.TAG, "Could not start Lensengine.", e);
+            Log.e(LensEnginePreview.TAG, "Could not start LensEngine.", e);
         }
         if (this.lensEngine == null) {
             return;

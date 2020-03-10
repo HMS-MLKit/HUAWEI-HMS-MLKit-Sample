@@ -16,10 +16,12 @@
 
 package com.huawei.hms.mlkit.sample.views.graphic;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
+import com.huawei.hms.mlkit.sample.util.CommonUtils;
 import com.huawei.hms.mlkit.sample.views.overlay.GraphicOverlay;
 import com.huawei.hms.mlsdk.classification.MLImageClassification;
 
@@ -29,16 +31,17 @@ public class LocalImageClassificationGraphic extends BaseGraphic {
 
     private final Paint textPaint;
     private final GraphicOverlay overlay;
-
+    private Context mContext;
     private final List<MLImageClassification> classifications;
 
-    public LocalImageClassificationGraphic(GraphicOverlay overlay, List<MLImageClassification> classifications) {
+    public LocalImageClassificationGraphic(GraphicOverlay overlay, Context context, List<MLImageClassification> classifications) {
         super(overlay);
         this.overlay = overlay;
+        this.mContext = context;
         this.classifications = classifications;
         this.textPaint = new Paint();
         this.textPaint.setColor(Color.WHITE);
-        this.textPaint.setTextSize(60.0f);
+        this.textPaint.setTextSize(CommonUtils.dp2px(this.mContext, 16));
     }
 
     @Override
@@ -48,7 +51,7 @@ public class LocalImageClassificationGraphic extends BaseGraphic {
 
         for (MLImageClassification classification : this.classifications) {
             canvas.drawText(classification.getName(), x, y, this.textPaint);
-            y = y - 62.0f;
+            y = y - CommonUtils.dp2px(this.mContext, 18);
         }
     }
 }

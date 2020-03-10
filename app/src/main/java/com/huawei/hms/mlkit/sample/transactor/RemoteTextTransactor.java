@@ -35,7 +35,7 @@ import com.huawei.hms.mlsdk.text.MLTextAnalyzer;
 
 public class RemoteTextTransactor extends BaseTransactor<MLText> {
 
-    private static final String TAG = "CloudTextTransactor";
+    private static final String TAG = "RemoteTextTransactor";
 
     private final MLTextAnalyzer detector;
 
@@ -74,6 +74,6 @@ public class RemoteTextTransactor extends BaseTransactor<MLText> {
     @Override
     protected void onFailure(@NonNull Exception e) {
         this.handler.sendEmptyMessage(Constant.GET_DATA_FAILED);
-        Log.w(RemoteTextTransactor.TAG, "Cloud Text detection failed." + e);
+        Log.e(RemoteTextTransactor.TAG, "Remote text detection failed: " + e.getMessage());
     }
 }

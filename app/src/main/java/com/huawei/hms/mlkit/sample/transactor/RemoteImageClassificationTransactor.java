@@ -16,6 +16,7 @@
 
 package com.huawei.hms.mlkit.sample.transactor;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.util.Log;
@@ -42,10 +43,13 @@ public class RemoteImageClassificationTransactor extends BaseTransactor<List<MLI
 
     private Handler handler;
 
-    public RemoteImageClassificationTransactor(Handler handler) {
+    private Context mContext;
+
+    public RemoteImageClassificationTransactor(Context context, Handler handler) {
         super();
         MLRemoteClassificationAnalyzerSetting options = new MLRemoteClassificationAnalyzerSetting.Factory().setMinAcceptablePossibility(0f).create();
         this.detector = MLAnalyzerFactory.getInstance().getRemoteImageClassificationAnalyzer(options);
+        this.mContext = context;
         this.handler = handler;
     }
 
@@ -55,7 +59,8 @@ public class RemoteImageClassificationTransactor extends BaseTransactor<List<MLI
         try {
             this.detector.stop();
         } catch (IOException e) {
-            Log.e(RemoteImageClassificationTransactor.TAG, "Exception thrown while trying to close cloud image classifier!", e);
+            Log.e(RemoteImageClassificationTransactor.TAG,
+                    "Exception thrown while trying to close remote image classification transactor" + e.getMessage());
         }
     }
 
@@ -79,14 +84,15 @@ public class RemoteImageClassificationTransactor extends BaseTransactor<List<MLI
                 classificationList.add(classification.getName());
             }
         }
-        RemoteImageClassificationGraphic remoteImageClassificationGraphic = new RemoteImageClassificationGraphic(graphicOverlay, classificationList);
+        RemoteImageClassificationGraphic remoteImageClassificationGraphic =
+                new RemoteImageClassificationGraphic(graphicOverlay, this.mContext, classificationList);
         graphicOverlay.addGraphic(remoteImageClassificationGraphic);
         graphicOverlay.postInvalidate();
     }
 
     @Override
     protected void onFailure(Exception e) {
-        Log.e(RemoteImageClassificationTransactor.TAG, "Cloud Image Classification failed " + e);
+        Log.e(RemoteImageClassificationTransactor.TAG, "Remote image classification detection failed: " + e.getMessage());
         this.handler.sendEmptyMessage(Constant.GET_DATA_FAILED);
     }
 }

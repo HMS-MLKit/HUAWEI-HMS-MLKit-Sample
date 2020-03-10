@@ -81,7 +81,7 @@
                 android:layout_height="25dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="15dp"
-                android:src="@drawable/black_album"></ImageView>
+                android:src="@mipmap/album_black"></ImageView>
 
             <TextView
                 android:layout_width="wrap_content"

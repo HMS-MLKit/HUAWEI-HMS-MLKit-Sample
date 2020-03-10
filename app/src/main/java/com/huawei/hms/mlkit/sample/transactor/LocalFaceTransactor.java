@@ -56,7 +56,7 @@ public class LocalFaceTransactor extends BaseTransactor<List<MLFace>> {
         try {
             this.detector.stop();
         } catch (IOException e) {
-            Log.w(LocalFaceTransactor.TAG, "LocalFaceTransactor stop detector exception.");
+            Log.e(LocalFaceTransactor.TAG, "Exception thrown while trying to close face transactor: " + e.getMessage());
         }
     }
 
@@ -83,7 +83,7 @@ public class LocalFaceTransactor extends BaseTransactor<List<MLFace>> {
 
     @Override
     protected void onFailure(@NonNull Exception e) {
-        Log.e(LocalFaceTransactor.TAG, "Face detection failed " + e);
+        Log.e(LocalFaceTransactor.TAG, "Face detection failed: " + e.getMessage());
     }
 
     @Override

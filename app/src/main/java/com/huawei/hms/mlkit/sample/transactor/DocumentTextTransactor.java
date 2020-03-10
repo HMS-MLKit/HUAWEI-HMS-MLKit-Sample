@@ -71,6 +71,6 @@ public class DocumentTextTransactor
     @Override
     protected void onFailure(@NonNull Exception e) {
         this.handler.sendEmptyMessage(Constant.GET_DATA_FAILED);
-        Log.w(DocumentTextTransactor.TAG, "Cloud Document Text detection failed." + e);
+        Log.e(DocumentTextTransactor.TAG, "Remote Document Text detection failed: " + e.getMessage());
     }
 }

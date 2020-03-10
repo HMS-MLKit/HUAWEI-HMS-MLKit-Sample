@@ -301,7 +301,7 @@ public class StillCutPhotoActivity extends BaseActivity implements ImageSegmenta
             try {
                 this.analyzer.stop();
             } catch (IOException e) {
-                Log.e(TAG, "Stop analyzer failed: " + e.getMessage());
+                Log.e(StillCutPhotoActivity.TAG, "Stop analyzer failed: " + e.getMessage());
             }
         }
         this.imageUri = null;

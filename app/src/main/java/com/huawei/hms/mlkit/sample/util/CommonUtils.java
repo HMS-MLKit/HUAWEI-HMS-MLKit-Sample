@@ -16,6 +16,7 @@
 
 package com.huawei.hms.mlkit.sample.util;
 
+import android.content.Context;
 import android.util.Log;
 
 import java.nio.ByteBuffer;
@@ -66,7 +67,7 @@ public class CommonUtils {
                 try {
                     dst.put((x + dst_y_slice), src.get(src_y_slice + srcx));
                 } catch (Exception e) {
-                    Log.d(TAG, "nv12_Resize Exception1" + e.getMessage());
+                    Log.d(CommonUtils.TAG, "nv12_Resize Exception1" + e.getMessage());
                 }
 
                 if ((y & 1) == 0) {
@@ -77,19 +78,23 @@ public class CommonUtils {
                         try {
                             dst.put(sp, src.get(dp));
                         } catch (Exception e) {
-                            Log.d(TAG, "nv12_Resize Exception2" + e.getMessage());
+                            Log.d(CommonUtils.TAG, "nv12_Resize Exception2" + e.getMessage());
                         }
                         ++sp;
                         ++dp;
                         try {
                             dst.put(sp, src.get(dp));
                         } catch (Exception e) {
-                            Log.d(TAG, "nv12_Resize Exception3" + e.getMessage());
+                            Log.d(CommonUtils.TAG, "nv12_Resize Exception3" + e.getMessage());
                         }
                     }
                 }
             }
             dst_y_slice += dw;
         }
+    }
+
+    public static float dp2px(Context context, float dipValue) {
+        return dipValue * context.getResources().getDisplayMetrics().density + 0.5f;
     }
 }

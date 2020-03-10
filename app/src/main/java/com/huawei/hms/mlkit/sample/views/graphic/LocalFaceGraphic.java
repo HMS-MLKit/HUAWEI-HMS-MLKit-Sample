@@ -32,6 +32,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 
+import com.huawei.hms.mlkit.sample.util.CommonUtils;
 import com.huawei.hms.mlkit.sample.views.overlay.GraphicOverlay;
 import com.huawei.hms.mlsdk.common.MLPosition;
 import com.huawei.hms.mlsdk.face.MLFace;
@@ -39,8 +40,6 @@ import com.huawei.hms.mlsdk.face.MLFaceKeyPoint;
 import com.huawei.hms.mlsdk.face.MLFaceShape;
 
 public class LocalFaceGraphic extends BaseGraphic {
-    private static final float BOX_STROKE_WIDTH = 6.0f;
-    private static final float LINE_WIDTH = 5.0f;
 
     private final GraphicOverlay overlay;
 
@@ -70,53 +69,54 @@ public class LocalFaceGraphic extends BaseGraphic {
 
         this.textPaint = new Paint();
         this.textPaint.setColor(Color.WHITE);
-        this.textPaint.setTextSize(this.dp2px(this.mContext, 6));
+        this.textPaint.setTextSize(CommonUtils.dp2px(this.mContext, 6));
         this.textPaint.setTypeface(Typeface.DEFAULT);
 
         this.faceFeaturePaintText = new Paint();
         this.faceFeaturePaintText.setColor(Color.WHITE);
-        this.faceFeaturePaintText.setTextSize(this.dp2px(this.mContext,11));
+        this.faceFeaturePaintText.setTextSize(CommonUtils.dp2px(this.mContext,11));
         this.faceFeaturePaintText.setTypeface(Typeface.DEFAULT);
 
         this.faceFeaturePaint = new Paint();
         this.faceFeaturePaint.setColor(this.faceFeaturePaintText.getColor());
         this.faceFeaturePaint.setStyle(Paint.Style.STROKE);
-        this.faceFeaturePaint.setStrokeWidth(LocalFaceGraphic.BOX_STROKE_WIDTH);
+        this.faceFeaturePaint.setStrokeWidth(CommonUtils.dp2px(this.mContext, 2));
 
+        float line_width = CommonUtils.dp2px(this.mContext, 1);
         this.facePaint = new Paint();
         this.facePaint.setColor(Color.parseColor("#ffcc66"));
         this.facePaint.setStyle(Paint.Style.STROKE);
-        this.facePaint.setStrokeWidth(LocalFaceGraphic.LINE_WIDTH);
+        this.facePaint.setStrokeWidth(line_width);
 
         this.landmarkPaint = new Paint();
         this.landmarkPaint.setColor(Color.RED);
         this.landmarkPaint.setStyle(Paint.Style.FILL);
-        this.landmarkPaint.setStrokeWidth(this.dp2px(this.mContext, 2));
+        this.landmarkPaint.setStrokeWidth(CommonUtils.dp2px(this.mContext, 2));
 
         this.eyePaint = new Paint();
         this.eyePaint.setColor(Color.parseColor("#00ccff"));
         this.eyePaint.setStyle(Paint.Style.STROKE);
-        this.eyePaint.setStrokeWidth(LocalFaceGraphic.LINE_WIDTH);
+        this.eyePaint.setStrokeWidth(line_width);
 
         this.eyebrowPaint = new Paint();
         this.eyebrowPaint.setColor(Color.parseColor("#006666"));
         this.eyebrowPaint.setStyle(Paint.Style.STROKE);
-        this.eyebrowPaint.setStrokeWidth(LocalFaceGraphic.LINE_WIDTH);
+        this.eyebrowPaint.setStrokeWidth(line_width);
 
         this.nosePaint = new Paint();
         this.nosePaint.setColor(Color.parseColor("#ffff00"));
         this.nosePaint.setStyle(Paint.Style.STROKE);
-        this.nosePaint.setStrokeWidth(LocalFaceGraphic.LINE_WIDTH);
+        this.nosePaint.setStrokeWidth(line_width);
 
         this.noseBasePaint = new Paint();
         this.noseBasePaint.setColor(Color.parseColor("#ff6699"));
         this.noseBasePaint.setStyle(Paint.Style.STROKE);
-        this.noseBasePaint.setStrokeWidth(LocalFaceGraphic.LINE_WIDTH);
+        this.noseBasePaint.setStrokeWidth(line_width);
 
         this.lipPaint = new Paint();
         this.lipPaint.setColor(Color.parseColor("#990000"));
         this.lipPaint.setStyle(Paint.Style.STROKE);
-        this.lipPaint.setStrokeWidth(LocalFaceGraphic.LINE_WIDTH);
+        this.lipPaint.setStrokeWidth(line_width);
     }
 
     public List<String> sortHashMap(HashMap<String, Float> map) {
@@ -144,14 +144,14 @@ public class LocalFaceGraphic extends BaseGraphic {
         if (this.faces == null) {
             return;
         }
-        float start = this.dp2px(this.mContext, 110);
+        float start = CommonUtils.dp2px(this.mContext, 110);
         float x = start;
         float width = this.overlay.getWidth() / 2.0f - start;
         float y;
         if (this.isLandScape()) {
-            y = this.overlay.getHeight() - this.dp2px(this.mContext,130);
+            y = this.overlay.getHeight() - CommonUtils.dp2px(this.mContext,130);
         } else {
-            y = this.overlay.getHeight() - this.dp2px(this.mContext,60);
+            y = this.overlay.getHeight() - CommonUtils.dp2px(this.mContext,60);
         }
         // Show all features mode.
         if (this.isOpenFeatures) {
@@ -188,7 +188,7 @@ public class LocalFaceGraphic extends BaseGraphic {
      */
     private void paintFeatures(List<MLFace> faces, Canvas canvas, float x, float y, float width) {
         float start = x;
-        float space = this.dp2px(this.mContext, 12);
+        float space = CommonUtils.dp2px(this.mContext, 12);
         for (MLFace face : faces) {
             HashMap<String, Float> emotions = new HashMap<>();
             emotions.put("Smiling", face.possibilityOfSmiling());
@@ -275,14 +275,10 @@ public class LocalFaceGraphic extends BaseGraphic {
                     canvas.drawCircle(
                             this.translateX(point.getX()),
                             this.translateY(point.getY()),
-                            10f, this.landmarkPaint);
+                            CommonUtils.dp2px(this.mContext, 3), this.landmarkPaint);
                 }
             }
         }
-    }
-
-    private float dp2px(Context context, float dipValue) {
-        return dipValue * context.getResources().getDisplayMetrics().density + 0.5f;
     }
 
     private boolean isLandScape() {

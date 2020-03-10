@@ -34,7 +34,7 @@ public class LanguageCategoryFragment extends BaseFragment {
 
     @Override
     protected void initClickEvent(View view) {
-        if (mGridView == null) {
+        if (this.mGridView == null) {
             return;
         }
         this.mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

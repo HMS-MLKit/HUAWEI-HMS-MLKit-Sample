@@ -35,11 +35,11 @@
 
     <ToggleButton
         android:id="@+id/object_facingSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/circle_stroke_radius"
+        android:layout_height="@dimen/circle_stroke_radius"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:background="@drawable/facing_switch_background"
+        android:background="@drawable/facingswitch_stroke"
         android:textOff=""
         android:textOn="" />
 </RelativeLayout>

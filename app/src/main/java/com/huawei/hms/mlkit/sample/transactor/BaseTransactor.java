@@ -122,9 +122,7 @@ public abstract class BaseTransactor<T> implements ImageTransactor {
                         new OnSuccessListener<T>() {
                             @Override
                             public void onSuccess(T results) {
-                                if(BaseTransactor.this.isImageSegment()){
-                                    BaseTransactor.this.onSuccess(bitmap, results, metadata, graphicOverlay);
-                                }else if (metadata == null || metadata.getCameraFacing() == CameraConfiguration.getCameraFacing()) {
+                                if (metadata == null || metadata.getCameraFacing() == CameraConfiguration.getCameraFacing()) {
                                     BaseTransactor.this.onSuccess(bitmap, results, metadata, graphicOverlay);
                                 }
                                 BaseTransactor.this.processLatestImage(graphicOverlay);
@@ -162,11 +160,7 @@ public abstract class BaseTransactor<T> implements ImageTransactor {
     protected abstract void onFailure(Exception e);
 
     @Override
-    public boolean isFaceDetection(){
-        return false;
-    }
-
-    public boolean isImageSegment(){
+    public boolean isFaceDetection() {
         return false;
     }
 }

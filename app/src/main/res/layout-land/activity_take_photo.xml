@@ -59,12 +59,11 @@
         <ImageButton
             android:id="@+id/img_pic"
             android:layout_width="30dp"
-            android:layout_height="24dp"
+            android:layout_height="30dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="30dp"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/black_album"
-            android:backgroundTint="@color/white" />
+            android:background="@mipmap/album_white"/>
 
         <ImageButton
             android:id="@+id/img_takePhoto"

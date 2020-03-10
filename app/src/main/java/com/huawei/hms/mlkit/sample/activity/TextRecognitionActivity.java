@@ -185,7 +185,7 @@ public final class TextRecognitionActivity extends BaseActivity
             this.languageDialog.dismiss();
             this.restartLensEngine(Constant.POSITION_LA);
         } else if (view.getId() == R.id.back) {
-            finish();
+            this.finish();
         }
     }
 
@@ -255,13 +255,13 @@ public final class TextRecognitionActivity extends BaseActivity
             @Override
             public void takePicture() {
                 intent.putExtra(Constant.ADD_PICTURE_TYPE, Constant.TYPE_TAKE_PHOTO);
-                startActivity(intent);
+                TextRecognitionActivity.this.startActivity(intent);
             }
 
             @Override
             public void selectImage() {
                 intent.putExtra(Constant.ADD_PICTURE_TYPE, Constant.TYPE_SELECT_IMAGE);
-                startActivity(intent);
+                TextRecognitionActivity.this.startActivity(intent);
             }
         });
     }

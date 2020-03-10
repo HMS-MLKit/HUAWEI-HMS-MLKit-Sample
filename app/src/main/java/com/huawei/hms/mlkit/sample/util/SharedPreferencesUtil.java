@@ -27,36 +27,36 @@ public class SharedPreferencesUtil {
 
 
     public SharedPreferencesUtil(Context context) {
-        mPreferences = context.getSharedPreferences(TAG, Context.MODE_PRIVATE);
-        mEditor = mPreferences.edit();
+        this.mPreferences = context.getSharedPreferences(SharedPreferencesUtil.TAG, Context.MODE_PRIVATE);
+        this.mEditor = this.mPreferences.edit();
     }
 
     public static SharedPreferencesUtil getInstance(Context context) {
-        if (mSharedPreferencesUtil == null) {
+        if (SharedPreferencesUtil.mSharedPreferencesUtil == null) {
             synchronized (SharedPreferencesUtil.class) {
-                if(mSharedPreferencesUtil == null) {
-                    mSharedPreferencesUtil = new SharedPreferencesUtil(context);
+                if(SharedPreferencesUtil.mSharedPreferencesUtil == null) {
+                    SharedPreferencesUtil.mSharedPreferencesUtil = new SharedPreferencesUtil(context);
                 }
             }
         }
-        return mSharedPreferencesUtil;
+        return SharedPreferencesUtil.mSharedPreferencesUtil;
     }
 
     public void putStringValue(String key, String value) {
-        mEditor.putString(key, value);
-        mEditor.commit();
+        this.mEditor.putString(key, value);
+        this.mEditor.commit();
     }
 
     public String getStringValue(String key) {
-        return mPreferences.getString(key, Constant.POSITION_EN);
+        return this.mPreferences.getString(key, Constant.POSITION_EN);
     }
 
     public void putIntValue(String key, int value) {
-        mEditor.putInt(key, value);
-        mEditor.commit();
+        this.mEditor.putInt(key, value);
+        this.mEditor.commit();
     }
 
     public int getIntValue(String key) {
-        return mPreferences.getInt(key, -1);
+        return this.mPreferences.getInt(key, -1);
     }
 }

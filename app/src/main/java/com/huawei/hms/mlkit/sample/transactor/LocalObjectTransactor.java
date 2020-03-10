@@ -17,11 +17,13 @@
 package com.huawei.hms.mlkit.sample.transactor;
 
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.huawei.hms.mlkit.sample.views.graphic.CameraImageGraphic;
 import com.huawei.hms.mlkit.sample.views.graphic.LocalObjectGraphic;
 import com.huawei.hms.mlkit.sample.camera.FrameMetadata;
 import com.huawei.hms.mlkit.sample.views.overlay.GraphicOverlay;
@@ -51,7 +53,7 @@ public class LocalObjectTransactor extends BaseTransactor<List<MLObject>> {
         try {
             this.detector.stop();
         } catch (IOException e) {
-            Log.e(LocalObjectTransactor.TAG, "Exception thrown while trying to close object detector!", e);
+            Log.e(LocalObjectTransactor.TAG, "Exception thrown while trying to close object transactor: " + e.getMessage());
         }
     }
 
@@ -67,6 +69,10 @@ public class LocalObjectTransactor extends BaseTransactor<List<MLObject>> {
             @NonNull FrameMetadata frameMetadata,
             @NonNull GraphicOverlay graphicOverlay) {
         graphicOverlay.clear();
+        if ((Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) && originalCameraImage != null) {
+            CameraImageGraphic imageGraphic = new CameraImageGraphic(graphicOverlay, originalCameraImage);
+            graphicOverlay.addGraphic(imageGraphic);
+        }
         for (MLObject object : results) {
             LocalObjectGraphic objectGraphic = new LocalObjectGraphic(graphicOverlay, object);
             graphicOverlay.addGraphic(objectGraphic);
@@ -76,6 +82,6 @@ public class LocalObjectTransactor extends BaseTransactor<List<MLObject>> {
 
     @Override
     protected void onFailure(@NonNull Exception e) {
-        Log.e(LocalObjectTransactor.TAG, "Object detection failed!", e);
+        Log.e(LocalObjectTransactor.TAG, "Object detection failed: " + e.getMessage());
     }
 }

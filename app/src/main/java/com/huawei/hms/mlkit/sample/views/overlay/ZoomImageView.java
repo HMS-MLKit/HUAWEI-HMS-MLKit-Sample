@@ -120,7 +120,7 @@ public class ZoomImageView extends ImageView {
 
     public ZoomImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        configureImageView(context);
+        this.configureImageView(context);
     }
 
     private void configureImageView(Context context) {
@@ -128,75 +128,75 @@ public class ZoomImageView extends ImageView {
 
         super.setClickable(true);
 
-        mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
-        mGestureDetector = new GestureDetector(context, new GestureListener());
+        this.mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
+        this.mGestureDetector = new GestureDetector(context, new GestureListener());
 
-        matrix = new Matrix();
-        prevMatrix = new Matrix();
+        this.matrix = new Matrix();
+        this.prevMatrix = new Matrix();
 
-        m = new float[9];
-        normalizedScale = 1;
-        if (mScaleType == null) {
-            mScaleType = ScaleType.FIT_CENTER;
+        this.m = new float[9];
+        this.normalizedScale = 1;
+        if (this.mScaleType == null) {
+            this.mScaleType = ScaleType.FIT_CENTER;
         }
 
-        minScale = 1;
-        maxScale = 3;
+        this.minScale = 1;
+        this.maxScale = 3;
 
-        superMinScale = SUPER_MIN_MULTIPLIER * minScale;
-        superMaxScale = SUPER_MAX_MULTIPLIER * maxScale;
+        this.superMinScale = ZoomImageView.SUPER_MIN_MULTIPLIER * this.minScale;
+        this.superMaxScale = ZoomImageView.SUPER_MAX_MULTIPLIER * this.maxScale;
 
-        setImageMatrix(matrix);
-        setScaleType(ScaleType.MATRIX);
-        setState(State.NONE);
+        this.setImageMatrix(this.matrix);
+        this.setScaleType(ScaleType.MATRIX);
+        this.setState(State.NONE);
 
-        onDrawReady = false;
+        this.onDrawReady = false;
         super.setOnTouchListener(new PrivateOnTouchListener());
     }
 
     @Override
     public void setOnTouchListener(OnTouchListener l) {
-        userTouchListener = l;
+        this.userTouchListener = l;
     }
 
     public void setOnTouchImageViewListener(OnTouchImageViewListener l) {
-        touchImageViewListener = l;
+        this.touchImageViewListener = l;
     }
 
     public void setOnDoubleTapListener(GestureDetector.OnDoubleTapListener l) {
-        doubleTapListener = l;
+        this.doubleTapListener = l;
     }
 
     @Override
     public void setImageResource(int resId) {
-        imageRenderedAtLeastOnce = false;
+        this.imageRenderedAtLeastOnce = false;
         super.setImageResource(resId);
-        savePreviousImageValues();
-        fitImageToView();
+        this.savePreviousImageValues();
+        this.fitImageToView();
     }
 
     @Override
     public void setImageBitmap(Bitmap bm) {
-        imageRenderedAtLeastOnce = false;
+        this.imageRenderedAtLeastOnce = false;
         super.setImageBitmap(bm);
-        savePreviousImageValues();
-        fitImageToView();
+        this.savePreviousImageValues();
+        this.fitImageToView();
     }
 
     @Override
     public void setImageDrawable(Drawable drawable) {
-        imageRenderedAtLeastOnce = false;
+        this.imageRenderedAtLeastOnce = false;
         super.setImageDrawable(drawable);
-        savePreviousImageValues();
-        fitImageToView();
+        this.savePreviousImageValues();
+        this.fitImageToView();
     }
 
     @Override
     public void setImageURI(Uri uri) {
-        imageRenderedAtLeastOnce = false;
+        this.imageRenderedAtLeastOnce = false;
         super.setImageURI(uri);
-        savePreviousImageValues();
-        fitImageToView();
+        this.savePreviousImageValues();
+        this.fitImageToView();
     }
 
     @Override
@@ -205,20 +205,20 @@ public class ZoomImageView extends ImageView {
             super.setScaleType(ScaleType.MATRIX);
 
         } else {
-            mScaleType = type;
-            if (onDrawReady) {
+            this.mScaleType = type;
+            if (this.onDrawReady) {
                 //
                 // If the image is already rendered, scaleType has been called programmatically
                 // and the TouchImageView should be updated with the new scaleType.
                 //
-                setZoom(this);
+                this.setZoom(this);
             }
         }
     }
 
     @Override
     public ScaleType getScaleType() {
-        return mScaleType;
+        return this.mScaleType;
     }
 
     /**
@@ -227,7 +227,7 @@ public class ZoomImageView extends ImageView {
      * @return true if image is zoomed
      */
     public boolean isZoomed() {
-        return normalizedScale != 1;
+        return this.normalizedScale != 1;
     }
 
     /**
@@ -236,14 +236,14 @@ public class ZoomImageView extends ImageView {
      * @return rect representing zoomed image
      */
     public RectF getZoomedRect() {
-        if (mScaleType == ScaleType.FIT_XY) {
+        if (this.mScaleType == ScaleType.FIT_XY) {
             throw new UnsupportedOperationException("getZoomedRect() not supported with FIT_XY");
         }
-        PointF topLeft = transformCoordTouchToBitmap(0, 0, true);
-        PointF bottomRight = transformCoordTouchToBitmap(viewWidth, viewHeight, true);
+        PointF topLeft = this.transformCoordTouchToBitmap(0, 0, true);
+        PointF bottomRight = this.transformCoordTouchToBitmap(this.viewWidth, this.viewHeight, true);
 
-        float w = getDrawable().getIntrinsicWidth();
-        float h = getDrawable().getIntrinsicHeight();
+        float w = this.getDrawable().getIntrinsicWidth();
+        float h = this.getDrawable().getIntrinsicHeight();
         return new RectF(topLeft.x / w, topLeft.y / h, bottomRight.x / w, bottomRight.y / h);
     }
 
@@ -252,13 +252,13 @@ public class ZoomImageView extends ImageView {
      * in the prevMatrix and prevView variables.
      */
     public void savePreviousImageValues() {
-        if (matrix != null && viewHeight != 0 && viewWidth != 0) {
-            matrix.getValues(m);
-            prevMatrix.setValues(m);
-            prevMatchViewHeight = matchViewHeight;
-            prevMatchViewWidth = matchViewWidth;
-            prevViewHeight = viewHeight;
-            prevViewWidth = viewWidth;
+        if (this.matrix != null && this.viewHeight != 0 && this.viewWidth != 0) {
+            this.matrix.getValues(this.m);
+            this.prevMatrix.setValues(this.m);
+            this.prevMatchViewHeight = this.matchViewHeight;
+            this.prevMatchViewWidth = this.matchViewWidth;
+            this.prevViewHeight = this.viewHeight;
+            this.prevViewWidth = this.viewWidth;
         }
     }
 
@@ -266,14 +266,14 @@ public class ZoomImageView extends ImageView {
     public Parcelable onSaveInstanceState() {
         Bundle bundle = new Bundle();
         bundle.putParcelable("instanceState", super.onSaveInstanceState());
-        bundle.putFloat("saveScale", normalizedScale);
-        bundle.putFloat("matchViewHeight", matchViewHeight);
-        bundle.putFloat("matchViewWidth", matchViewWidth);
-        bundle.putInt("viewWidth", viewWidth);
-        bundle.putInt("viewHeight", viewHeight);
-        matrix.getValues(m);
-        bundle.putFloatArray("matrix", m);
-        bundle.putBoolean("imageRendered", imageRenderedAtLeastOnce);
+        bundle.putFloat("saveScale", this.normalizedScale);
+        bundle.putFloat("matchViewHeight", this.matchViewHeight);
+        bundle.putFloat("matchViewWidth", this.matchViewWidth);
+        bundle.putInt("viewWidth", this.viewWidth);
+        bundle.putInt("viewHeight", this.viewHeight);
+        this.matrix.getValues(this.m);
+        bundle.putFloatArray("matrix", this.m);
+        bundle.putBoolean("imageRendered", this.imageRenderedAtLeastOnce);
         return bundle;
     }
 
@@ -281,14 +281,14 @@ public class ZoomImageView extends ImageView {
     public void onRestoreInstanceState(Parcelable state) {
         if (state instanceof Bundle) {
             Bundle bundle = (Bundle) state;
-            normalizedScale = bundle.getFloat("saveScale");
-            m = bundle.getFloatArray("matrix");
-            prevMatrix.setValues(m);
-            prevMatchViewHeight = bundle.getFloat("matchViewHeight");
-            prevMatchViewWidth = bundle.getFloat("matchViewWidth");
-            prevViewHeight = bundle.getInt("viewHeight");
-            prevViewWidth = bundle.getInt("viewWidth");
-            imageRenderedAtLeastOnce = bundle.getBoolean("imageRendered");
+            this.normalizedScale = bundle.getFloat("saveScale");
+            this.m = bundle.getFloatArray("matrix");
+            this.prevMatrix.setValues(this.m);
+            this.prevMatchViewHeight = bundle.getFloat("matchViewHeight");
+            this.prevMatchViewWidth = bundle.getFloat("matchViewWidth");
+            this.prevViewHeight = bundle.getInt("viewHeight");
+            this.prevViewWidth = bundle.getInt("viewWidth");
+            this.imageRenderedAtLeastOnce = bundle.getBoolean("imageRendered");
             super.onRestoreInstanceState(bundle.getParcelable("instanceState"));
             return;
         }
@@ -298,11 +298,11 @@ public class ZoomImageView extends ImageView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        onDrawReady = true;
-        imageRenderedAtLeastOnce = true;
-        if (delayedZoomVariables != null) {
-            setZoom(delayedZoomVariables.scale, delayedZoomVariables.focusX, delayedZoomVariables.focusY, delayedZoomVariables.scaleType);
-            delayedZoomVariables = null;
+        this.onDrawReady = true;
+        this.imageRenderedAtLeastOnce = true;
+        if (this.delayedZoomVariables != null) {
+            this.setZoom(this.delayedZoomVariables.scale, this.delayedZoomVariables.focusX, this.delayedZoomVariables.focusY, this.delayedZoomVariables.scaleType);
+            this.delayedZoomVariables = null;
         }
         super.onDraw(canvas);
     }
@@ -310,7 +310,7 @@ public class ZoomImageView extends ImageView {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        savePreviousImageValues();
+        this.savePreviousImageValues();
     }
 
     /**
@@ -319,7 +319,7 @@ public class ZoomImageView extends ImageView {
      * @return max zoom multiplier.
      */
     public float getMaxZoom() {
-        return maxScale;
+        return this.maxScale;
     }
 
     /**
@@ -328,8 +328,8 @@ public class ZoomImageView extends ImageView {
      * @param max max zoom multiplier.
      */
     public void setMaxZoom(float max) {
-        maxScale = max;
-        superMaxScale = SUPER_MAX_MULTIPLIER * maxScale;
+        this.maxScale = max;
+        this.superMaxScale = ZoomImageView.SUPER_MAX_MULTIPLIER * this.maxScale;
     }
 
     /**
@@ -338,7 +338,7 @@ public class ZoomImageView extends ImageView {
      * @return min zoom multiplier.
      */
     public float getMinZoom() {
-        return minScale;
+        return this.minScale;
     }
 
     /**
@@ -348,7 +348,7 @@ public class ZoomImageView extends ImageView {
      * @return current zoom multiplier.
      */
     public float getCurrentZoom() {
-        return normalizedScale;
+        return this.normalizedScale;
     }
 
     /**
@@ -357,16 +357,16 @@ public class ZoomImageView extends ImageView {
      * @param min min zoom multiplier.
      */
     public void setMinZoom(float min) {
-        minScale = min;
-        superMinScale = SUPER_MIN_MULTIPLIER * minScale;
+        this.minScale = min;
+        this.superMinScale = ZoomImageView.SUPER_MIN_MULTIPLIER * this.minScale;
     }
 
     /**
      * Reset zoom and translation to initial state.
      */
     public void resetZoom() {
-        normalizedScale = 1;
-        fitImageToView();
+        this.normalizedScale = 1;
+        this.fitImageToView();
     }
 
     /**
@@ -375,7 +375,7 @@ public class ZoomImageView extends ImageView {
      * @param scale
      */
     public void setZoom(float scale) {
-        setZoom(scale, 0.5f, 0.5f);
+        this.setZoom(scale, 0.5f, 0.5f);
     }
 
     /**
@@ -389,7 +389,7 @@ public class ZoomImageView extends ImageView {
      * @param focusY
      */
     public void setZoom(float scale, float focusX, float focusY) {
-        setZoom(scale, focusX, focusY, mScaleType);
+        this.setZoom(scale, focusX, focusY, this.mScaleType);
     }
 
     /**
@@ -409,22 +409,22 @@ public class ZoomImageView extends ImageView {
         // image and view sizes have not yet been calculated in onMeasure. Thus, we should
         // delay calling setZoom until the view has been measured.
         //
-        if (!onDrawReady) {
-            delayedZoomVariables = new ZoomVariables(scale, focusX, focusY, scaleType);
+        if (!this.onDrawReady) {
+            this.delayedZoomVariables = new ZoomVariables(scale, focusX, focusY, scaleType);
             return;
         }
 
-        if (scaleType != mScaleType) {
-            setScaleType(scaleType);
+        if (scaleType != this.mScaleType) {
+            this.setScaleType(scaleType);
         }
-        resetZoom();
-        scaleImage(scale, viewWidth / 2.0f, viewHeight / 2.0f, true);
-        matrix.getValues(m);
-        m[Matrix.MTRANS_X] = -((focusX * getImageWidth()) - (viewWidth * 0.5f));
-        m[Matrix.MTRANS_Y] = -((focusY * getImageHeight()) - (viewHeight * 0.5f));
-        matrix.setValues(m);
-        fixTrans();
-        setImageMatrix(matrix);
+        this.resetZoom();
+        this.scaleImage(scale, this.viewWidth / 2.0f, this.viewHeight / 2.0f, true);
+        this.matrix.getValues(this.m);
+        this.m[Matrix.MTRANS_X] = -((focusX * this.getImageWidth()) - (this.viewWidth * 0.5f));
+        this.m[Matrix.MTRANS_Y] = -((focusY * this.getImageHeight()) - (this.viewHeight * 0.5f));
+        this.matrix.setValues(this.m);
+        this.fixTrans();
+        this.setImageMatrix(this.matrix);
     }
 
     /**
@@ -435,7 +435,7 @@ public class ZoomImageView extends ImageView {
      */
     public void setZoom(ZoomImageView img) {
         PointF center = img.getScrollPosition();
-        setZoom(img.getCurrentZoom(), center.x, center.y, img.getScaleType());
+        this.setZoom(img.getCurrentZoom(), center.x, center.y, img.getScaleType());
     }
 
     /**
@@ -447,14 +447,14 @@ public class ZoomImageView extends ImageView {
      * @return PointF representing the scroll position of the zoomed image.
      */
     public PointF getScrollPosition() {
-        Drawable drawable = getDrawable();
+        Drawable drawable = this.getDrawable();
         if (drawable == null) {
             return null;
         }
         int drawableWidth = drawable.getIntrinsicWidth();
         int drawableHeight = drawable.getIntrinsicHeight();
 
-        PointF point = transformCoordTouchToBitmap(viewWidth / 2.0f, viewHeight / 2.0f, true);
+        PointF point = this.transformCoordTouchToBitmap(this.viewWidth / 2.0f, this.viewHeight / 2.0f, true);
         point.x /= drawableWidth;
         point.y /= drawableHeight;
         return point;
@@ -468,7 +468,7 @@ public class ZoomImageView extends ImageView {
      * @param focusY
      */
     public void setScrollPosition(float focusX, float focusY) {
-        setZoom(normalizedScale, focusX, focusY);
+        this.setZoom(this.normalizedScale, focusX, focusY);
     }
 
     /**
@@ -476,15 +476,15 @@ public class ZoomImageView extends ImageView {
      * is out of bounds.
      */
     private void fixTrans() {
-        matrix.getValues(m);
-        float transX = m[Matrix.MTRANS_X];
-        float transY = m[Matrix.MTRANS_Y];
+        this.matrix.getValues(this.m);
+        float transX = this.m[Matrix.MTRANS_X];
+        float transY = this.m[Matrix.MTRANS_Y];
 
-        float fixTransX = getFixTrans(transX, viewWidth, getImageWidth());
-        float fixTransY = getFixTrans(transY, viewHeight, getImageHeight());
+        float fixTransX = this.getFixTrans(transX, this.viewWidth, this.getImageWidth());
+        float fixTransY = this.getFixTrans(transY, this.viewHeight, this.getImageHeight());
 
         if (fixTransX != 0 || fixTransY != 0) {
-            matrix.postTranslate(fixTransX, fixTransY);
+            this.matrix.postTranslate(fixTransX, fixTransY);
         }
     }
 
@@ -496,16 +496,16 @@ public class ZoomImageView extends ImageView {
      * then makes sure the image is centered correctly within the view.
      */
     private void fixScaleTrans() {
-        fixTrans();
-        matrix.getValues(m);
-        if (getImageWidth() < viewWidth) {
-            m[Matrix.MTRANS_X] = (viewWidth - getImageWidth()) / 2;
+        this.fixTrans();
+        this.matrix.getValues(this.m);
+        if (this.getImageWidth() < this.viewWidth) {
+            this.m[Matrix.MTRANS_X] = (this.viewWidth - this.getImageWidth()) / 2;
         }
 
-        if (getImageHeight() < viewHeight) {
-            m[Matrix.MTRANS_Y] = (viewHeight - getImageHeight()) / 2;
+        if (this.getImageHeight() < this.viewHeight) {
+            this.m[Matrix.MTRANS_Y] = (this.viewHeight - this.getImageHeight()) / 2;
         }
-        matrix.setValues(m);
+        this.matrix.setValues(this.m);
     }
 
     private float getFixTrans(float trans, float viewSize, float contentSize) {
@@ -520,10 +520,12 @@ public class ZoomImageView extends ImageView {
             maxTrans = 0;
         }
 
-        if (trans < minTrans)
+        if (trans < minTrans) {
             return -trans + minTrans;
-        if (trans > maxTrans)
+        }
+        if (trans > maxTrans) {
             return -trans + maxTrans;
+        }
         return 0;
     }
 
@@ -535,18 +537,18 @@ public class ZoomImageView extends ImageView {
     }
 
     private float getImageWidth() {
-        return matchViewWidth * normalizedScale;
+        return this.matchViewWidth * this.normalizedScale;
     }
 
     private float getImageHeight() {
-        return matchViewHeight * normalizedScale;
+        return this.matchViewHeight * this.normalizedScale;
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        Drawable drawable = getDrawable();
+        Drawable drawable = this.getDrawable();
         if (drawable == null || drawable.getIntrinsicWidth() == 0 || drawable.getIntrinsicHeight() == 0) {
-            setMeasuredDimension(0, 0);
+            this.setMeasuredDimension(0, 0);
             return;
         }
 
@@ -556,22 +558,22 @@ public class ZoomImageView extends ImageView {
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-        int totalViewWidth = setViewSize(widthMode, widthSize, drawableWidth);
-        int totalViewHeight = setViewSize(heightMode, heightSize, drawableHeight);
+        int totalViewWidth = this.setViewSize(widthMode, widthSize, drawableWidth);
+        int totalViewHeight = this.setViewSize(heightMode, heightSize, drawableHeight);
 
         // Image view width, height must consider padding
-        viewWidth = totalViewWidth - getPaddingLeft() - getPaddingRight();
-        viewHeight = totalViewHeight - getPaddingTop() - getPaddingBottom();
+        this.viewWidth = totalViewWidth - this.getPaddingLeft() - this.getPaddingRight();
+        this.viewHeight = totalViewHeight - this.getPaddingTop() - this.getPaddingBottom();
 
         //
         // Set view dimensions
         //
-        setMeasuredDimension(viewWidth, viewHeight);
+        this.setMeasuredDimension(this.viewWidth, this.viewHeight);
 
         //
         // Fit content within view
         //
-        fitImageToView();
+        this.fitImageToView();
     }
 
     /**
@@ -580,11 +582,11 @@ public class ZoomImageView extends ImageView {
      * allows the image to maintain its zoom after rotation.
      */
     private void fitImageToView() {
-        Drawable drawable = getDrawable();
+        Drawable drawable = this.getDrawable();
         if (drawable == null || drawable.getIntrinsicWidth() == 0 || drawable.getIntrinsicHeight() == 0) {
             return;
         }
-        if (matrix == null || prevMatrix == null) {
+        if (this.matrix == null || this.prevMatrix == null) {
             return;
         }
 
@@ -594,10 +596,10 @@ public class ZoomImageView extends ImageView {
         //
         // Scale image for view
         //
-        float scaleX = viewWidth / (float) drawableWidth;
-        float scaleY = viewHeight / (float) drawableHeight;
+        float scaleX = this.viewWidth / (float) drawableWidth;
+        float scaleY = this.viewHeight / (float) drawableHeight;
 
-        switch (mScaleType) {
+        switch (this.mScaleType) {
             case CENTER:
                 scaleX = scaleY = 1;
                 break;
@@ -626,26 +628,26 @@ public class ZoomImageView extends ImageView {
         //
         // Center the image
         //
-        float redundantXSpace = viewWidth - (scaleX * drawableWidth);
-        float redundantYSpace = viewHeight - (scaleY * drawableHeight);
-        matchViewWidth = viewWidth - redundantXSpace;
-        matchViewHeight = viewHeight - redundantYSpace;
-        if (!isZoomed() && !imageRenderedAtLeastOnce) {
+        float redundantXSpace = this.viewWidth - (scaleX * drawableWidth);
+        float redundantYSpace = this.viewHeight - (scaleY * drawableHeight);
+        this.matchViewWidth = this.viewWidth - redundantXSpace;
+        this.matchViewHeight = this.viewHeight - redundantYSpace;
+        if (!this.isZoomed() && !this.imageRenderedAtLeastOnce) {
             //
             // Stretch and center image to fit view
             //
-            matrix.setScale(scaleX, scaleY);
-            switch (mScaleType) {
+            this.matrix.setScale(scaleX, scaleY);
+            switch (this.mScaleType) {
                 case FIT_START:
-                    matrix.postTranslate(0, 0);
+                    this.matrix.postTranslate(0, 0);
                     break;
                 case FIT_END:
-                    matrix.postTranslate(redundantXSpace, redundantYSpace);
+                    this.matrix.postTranslate(redundantXSpace, redundantYSpace);
                     break;
                 default:
-                    matrix.postTranslate(redundantXSpace / 2.0f, redundantYSpace / 2.0f);
+                    this.matrix.postTranslate(redundantXSpace / 2.0f, redundantYSpace / 2.0f);
             }
-            normalizedScale = 1;
+            this.normalizedScale = 1;
 
         } else {
             //
@@ -654,44 +656,44 @@ public class ZoomImageView extends ImageView {
             // to set them equal to the current values.
             //
 //        	if (prevMatchViewWidth == 0 || prevMatchViewHeight == 0) {
-            savePreviousImageValues();
+            this.savePreviousImageValues();
 //        	}
 
-            prevMatrix.getValues(m);
+            this.prevMatrix.getValues(this.m);
 
             //
             // Rescale Matrix after rotation
             //
-            m[Matrix.MSCALE_X] = matchViewWidth / drawableWidth * normalizedScale;
-            m[Matrix.MSCALE_Y] = matchViewHeight / drawableHeight * normalizedScale;
+            this.m[Matrix.MSCALE_X] = this.matchViewWidth / drawableWidth * this.normalizedScale;
+            this.m[Matrix.MSCALE_Y] = this.matchViewHeight / drawableHeight * this.normalizedScale;
 
             //
             // TransX and TransY from previous matrix
             //
-            float transX = m[Matrix.MTRANS_X];
-            float transY = m[Matrix.MTRANS_Y];
+            float transX = this.m[Matrix.MTRANS_X];
+            float transY = this.m[Matrix.MTRANS_Y];
 
             //
             // Width
             //
-            float prevActualWidth = prevMatchViewWidth * normalizedScale;
-            float actualWidth = getImageWidth();
-            translateMatrixAfterRotate(Matrix.MTRANS_X, transX, prevActualWidth, actualWidth, prevViewWidth, viewWidth, drawableWidth);
+            float prevActualWidth = this.prevMatchViewWidth * this.normalizedScale;
+            float actualWidth = this.getImageWidth();
+            this.translateMatrixAfterRotate(Matrix.MTRANS_X, transX, prevActualWidth, actualWidth, this.prevViewWidth, this.viewWidth, drawableWidth);
 
             //
             // Height
             //
-            float prevActualHeight = prevMatchViewHeight * normalizedScale;
-            float actualHeight = getImageHeight();
-            translateMatrixAfterRotate(Matrix.MTRANS_Y, transY, prevActualHeight, actualHeight, prevViewHeight, viewHeight, drawableHeight);
+            float prevActualHeight = this.prevMatchViewHeight * this.normalizedScale;
+            float actualHeight = this.getImageHeight();
+            this.translateMatrixAfterRotate(Matrix.MTRANS_Y, transY, prevActualHeight, actualHeight, this.prevViewHeight, this.viewHeight, drawableHeight);
 
             //
             // Set the matrix to the adjusted scale and translate values.
             //
-            matrix.setValues(m);
+            this.matrix.setValues(this.m);
         }
-        fixTrans();
-        setImageMatrix(matrix);
+        this.fixTrans();
+        this.setImageMatrix(this.matrix);
     }
 
     /**
@@ -741,13 +743,13 @@ public class ZoomImageView extends ImageView {
             //
             // The width/height of image is less than the view's width/height. Center it.
             //
-            m[axis] = (viewSize - (drawableSize * m[Matrix.MSCALE_X])) * 0.5f;
+            this.m[axis] = (viewSize - (drawableSize * this.m[Matrix.MSCALE_X])) * 0.5f;
 
         } else if (trans > 0) {
             //
             // The image is larger than the view, but was not before rotation. Center it.
             //
-            m[axis] = -((imageSize - viewSize) * 0.5f);
+            this.m[axis] = -((imageSize - viewSize) * 0.5f);
 
         } else {
             //
@@ -756,7 +758,7 @@ public class ZoomImageView extends ImageView {
             // to calculate the trans in the new view width/height.
             //
             float percentage = (Math.abs(trans) + (0.5f * prevViewSize)) / prevImageSize;
-            m[axis] = -((percentage * imageSize) - (viewSize * 0.5f));
+            this.m[axis] = -((percentage * imageSize) - (viewSize * 0.5f));
         }
     }
 
@@ -765,36 +767,40 @@ public class ZoomImageView extends ImageView {
     }
 
     public boolean canScrollHorizontallyFroyo(int direction) {
-        return canScrollHorizontally(direction);
+        return this.canScrollHorizontally(direction);
     }
 
     @Override
     public boolean canScrollHorizontally(int direction) {
-        matrix.getValues(m);
-        float x = m[Matrix.MTRANS_X];
+        this.matrix.getValues(this.m);
+        float x = this.m[Matrix.MTRANS_X];
 
-        if (getImageWidth() < viewWidth) {
+        if (this.getImageWidth() < this.viewWidth) {
             return false;
 
         } else if (x >= -1 && direction < 0) {
             return false;
 
-        } else return !(Math.abs(x) + viewWidth + 1 >= getImageWidth()) || direction <= 0;
+        } else {
+            return !(Math.abs(x) + this.viewWidth + 1 >= this.getImageWidth()) || direction <= 0;
+        }
 
     }
 
     @Override
     public boolean canScrollVertically(int direction) {
-        matrix.getValues(m);
-        float y = m[Matrix.MTRANS_Y];
+        this.matrix.getValues(this.m);
+        float y = this.m[Matrix.MTRANS_Y];
 
-        if (getImageHeight() < viewHeight) {
+        if (this.getImageHeight() < this.viewHeight) {
             return false;
 
         } else if (y >= -1 && direction < 0) {
             return false;
 
-        } else return !(Math.abs(y) + viewHeight + 1 >= getImageHeight()) || direction <= 0;
+        } else {
+            return !(Math.abs(y) + this.viewHeight + 1 >= this.getImageHeight()) || direction <= 0;
+        }
 
     }
 
@@ -803,41 +809,41 @@ public class ZoomImageView extends ImageView {
 
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
-            if (doubleTapListener != null) {
-                return doubleTapListener.onSingleTapConfirmed(e);
+            if (ZoomImageView.this.doubleTapListener != null) {
+                return ZoomImageView.this.doubleTapListener.onSingleTapConfirmed(e);
             }
-            return performClick();
+            return ZoomImageView.this.performClick();
         }
 
         @Override
         public void onLongPress(MotionEvent e) {
-            performLongClick();
+            ZoomImageView.this.performLongClick();
         }
 
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            if (fling != null) {
+            if (ZoomImageView.this.fling != null) {
                 //
                 // If a previous fling is still active, it should be cancelled so that two flings
                 // are not run simultaenously.
                 //
-                fling.cancelFling();
+                ZoomImageView.this.fling.cancelFling();
             }
-            fling = new Fling((int) velocityX, (int) velocityY);
-            compatPostOnAnimation(fling);
+            ZoomImageView.this.fling = new Fling((int) velocityX, (int) velocityY);
+            ZoomImageView.this.compatPostOnAnimation(ZoomImageView.this.fling);
             return super.onFling(e1, e2, velocityX, velocityY);
         }
 
         @Override
         public boolean onDoubleTap(MotionEvent e) {
             boolean consumed = false;
-            if (doubleTapListener != null) {
-                consumed = doubleTapListener.onDoubleTap(e);
+            if (ZoomImageView.this.doubleTapListener != null) {
+                consumed = ZoomImageView.this.doubleTapListener.onDoubleTap(e);
             }
-            if (state == State.NONE) {
-                float targetZoom = (Math.abs(normalizedScale - minScale) < 0.00001f) ? maxScale : minScale;
+            if (ZoomImageView.this.state == State.NONE) {
+                float targetZoom = (Math.abs(ZoomImageView.this.normalizedScale - ZoomImageView.this.minScale) < 0.00001f) ? ZoomImageView.this.maxScale : ZoomImageView.this.minScale;
                 DoubleTapZoom doubleTap = new DoubleTapZoom(targetZoom, e.getX(), e.getY(), false);
-                compatPostOnAnimation(doubleTap);
+                ZoomImageView.this.compatPostOnAnimation(doubleTap);
                 consumed = true;
             }
             return consumed;
@@ -845,8 +851,8 @@ public class ZoomImageView extends ImageView {
 
         @Override
         public boolean onDoubleTapEvent(MotionEvent e) {
-            if (doubleTapListener != null) {
-                return doubleTapListener.onDoubleTapEvent(e);
+            if (ZoomImageView.this.doubleTapListener != null) {
+                return ZoomImageView.this.doubleTapListener.onDoubleTapEvent(e);
             }
             return false;
         }
@@ -866,54 +872,55 @@ public class ZoomImageView extends ImageView {
 
         @Override
         public boolean onTouch(View v, MotionEvent event) {
-            mScaleDetector.onTouchEvent(event);
-            mGestureDetector.onTouchEvent(event);
+            ZoomImageView.this.mScaleDetector.onTouchEvent(event);
+            ZoomImageView.this.mGestureDetector.onTouchEvent(event);
             PointF curr = new PointF(event.getX(), event.getY());
 
-            if (state == State.NONE || state == State.DRAG || state == State.FLING) {
+            if (ZoomImageView.this.state == State.NONE || ZoomImageView.this.state == State.DRAG || ZoomImageView.this.state == State.FLING) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        last.set(curr);
-                        if (fling != null)
-                            fling.cancelFling();
-                        setState(State.DRAG);
+                        this.last.set(curr);
+                        if (ZoomImageView.this.fling != null) {
+                            ZoomImageView.this.fling.cancelFling();
+                        }
+                        ZoomImageView.this.setState(State.DRAG);
                         break;
 
                     case MotionEvent.ACTION_MOVE:
-                        if (state == State.DRAG) {
-                            float deltaX = curr.x - last.x;
-                            float deltaY = curr.y - last.y;
-                            float fixTransX = getFixDragTrans(deltaX, viewWidth, getImageWidth());
-                            float fixTransY = getFixDragTrans(deltaY, viewHeight, getImageHeight());
-                            matrix.postTranslate(fixTransX, fixTransY);
-                            fixTrans();
-                            last.set(curr.x, curr.y);
+                        if (ZoomImageView.this.state == State.DRAG) {
+                            float deltaX = curr.x - this.last.x;
+                            float deltaY = curr.y - this.last.y;
+                            float fixTransX = ZoomImageView.this.getFixDragTrans(deltaX, ZoomImageView.this.viewWidth, ZoomImageView.this.getImageWidth());
+                            float fixTransY = ZoomImageView.this.getFixDragTrans(deltaY, ZoomImageView.this.viewHeight, ZoomImageView.this.getImageHeight());
+                            ZoomImageView.this.matrix.postTranslate(fixTransX, fixTransY);
+                            ZoomImageView.this.fixTrans();
+                            this.last.set(curr.x, curr.y);
                         }
                         break;
 
                     case MotionEvent.ACTION_UP:
                     case MotionEvent.ACTION_POINTER_UP:
-                        setState(State.NONE);
+                        ZoomImageView.this.setState(State.NONE);
                         break;
                     default:
                         break;
                 }
             }
 
-            setImageMatrix(matrix);
+            ZoomImageView.this.setImageMatrix(ZoomImageView.this.matrix);
 
             //
             // User-defined OnTouchListener
             //
-            if (userTouchListener != null) {
-                userTouchListener.onTouch(v, event);
+            if (ZoomImageView.this.userTouchListener != null) {
+                ZoomImageView.this.userTouchListener.onTouch(v, event);
             }
 
             //
             // OnTouchImageViewListener is set: TouchImageView dragged by user.
             //
-            if (touchImageViewListener != null) {
-                touchImageViewListener.onMove();
+            if (ZoomImageView.this.touchImageViewListener != null) {
+                ZoomImageView.this.touchImageViewListener.onMove();
             }
 
             //
@@ -927,19 +934,19 @@ public class ZoomImageView extends ImageView {
     private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
         @Override
         public boolean onScaleBegin(ScaleGestureDetector detector) {
-            setState(State.ZOOM);
+            ZoomImageView.this.setState(State.ZOOM);
             return true;
         }
 
         @Override
         public boolean onScale(ScaleGestureDetector detector) {
-            scaleImage(detector.getScaleFactor(), detector.getFocusX(), detector.getFocusY(), true);
+            ZoomImageView.this.scaleImage(detector.getScaleFactor(), detector.getFocusX(), detector.getFocusY(), true);
 
             //
             // OnTouchImageViewListener is set: TouchImageView pinch zoomed by user.
             //
-            if (touchImageViewListener != null) {
-                touchImageViewListener.onMove();
+            if (ZoomImageView.this.touchImageViewListener != null) {
+                ZoomImageView.this.touchImageViewListener.onMove();
             }
             return true;
         }
@@ -947,21 +954,21 @@ public class ZoomImageView extends ImageView {
         @Override
         public void onScaleEnd(ScaleGestureDetector detector) {
             super.onScaleEnd(detector);
-            setState(State.NONE);
+            ZoomImageView.this.setState(State.NONE);
             boolean animateToZoomBoundary = false;
-            float targetZoom = normalizedScale;
-            if (normalizedScale > maxScale) {
-                targetZoom = maxScale;
+            float targetZoom = ZoomImageView.this.normalizedScale;
+            if (ZoomImageView.this.normalizedScale > ZoomImageView.this.maxScale) {
+                targetZoom = ZoomImageView.this.maxScale;
                 animateToZoomBoundary = true;
 
-            } else if (normalizedScale < minScale) {
-                targetZoom = minScale;
+            } else if (ZoomImageView.this.normalizedScale < ZoomImageView.this.minScale) {
+                targetZoom = ZoomImageView.this.minScale;
                 animateToZoomBoundary = true;
             }
 
             if (animateToZoomBoundary) {
-                DoubleTapZoom doubleTap = new DoubleTapZoom(targetZoom, viewWidth / 2.0f, viewHeight / 2.0f, true);
-                compatPostOnAnimation(doubleTap);
+                DoubleTapZoom doubleTap = new DoubleTapZoom(targetZoom, ZoomImageView.this.viewWidth / 2.0f, ZoomImageView.this.viewHeight / 2.0f, true);
+                ZoomImageView.this.compatPostOnAnimation(doubleTap);
             }
         }
     }
@@ -969,26 +976,26 @@ public class ZoomImageView extends ImageView {
     private void scaleImage(double deltaScale, float focusX, float focusY, boolean stretchImageToSuper) {
         float lowerScale, upperScale;
         if (stretchImageToSuper) {
-            lowerScale = superMinScale;
-            upperScale = superMaxScale;
+            lowerScale = this.superMinScale;
+            upperScale = this.superMaxScale;
 
         } else {
-            lowerScale = minScale;
-            upperScale = maxScale;
+            lowerScale = this.minScale;
+            upperScale = this.maxScale;
         }
 
-        float origScale = normalizedScale;
-        normalizedScale *= deltaScale;
-        if (normalizedScale > upperScale) {
-            normalizedScale = upperScale;
+        float origScale = this.normalizedScale;
+        this.normalizedScale *= deltaScale;
+        if (this.normalizedScale > upperScale) {
+            this.normalizedScale = upperScale;
             deltaScale = upperScale / origScale;
-        } else if (normalizedScale < lowerScale) {
-            normalizedScale = lowerScale;
+        } else if (this.normalizedScale < lowerScale) {
+            this.normalizedScale = lowerScale;
             deltaScale = lowerScale / origScale;
         }
 
-        matrix.postScale((float) deltaScale, (float) deltaScale, focusX, focusY);
-        fixScaleTrans();
+        this.matrix.postScale((float) deltaScale, (float) deltaScale, focusX, focusY);
+        this.fixScaleTrans();
     }
 
 
@@ -1004,50 +1011,50 @@ public class ZoomImageView extends ImageView {
         private PointF endTouch;
 
         DoubleTapZoom(float targetZoom, float focusX, float focusY, boolean stretchImageToSuper) {
-            setState(State.ANIMATE_ZOOM);
-            startTime = System.currentTimeMillis();
-            this.startZoom = normalizedScale;
+            ZoomImageView.this.setState(State.ANIMATE_ZOOM);
+            this.startTime = System.currentTimeMillis();
+            this.startZoom = ZoomImageView.this.normalizedScale;
             this.targetZoom = targetZoom;
             this.stretchImageToSuper = stretchImageToSuper;
-            PointF bitmapPoint = transformCoordTouchToBitmap(focusX, focusY, false);
+            PointF bitmapPoint = ZoomImageView.this.transformCoordTouchToBitmap(focusX, focusY, false);
             this.bitmapX = bitmapPoint.x;
             this.bitmapY = bitmapPoint.y;
 
             //
             // Used for translating image during scaling
             //
-            startTouch = transformCoordBitmapToTouch(bitmapX, bitmapY);
-            endTouch = new PointF(viewWidth / 2.0f, viewHeight / 2.0f);
+            this.startTouch = ZoomImageView.this.transformCoordBitmapToTouch(this.bitmapX, this.bitmapY);
+            this.endTouch = new PointF(ZoomImageView.this.viewWidth / 2.0f, ZoomImageView.this.viewHeight / 2.0f);
         }
 
         @Override
         public void run() {
-            float t = interpolate();
-            double deltaScale = calculateDeltaScale(t);
-            scaleImage(deltaScale, bitmapX, bitmapY, stretchImageToSuper);
-            translateImageToCenterTouchPosition(t);
-            fixScaleTrans();
-            setImageMatrix(matrix);
+            float t = this.interpolate();
+            double deltaScale = this.calculateDeltaScale(t);
+            ZoomImageView.this.scaleImage(deltaScale, this.bitmapX, this.bitmapY, this.stretchImageToSuper);
+            this.translateImageToCenterTouchPosition(t);
+            ZoomImageView.this.fixScaleTrans();
+            ZoomImageView.this.setImageMatrix(ZoomImageView.this.matrix);
 
             //
             // OnTouchImageViewListener is set: double tap runnable updates listener
             // with every frame.
             //
-            if (touchImageViewListener != null) {
-                touchImageViewListener.onMove();
+            if (ZoomImageView.this.touchImageViewListener != null) {
+                ZoomImageView.this.touchImageViewListener.onMove();
             }
 
             if (t < 1f) {
                 //
                 // We haven't finished zooming
                 //
-                compatPostOnAnimation(this);
+                ZoomImageView.this.compatPostOnAnimation(this);
 
             } else {
                 //
                 // Finished zooming
                 //
-                setState(State.NONE);
+                ZoomImageView.this.setState(State.NONE);
             }
         }
 
@@ -1059,10 +1066,10 @@ public class ZoomImageView extends ImageView {
          * @param t
          */
         private void translateImageToCenterTouchPosition(float t) {
-            float targetX = startTouch.x + t * (endTouch.x - startTouch.x);
-            float targetY = startTouch.y + t * (endTouch.y - startTouch.y);
-            PointF curr = transformCoordBitmapToTouch(bitmapX, bitmapY);
-            matrix.postTranslate(targetX - curr.x, targetY - curr.y);
+            float targetX = this.startTouch.x + t * (this.endTouch.x - this.startTouch.x);
+            float targetY = this.startTouch.y + t * (this.endTouch.y - this.startTouch.y);
+            PointF curr = ZoomImageView.this.transformCoordBitmapToTouch(this.bitmapX, this.bitmapY);
+            ZoomImageView.this.matrix.postTranslate(targetX - curr.x, targetY - curr.y);
         }
 
         /**
@@ -1072,9 +1079,9 @@ public class ZoomImageView extends ImageView {
          */
         private float interpolate() {
             long currTime = System.currentTimeMillis();
-            float elapsed = (currTime - startTime) / ZOOM_TIME;
+            float elapsed = (currTime - this.startTime) / DoubleTapZoom.ZOOM_TIME;
             elapsed = Math.min(1f, elapsed);
-            return interpolator.getInterpolation(elapsed);
+            return this.interpolator.getInterpolation(elapsed);
         }
 
         /**
@@ -1085,8 +1092,8 @@ public class ZoomImageView extends ImageView {
          * @return
          */
         private double calculateDeltaScale(float t) {
-            double zoom = startZoom + t * (targetZoom - startZoom);
-            return zoom / normalizedScale;
+            double zoom = this.startZoom + t * (this.targetZoom - this.startZoom);
+            return zoom / ZoomImageView.this.normalizedScale;
         }
     }
 
@@ -1101,13 +1108,13 @@ public class ZoomImageView extends ImageView {
      * @return Coordinates of the point touched, in the coordinate system of the original drawable.
      */
     private PointF transformCoordTouchToBitmap(float x, float y, boolean clipToBitmap) {
-        matrix.getValues(m);
-        float origW = getDrawable().getIntrinsicWidth();
-        float origH = getDrawable().getIntrinsicHeight();
-        float transX = m[Matrix.MTRANS_X];
-        float transY = m[Matrix.MTRANS_Y];
-        float finalX = ((x - transX) * origW) / getImageWidth();
-        float finalY = ((y - transY) * origH) / getImageHeight();
+        this.matrix.getValues(this.m);
+        float origW = this.getDrawable().getIntrinsicWidth();
+        float origH = this.getDrawable().getIntrinsicHeight();
+        float transX = this.m[Matrix.MTRANS_X];
+        float transY = this.m[Matrix.MTRANS_Y];
+        float finalX = ((x - transX) * origW) / this.getImageWidth();
+        float finalY = ((y - transY) * origH) / this.getImageHeight();
 
         if (clipToBitmap) {
             finalX = Math.min(Math.max(finalX, 0), origW);
@@ -1126,13 +1133,13 @@ public class ZoomImageView extends ImageView {
      * @return Coordinates of the point in the view's coordinate system.
      */
     private PointF transformCoordBitmapToTouch(float bx, float by) {
-        matrix.getValues(m);
-        float origW = getDrawable().getIntrinsicWidth();
-        float origH = getDrawable().getIntrinsicHeight();
+        this.matrix.getValues(this.m);
+        float origW = this.getDrawable().getIntrinsicWidth();
+        float origH = this.getDrawable().getIntrinsicHeight();
         float px = bx / origW;
         float py = by / origH;
-        float finalX = m[Matrix.MTRANS_X] + getImageWidth() * px;
-        float finalY = m[Matrix.MTRANS_Y] + getImageHeight() * py;
+        float finalX = this.m[Matrix.MTRANS_X] + this.getImageWidth() * px;
+        float finalY = this.m[Matrix.MTRANS_Y] + this.getImageHeight() * py;
         return new PointF(finalX, finalY);
     }
 
@@ -1143,40 +1150,40 @@ public class ZoomImageView extends ImageView {
         int currX, currY;
 
         Fling(int velocityX, int velocityY) {
-            setState(State.FLING);
-            scroller = new CompatScroller(context);
-            matrix.getValues(m);
+            ZoomImageView.this.setState(State.FLING);
+            this.scroller = new CompatScroller(ZoomImageView.this.context);
+            ZoomImageView.this.matrix.getValues(ZoomImageView.this.m);
 
-            int startX = (int) m[Matrix.MTRANS_X];
-            int startY = (int) m[Matrix.MTRANS_Y];
+            int startX = (int) ZoomImageView.this.m[Matrix.MTRANS_X];
+            int startY = (int) ZoomImageView.this.m[Matrix.MTRANS_Y];
             int minX, maxX, minY, maxY;
 
-            if (getImageWidth() > viewWidth) {
-                minX = viewWidth - (int) getImageWidth();
+            if (ZoomImageView.this.getImageWidth() > ZoomImageView.this.viewWidth) {
+                minX = ZoomImageView.this.viewWidth - (int) ZoomImageView.this.getImageWidth();
                 maxX = 0;
 
             } else {
                 minX = maxX = startX;
             }
 
-            if (getImageHeight() > viewHeight) {
-                minY = viewHeight - (int) getImageHeight();
+            if (ZoomImageView.this.getImageHeight() > ZoomImageView.this.viewHeight) {
+                minY = ZoomImageView.this.viewHeight - (int) ZoomImageView.this.getImageHeight();
                 maxY = 0;
 
             } else {
                 minY = maxY = startY;
             }
 
-            scroller.fling(startX, startY, velocityX, velocityY, minX,
+            this.scroller.fling(startX, startY, velocityX, velocityY, minX,
                     maxX, minY, maxY);
-            currX = startX;
-            currY = startY;
+            this.currX = startX;
+            this.currY = startY;
         }
 
         public void cancelFling() {
-            if (scroller != null) {
-                setState(State.NONE);
-                scroller.forceFinished(true);
+            if (this.scroller != null) {
+                ZoomImageView.this.setState(State.NONE);
+                this.scroller.forceFinished(true);
             }
         }
 
@@ -1187,26 +1194,26 @@ public class ZoomImageView extends ImageView {
             // OnTouchImageViewListener is set: TouchImageView listener has been flung by user.
             // Listener runnable updated with each frame of fling animation.
             //
-            if (touchImageViewListener != null) {
-                touchImageViewListener.onMove();
+            if (ZoomImageView.this.touchImageViewListener != null) {
+                ZoomImageView.this.touchImageViewListener.onMove();
             }
 
-            if (scroller.isFinished()) {
-                scroller = null;
+            if (this.scroller.isFinished()) {
+                this.scroller = null;
                 return;
             }
 
-            if (scroller.computeScrollOffset()) {
-                int newX = scroller.getCurrX();
-                int newY = scroller.getCurrY();
-                int transX = newX - currX;
-                int transY = newY - currY;
-                currX = newX;
-                currY = newY;
-                matrix.postTranslate(transX, transY);
-                fixTrans();
-                setImageMatrix(matrix);
-                compatPostOnAnimation(this);
+            if (this.scroller.computeScrollOffset()) {
+                int newX = this.scroller.getCurrX();
+                int newY = this.scroller.getCurrY();
+                int transX = newX - this.currX;
+                int transY = newY - this.currY;
+                this.currX = newX;
+                this.currY = newY;
+                ZoomImageView.this.matrix.postTranslate(transX, transY);
+                ZoomImageView.this.fixTrans();
+                ZoomImageView.this.setImageMatrix(ZoomImageView.this.matrix);
+                ZoomImageView.this.compatPostOnAnimation(this);
             }
         }
     }
@@ -1219,61 +1226,61 @@ public class ZoomImageView extends ImageView {
 
         public CompatScroller(Context context) {
             if (VERSION.SDK_INT < VERSION_CODES.GINGERBREAD) {
-                isPreGingerbread = true;
-                scroller = new Scroller(context);
+                this.isPreGingerbread = true;
+                this.scroller = new Scroller(context);
 
             } else {
-                isPreGingerbread = false;
-                overScroller = new OverScroller(context);
+                this.isPreGingerbread = false;
+                this.overScroller = new OverScroller(context);
             }
         }
 
         public void fling(int startX, int startY, int velocityX, int velocityY, int minX, int maxX, int minY, int maxY) {
-            if (isPreGingerbread) {
-                scroller.fling(startX, startY, velocityX, velocityY, minX, maxX, minY, maxY);
+            if (this.isPreGingerbread) {
+                this.scroller.fling(startX, startY, velocityX, velocityY, minX, maxX, minY, maxY);
             } else {
-                overScroller.fling(startX, startY, velocityX, velocityY, minX, maxX, minY, maxY);
+                this.overScroller.fling(startX, startY, velocityX, velocityY, minX, maxX, minY, maxY);
             }
         }
 
         public void forceFinished(boolean finished) {
-            if (isPreGingerbread) {
-                scroller.forceFinished(finished);
+            if (this.isPreGingerbread) {
+                this.scroller.forceFinished(finished);
             } else {
-                overScroller.forceFinished(finished);
+                this.overScroller.forceFinished(finished);
             }
         }
 
         public boolean isFinished() {
-            if (isPreGingerbread) {
-                return scroller.isFinished();
+            if (this.isPreGingerbread) {
+                return this.scroller.isFinished();
             } else {
-                return overScroller.isFinished();
+                return this.overScroller.isFinished();
             }
         }
 
         public boolean computeScrollOffset() {
-            if (isPreGingerbread) {
-                return scroller.computeScrollOffset();
+            if (this.isPreGingerbread) {
+                return this.scroller.computeScrollOffset();
             } else {
-                overScroller.computeScrollOffset();
-                return overScroller.computeScrollOffset();
+                this.overScroller.computeScrollOffset();
+                return this.overScroller.computeScrollOffset();
             }
         }
 
         public int getCurrX() {
-            if (isPreGingerbread) {
-                return scroller.getCurrX();
+            if (this.isPreGingerbread) {
+                return this.scroller.getCurrX();
             } else {
-                return overScroller.getCurrX();
+                return this.overScroller.getCurrX();
             }
         }
 
         public int getCurrY() {
-            if (isPreGingerbread) {
-                return scroller.getCurrY();
+            if (this.isPreGingerbread) {
+                return this.scroller.getCurrY();
             } else {
-                return overScroller.getCurrY();
+                return this.overScroller.getCurrY();
             }
         }
     }
@@ -1281,10 +1288,10 @@ public class ZoomImageView extends ImageView {
     @TargetApi(VERSION_CODES.JELLY_BEAN)
     private void compatPostOnAnimation(Runnable runnable) {
         if (VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN) {
-            postOnAnimation(runnable);
+            this.postOnAnimation(runnable);
 
         } else {
-            postDelayed(runnable, 1000 / 60);
+            this.postDelayed(runnable, 1000 / 60);
         }
     }
 

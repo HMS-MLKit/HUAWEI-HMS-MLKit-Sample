@@ -58,16 +58,16 @@ public class ImageUtils {
             os.flush();
 
         } catch (FileNotFoundException e) {
-            SmartLog.e(TAG, e.getMessage());
+            SmartLog.e(ImageUtils.TAG, e.getMessage());
         } catch (IOException e) {
-            SmartLog.e(TAG, e.getMessage());
+            SmartLog.e(ImageUtils.TAG, e.getMessage());
         }finally {
             try {
                 if(os != null) {
                     os.close();
                 }
             }catch (IOException e){
-                SmartLog.e(TAG, e.getMessage());
+                SmartLog.e(ImageUtils.TAG, e.getMessage());
             }
         }
 
@@ -77,19 +77,20 @@ public class ImageUtils {
                 MediaStore.Images.Media.insertImage(this.context.getContentResolver(), file.getCanonicalPath(), fileName, null);
             }
         } catch (IOException e) {
-            SmartLog.e(TAG, e.getMessage());
+            SmartLog.e(ImageUtils.TAG, e.getMessage());
         }
 
         if (file == null) {
             return;
         }
+
         // Gallery refresh.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             String path = null;
             try {
                 path = file.getCanonicalPath();
             } catch (IOException e) {
-                SmartLog.e(TAG, e.getMessage());
+                SmartLog.e(ImageUtils.TAG, e.getMessage());
             }
             MediaScannerConnection.scanFile(this.context, new String[]{path}, null,
                     new MediaScannerConnection.OnScanCompletedListener() {

@@ -8,7 +8,7 @@
     <RelativeLayout
         android:id="@+id/logo"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="@dimen/start_logo_height"
         android:layout_alignParentTop="true"
         android:background="@color/logo_background"
         android:scaleType="fitXY">
@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="80dp"
-            android:layout_marginTop="100dp"
+            android:layout_centerVertical="true"
             android:text="MACHINE\n LEARNING"
             android:textColor="@color/white"
             android:textSize="22sp"></TextView>
@@ -36,8 +36,8 @@
         android:layout_width="220dp"
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="230dp"
-        android:background="@drawable/white_circle_background"></ImageView>
+        android:layout_marginTop="@dimen/start_logo_margin"
+        android:background="@drawable/logo_circle_background"></ImageView>
 
     <ImageView
         android:id="@+id/setting_img"
@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/logo"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="@dimen/start_margin_top"
         android:layout_marginRight="30dp"
         android:orientation="vertical">
 

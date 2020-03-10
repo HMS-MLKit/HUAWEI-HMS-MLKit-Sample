@@ -49,24 +49,24 @@ public class AddPictureDialog extends Dialog implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initViews();
+        this.initViews();
     }
 
     private void initViews() {
-        LayoutInflater inflater = LayoutInflater.from(context);
+        LayoutInflater inflater = LayoutInflater.from(this.context);
         View view = inflater.inflate(R.layout.dialog_add_picture, null);
-        setContentView(view);
+        this.setContentView(view);
 
-        tvTakePicture = view.findViewById(R.id.take_photo);
-        tvSelectImage = view.findViewById(R.id.select_image);
-        tvCancel = view.findViewById(R.id.cancel);
+        this.tvTakePicture = view.findViewById(R.id.take_photo);
+        this.tvSelectImage = view.findViewById(R.id.select_image);
+        this.tvCancel = view.findViewById(R.id.cancel);
 
-        tvTakePicture.setOnClickListener(this);
-        tvSelectImage.setOnClickListener(this);
-        tvCancel.setOnClickListener(this);
+        this.tvTakePicture.setOnClickListener(this);
+        this.tvSelectImage.setOnClickListener(this);
+        this.tvCancel.setOnClickListener(this);
 
-        setCanceledOnTouchOutside(true);
-        Window dialogWindow = getWindow();
+        this.setCanceledOnTouchOutside(true);
+        Window dialogWindow = this.getWindow();
         WindowManager.LayoutParams layoutParams = dialogWindow.getAttributes();
         layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
         layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
@@ -83,15 +83,15 @@ public class AddPictureDialog extends Dialog implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.take_photo:
-                clickListener.takePicture();
-                dismiss();
+                this.clickListener.takePicture();
+                this.dismiss();
                 break;
             case R.id.select_image:
-                clickListener.selectImage();
-                dismiss();
+                this.clickListener.selectImage();
+                this.dismiss();
                 break;
             case R.id.cancel:
-                dismiss();
+                this.dismiss();
                 break;
         }
     }

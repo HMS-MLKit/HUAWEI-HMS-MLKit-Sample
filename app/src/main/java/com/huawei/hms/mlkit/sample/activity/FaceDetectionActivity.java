@@ -93,7 +93,7 @@ public final class FaceDetectionActivity extends BaseActivity
                     .setKeyPointType(MLFaceAnalyzerSetting.TYPE_KEYPOINTS)
                     .create();
         }
-        this.lensEngine.setMachineLearningFrameTransactor(new LocalFaceTransactor(detectorOptions, getApplicationContext(), isOpen));
+        this.lensEngine.setMachineLearningFrameTransactor(new LocalFaceTransactor(detectorOptions, this.getApplicationContext(), isOpen));
     }
 
     @Override

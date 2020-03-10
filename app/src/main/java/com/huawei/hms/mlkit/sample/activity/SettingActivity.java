@@ -36,10 +36,10 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting);
-        this.mVersion = findViewById(R.id.version);
+        this.setContentView(R.layout.activity_setting);
+        this.mVersion = this.findViewById(R.id.version);
         this.mVersion.setText(this.getVersionName());
-        findViewById(R.id.back).setOnClickListener(this);
+        this.findViewById(R.id.back).setOnClickListener(this);
     }
 
 
@@ -47,7 +47,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.back:
-                finish();
+                this.finish();
                 break;
             default:
                 break;
@@ -60,9 +60,9 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
      * @return
      */
     public String getVersionName() {
-        PackageManager packageManager = getPackageManager();
+        PackageManager packageManager = this.getPackageManager();
         try {
-            PackageInfo packageInfo = packageManager.getPackageInfo(getPackageName(), 0);
+            PackageInfo packageInfo = packageManager.getPackageInfo(this.getPackageName(), 0);
             String mVersionName = packageInfo.versionName;
             return mVersionName;
         } catch (PackageManager.NameNotFoundException e) {

@@ -26,7 +26,7 @@ public class Entity {
     }
 
     public int getResourceId() {
-        return resourceId;
+        return this.resourceId;
     }
 
     public void setResourceId(int resourceId) {
@@ -34,10 +34,10 @@ public class Entity {
     }
 
     public boolean isSelected() {
-        return isSelected;
+        return this.isSelected;
     }
 
     public void setSelected(boolean selected) {
-        isSelected = selected;
+        this.isSelected = selected;
     }
 }

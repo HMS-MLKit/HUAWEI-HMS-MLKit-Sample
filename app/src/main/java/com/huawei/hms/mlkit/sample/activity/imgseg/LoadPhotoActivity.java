@@ -17,7 +17,6 @@
 package com.huawei.hms.mlkit.sample.activity.imgseg;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -35,7 +34,7 @@ import android.widget.TextView;
 import com.huawei.hms.mlkit.sample.R;
 import com.huawei.hms.mlkit.sample.activity.BaseActivity;
 import com.huawei.hms.mlkit.sample.transactor.ImageTransactor;
-import com.huawei.hms.mlkit.sample.transactor.StillImageSliceDetectorTransactor;
+import com.huawei.hms.mlkit.sample.transactor.StillImageSegmentationTransactor;
 import com.huawei.hms.mlkit.sample.util.BitmapUtils;
 import com.huawei.hms.mlkit.sample.views.color.ColorSelector;
 import com.huawei.hms.mlkit.sample.views.overlay.GraphicOverlay;
@@ -108,7 +107,7 @@ public class LoadPhotoActivity extends BaseActivity {
                 @Override
                 public void onClick(View v) {
                     MLImageSegmentationSetting setting = new MLImageSegmentationSetting.Factory().setAnalyzerType(MLImageSegmentationSetting.IMAGE_SEG).create();
-                    StillImageSliceDetectorTransactor transactor = new StillImageSliceDetectorTransactor(LoadPhotoActivity.this.getApplicationContext(), setting, LoadPhotoActivity.this.originBitmap, LoadPhotoActivity.this.preview, index);
+                    StillImageSegmentationTransactor transactor = new StillImageSegmentationTransactor(LoadPhotoActivity.this.getApplicationContext(), setting, LoadPhotoActivity.this.originBitmap, LoadPhotoActivity.this.preview, index);
                     transactor.setColor(LoadPhotoActivity.this.colorvalue);
                     LoadPhotoActivity.this.imageTransactor = transactor;
                     LoadPhotoActivity.this.imageTransactor.process(LoadPhotoActivity.this.originBitmap, LoadPhotoActivity.this.graphicOverlay);

@@ -114,12 +114,12 @@
 
         <ImageButton
             android:id="@+id/takePicture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/circle_stroke_radius"
+            android:layout_height="@dimen/circle_stroke_radius"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/language_setting"
             android:layout_marginTop="30dp"
-            android:background="@drawable/take_picture_background" />
+            android:background="@drawable/take_picture_stroke" />
     </RelativeLayout>
 
 </RelativeLayout>

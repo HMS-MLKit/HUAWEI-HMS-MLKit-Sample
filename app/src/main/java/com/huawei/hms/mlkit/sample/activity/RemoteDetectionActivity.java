@@ -148,7 +148,7 @@ public final class RemoteDetectionActivity extends BaseActivity implements OnCli
             if (RemoteDetectionActivity.this.progressDialog != null) {
                 RemoteDetectionActivity.this.progressDialog.dismiss();
             }
-            Toast.makeText(getApplicationContext(), RemoteDetectionActivity.this.getString(R.string.get_data_failed), Toast.LENGTH_SHORT).show();
+            Toast.makeText(RemoteDetectionActivity.this.getApplicationContext(), RemoteDetectionActivity.this.getString(R.string.get_data_failed), Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -358,7 +358,7 @@ public final class RemoteDetectionActivity extends BaseActivity implements OnCli
     private void createImageTransactor() {
         switch (this.selectedMode) {
             case Constant.CLOUD_IMAGE_CLASSIFICATION:
-                this.imageTransactor = new RemoteImageClassificationTransactor(this.mHandler);
+                this.imageTransactor = new RemoteImageClassificationTransactor(this.getApplicationContext(), this.mHandler);
                 break;
             case Constant.CLOUD_LANDMARK_DETECTION:
                 this.imageTransactor = new RemoteLandmarkTransactor(this.mHandler);

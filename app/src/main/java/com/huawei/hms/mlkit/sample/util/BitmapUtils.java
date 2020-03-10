@@ -25,14 +25,17 @@ import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.YuvImage;
 import android.hardware.Camera.CameraInfo;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
 
 import com.huawei.hms.mlkit.sample.camera.FrameMetadata;
 import com.huawei.hms.mlsdk.common.MLFrame;
+import com.huawei.hms.mlsdk.common.internal.client.SmartLog;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 
 import androidx.annotation.Nullable;
@@ -59,9 +62,9 @@ public class BitmapUtils {
             yuvImage.compressToJpeg(new Rect(0, 0, metadata.getWidth(), metadata.getHeight()), 80, stream);
             Bitmap bitmap = BitmapFactory.decodeByteArray(stream.toByteArray(), 0, stream.size());
             stream.close();
-            return rotateBitmap(bitmap, metadata.getRotation(), metadata.getCameraFacing());
+            return BitmapUtils.rotateBitmap(bitmap, metadata.getRotation(), metadata.getCameraFacing());
         } catch (Exception e) {
-            Log.e(TAG, "Error: " + e.getMessage());
+            Log.e(BitmapUtils.TAG, "Error: " + e.getMessage());
         }
         return null;
     }
@@ -105,13 +108,14 @@ public class BitmapUtils {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
 
-        String path = getImagePath(activity, uri);
+        String path = BitmapUtils.getImagePath(activity, uri);
         BitmapFactory.decodeFile(path, options);
-        int sampleSize = calculateInSampleSize(options, width, height);
+        int sampleSize = BitmapUtils.calculateInSampleSize(options, width, height);
         options.inSampleSize = sampleSize;
         options.inJustDecodeBounds = false;
 
-        return zoomImage(BitmapFactory.decodeFile(path, options), width, height);
+        Bitmap bitmap = BitmapUtils.zoomImage(BitmapFactory.decodeFile(path, options), width, height);
+        return BitmapUtils.rotateBitmap(bitmap, BitmapUtils.getRotationAngle(path));
     }
 
     private static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
@@ -144,6 +148,49 @@ public class BitmapUtils {
                         true);
 
         return resizedBitmap;
+    }
+
+    /**
+     * Get the rotation angle of the photo
+     *
+     * @param path photo path
+     * @return angle
+     */
+    public static int getRotationAngle(String path) {
+        int rotation = 0;
+        try {
+            ExifInterface exifInterface = new ExifInterface(path);
+            int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+            switch (orientation) {
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    rotation = 90;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    rotation = 180;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    rotation = 270;
+                    break;
+            }
+        } catch (IOException e) {
+            SmartLog.e(BitmapUtils.TAG, "Failed to get rotation: " + e.getMessage());
+        }
+        return rotation;
+    }
+
+    public static Bitmap rotateBitmap(Bitmap bitmap, int angle) {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        Bitmap result = null;
+        try {
+            result = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+        } catch (OutOfMemoryError e) {
+            SmartLog.e(BitmapUtils.TAG, "Failed to rotate bitmap: " + e.getMessage());
+        }
+        if (result == null) {
+            return bitmap;
+        }
+        return result;
     }
 }
 

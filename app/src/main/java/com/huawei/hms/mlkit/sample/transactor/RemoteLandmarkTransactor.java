@@ -36,7 +36,7 @@ import java.util.List;
 
 public class RemoteLandmarkTransactor extends BaseTransactor<List<MLRemoteLandmark>> {
 
-    private static final String TAG = "HmsMLLandmarkTransactor";
+    private static final String TAG = "LandmarkTransactor";
 
     private final MLRemoteLandmarkAnalyzer detector;
 
@@ -59,7 +59,7 @@ public class RemoteLandmarkTransactor extends BaseTransactor<List<MLRemoteLandma
         try {
             this.detector.close();
         } catch (IOException e) {
-            Log.e(RemoteLandmarkTransactor.TAG, "Exception thrown while trying to close cloud landmark detector!", e);
+            Log.e(RemoteLandmarkTransactor.TAG, "Exception thrown while trying to close remote landmark transactor: " + e.getMessage());
         }
     }
 
@@ -86,7 +86,7 @@ public class RemoteLandmarkTransactor extends BaseTransactor<List<MLRemoteLandma
 
     @Override
     protected void onFailure(Exception e) {
-        Log.e(RemoteLandmarkTransactor.TAG, "Cloud Landmark detection failed!", e);
+        Log.e(RemoteLandmarkTransactor.TAG, "Remote landmark detection failed: " + e.getMessage());
         this.handler.sendEmptyMessage(Constant.GET_DATA_FAILED);
     }
 }

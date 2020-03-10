@@ -38,7 +38,7 @@ import com.huawei.hms.mlkit.sample.callback.ImageSegmentationResultCallBack;
 import com.huawei.hms.mlkit.sample.camera.CameraConfiguration;
 import com.huawei.hms.mlkit.sample.camera.LensEngine;
 import com.huawei.hms.mlkit.sample.camera.LensEnginePreview;
-import com.huawei.hms.mlkit.sample.transactor.ImageSliceDetectorTransactor;
+import com.huawei.hms.mlkit.sample.transactor.ImageSegmentationTransactor;
 import com.huawei.hms.mlkit.sample.util.Constant;
 import com.huawei.hms.mlkit.sample.util.ImageUtils;
 import com.huawei.hms.mlkit.sample.views.overlay.GraphicOverlay;
@@ -53,19 +53,20 @@ import java.io.InputStream;
  * if there is a human body in the picture, then cut out the human body and replace the background
  * to achieve the real-time human detection effect.
  */
-public class TakePhotoActivity extends BaseActivity implements CompoundButton.OnCheckedChangeListener, ImageSegmentationResultCallBack {
+public class TakePhotoActivity extends BaseActivity implements CompoundButton.OnCheckedChangeListener
+        , ImageSegmentationResultCallBack, View.OnClickListener {
     private LensEngine lensEngine = null;
     private LensEnginePreview preview;
     private GraphicOverlay graphicOverlay;
     private ToggleButton facingSwitch;
-    private ImageButton img_takePhoto, img_pic;
+    private ImageButton img_takePhoto, img_pic, img_back;
 
     private CameraConfiguration cameraConfiguration = null;
     private static String TAG = "TakePhotoActivity";
     private int index;
     private int facing = CameraConfiguration.CAMERA_FACING_FRONT;
     private Bitmap background, processImage;
-    private ImageSliceDetectorTransactor transactor;
+    private ImageSegmentationTransactor transactor;
     private MLImageSegmentationSetting setting;
 
     @Override
@@ -110,10 +111,13 @@ public class TakePhotoActivity extends BaseActivity implements CompoundButton.On
         }
         this.img_takePhoto = this.findViewById(R.id.img_takePhoto);
         this.img_pic = this.findViewById(R.id.img_pic);
+        this.img_back = this.findViewById(R.id.back);
     }
 
     private void initAction() {
         this.facingSwitch.setOnCheckedChangeListener(this);
+        this.img_back.setOnClickListener(this);
+        this.img_pic.setOnClickListener(this);
         // Set the display effect when the takePhoto button is clicked.
         this.img_takePhoto.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -139,14 +143,15 @@ public class TakePhotoActivity extends BaseActivity implements CompoundButton.On
                 }
             }
         });
+    }
 
-        this.img_pic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Back to background page.
-                TakePhotoActivity.this.finish();
-            }
-        });
+    @Override
+    public void onClick(View view) {
+        if(view.getId() == R.id.back){
+            this.finish();
+        }else if(view.getId() == R.id.img_pic){
+            this.finish();
+        }
     }
 
     private void createLensEngine() {
@@ -156,7 +161,7 @@ public class TakePhotoActivity extends BaseActivity implements CompoundButton.On
         }
         try {
             this.setting = new MLImageSegmentationSetting.Factory().setAnalyzerType(MLImageSegmentationSetting.BODY_SEG).setExact(false).create();
-            this.transactor = new ImageSliceDetectorTransactor(this.getApplicationContext(), this.setting, true, this.background, this.facing);
+            this.transactor = new ImageSegmentationTransactor(this.getApplicationContext(), this.setting, this.background);
             this.transactor.setImageSegmentationResultCallBack(this);
             this.lensEngine.setMachineLearningFrameTransactor(this.transactor);
         } catch (Exception e) {
@@ -206,16 +211,14 @@ public class TakePhotoActivity extends BaseActivity implements CompoundButton.On
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         Log.d(TakePhotoActivity.TAG, "Set facing");
         if (this.lensEngine != null) {
-            if (isChecked) {
+            if (!isChecked) {
                 this.facing = CameraConfiguration.CAMERA_FACING_FRONT;
             } else {
                 this.facing = CameraConfiguration.CAMERA_FACING_BACK;
-                this.transactor.setImageSegmentationResultCallBack(this);
-                this.lensEngine.setMachineLearningFrameTransactor(this.transactor);
             }
             this.cameraConfiguration.setCameraFacing(this.facing);
             this.setting = new MLImageSegmentationSetting.Factory().setAnalyzerType(0).create();
-            this.transactor = new ImageSliceDetectorTransactor(this.getApplicationContext(), this.setting, true, this.background, this.facing);
+            this.transactor = new ImageSegmentationTransactor(this.getApplicationContext(), this.setting, this.background);
             this.transactor.setImageSegmentationResultCallBack(this);
             this.lensEngine.setMachineLearningFrameTransactor(this.transactor);
         }

@@ -122,7 +122,7 @@
                 android:layout_width="240dp"
                 android:layout_height="151dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/margin_l"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/rn_dashed_box"
                 android:gravity="center_horizontal">
 
@@ -230,7 +230,7 @@
                 android:layout_width="240dp"
                 android:layout_height="151dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="@dimen/idcard_result_margin"
                 android:background="@drawable/rn_dashed_box"
                 android:gravity="center_horizontal">
 
@@ -357,7 +357,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="24dp"
                 android:layout_marginLeft="24dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="@dimen/idcard_result_margin"
                 android:layout_marginEnd="24dp"
                 android:layout_marginRight="24dp"
                 android:fontFamily="HwChinese-medium"
@@ -370,7 +370,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/idcard_margin"
                 android:layout_marginLeft="@dimen/idcard_margin"
-                android:layout_marginTop="@dimen/idcard_margin"
+                android:layout_marginTop="@dimen/idcard_result_margin"
                 android:layout_marginEnd="@dimen/idcard_margin"
                 android:layout_marginRight="@dimen/idcard_margin">
 
@@ -389,7 +389,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="5dp"
         android:text="@string/idcard_mark"
         android:textColor="@color/secondary_text_color"
         android:textSize="12sp">

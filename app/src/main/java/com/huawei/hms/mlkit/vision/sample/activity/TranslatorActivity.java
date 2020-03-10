@@ -55,9 +55,9 @@ public class TranslatorActivity extends BaseActivity {
     private static final List<String> spSourceList_en = new ArrayList<>(Arrays.asList("Auto", "Chinese", "English", "French", "Spanish", "Arabic", "Thai", "Turkish"));
     private static final List<String> spDestList = new ArrayList<>(Arrays.asList("中文", "英文", "法语", "西班牙语", "阿拉伯语", "泰语", "土耳其语"));
     private static final List<String> spDestList_en = new ArrayList<>(Arrays.asList("Chinese", "English", "French", "Spanish", "Arabic", "Thai", "Turkish"));
-    private static final List<String> codeList = new ArrayList<>(Arrays.asList("ar", "de", "en", "es", "fr", "it", "ja", "pt", "ru", "th", "tr", "zh"));
+    private static final List<String> codeList = new ArrayList<>(Arrays.asList("ar", "de", "en", "es", "fr", "it", "ja", "pt", "ru", "th", "tr", "zh", "ro"));
     private static final List<String> languageList = new ArrayList<>(Arrays.asList("Arabic", "German", "English", "Spanish", "French", "Italian",
-            "Japanese", "Portuguese", "Russian", "Thai", "Turkish", "Chinese"));
+            "Japanese", "Portuguese", "Russian", "Thai", "Turkish", "Chinese", "Romanian"));
 
 
     private Spinner spSourceType;

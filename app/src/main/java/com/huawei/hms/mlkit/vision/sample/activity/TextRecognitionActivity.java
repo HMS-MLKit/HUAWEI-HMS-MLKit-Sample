@@ -22,6 +22,7 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.hardware.Camera;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -168,21 +169,25 @@ public final class TextRecognitionActivity extends BaseActivity
             SharedPreferencesUtil.getInstance(this).
                     putStringValue(Constant.POSITION_KEY, Constant.POSITION_EN);
             this.languageDialog.dismiss();
+            this.preview.release();
             this.restartLensEngine(Constant.POSITION_EN);
         } else if (view.getId() == R.id.japanese) {
             SharedPreferencesUtil.getInstance(this).
                     putStringValue(Constant.POSITION_KEY, Constant.POSITION_JA);
             this.languageDialog.dismiss();
+            this.preview.release();
             this.restartLensEngine(Constant.POSITION_JA);
         } else if (view.getId() == R.id.korean) {
             SharedPreferencesUtil.getInstance(this).
                     putStringValue(Constant.POSITION_KEY, Constant.POSITION_KO);
             this.languageDialog.dismiss();
+            this.preview.release();
             this.restartLensEngine(Constant.POSITION_KO);
         } else if (view.getId() == R.id.latin) {
             SharedPreferencesUtil.getInstance(this).
                     putStringValue(Constant.POSITION_KEY, Constant.POSITION_LA);
             this.languageDialog.dismiss();
+            this.preview.release();
             this.restartLensEngine(Constant.POSITION_LA);
         } else if (view.getId() == R.id.back) {
             this.finish();
@@ -200,7 +205,9 @@ public final class TextRecognitionActivity extends BaseActivity
         if (null != this.lensEngine) {
             this.mCamera = this.lensEngine.getCamera();
             try {
-                this.mCamera.setPreviewDisplay(this.preview.getSurfaceHolder());
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+                    this.mCamera.setPreviewDisplay(this.preview.getSurfaceHolder());
+                }
             } catch (IOException e) {
                 Log.d(TextRecognitionActivity.TAG, "initViews IOException");
             }

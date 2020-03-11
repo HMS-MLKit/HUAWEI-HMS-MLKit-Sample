@@ -17,6 +17,7 @@
 package com.huawei.hms.mlkit.vision.sample.activity;
 
 import android.hardware.Camera;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -93,7 +94,9 @@ public final class ObjectDetectionActivity extends BaseActivity
         if (null != this.lensEngine) {
             this.mCamera = this.lensEngine.getCamera();
             try {
-                this.mCamera.setPreviewDisplay(this.preview.getSurfaceHolder());
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+                    this.mCamera.setPreviewDisplay(this.preview.getSurfaceHolder());
+                }
             } catch (IOException e) {
                 Log.d(ObjectDetectionActivity.TAG, "initViews IOException");
             }

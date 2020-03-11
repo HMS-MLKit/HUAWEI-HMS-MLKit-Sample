@@ -58,6 +58,15 @@
         <activity android:name=".activity.IDCardRecognitionActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"></activity>
 
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/apk_file_provider" />
+        </provider>
         <meta-data
             android:name="com.huawei.hms.ml.DEPENDENCY"
             android:value="object,ocr,face,label,icr,imgseg" />

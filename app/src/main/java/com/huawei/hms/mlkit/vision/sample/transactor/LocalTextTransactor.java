@@ -133,7 +133,7 @@ public class LocalTextTransactor extends BaseTransactor<MLText> {
         this.latestImageMetaData = frameMetadata;
         graphicOverlay.clear();
         List<MLText.Block> blocks = results.getBlocks();
-        if ((Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) && originalCameraImage != null) {
+        if ((Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) && originalCameraImage != null) {
             CameraImageGraphic imageGraphic = new CameraImageGraphic(graphicOverlay, originalCameraImage);
             graphicOverlay.addGraphic(imageGraphic);
         }

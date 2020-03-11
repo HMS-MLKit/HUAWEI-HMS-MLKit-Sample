@@ -76,6 +76,8 @@ public class LocalObjectGraphic extends BaseGraphic {
                 return "Plant";
             case MLObject.TYPE_FOOD:
                 return "Food";
+            case MLObject.TYPE_FACE:
+                return "Face";
             default: // fall out
         }
         return "";

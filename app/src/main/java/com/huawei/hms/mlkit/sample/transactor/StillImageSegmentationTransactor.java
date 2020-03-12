@@ -35,6 +35,7 @@ import com.huawei.hms.mlsdk.MLAnalyzerFactory;
 import com.huawei.hms.mlsdk.common.MLFrame;
 import com.huawei.hms.mlsdk.imgseg.MLImageSegmentation;
 import com.huawei.hms.mlsdk.imgseg.MLImageSegmentationAnalyzer;
+import com.huawei.hms.mlsdk.imgseg.MLImageSegmentationClassification;
 import com.huawei.hms.mlsdk.imgseg.MLImageSegmentationSetting;
 
 import java.io.IOException;
@@ -159,25 +160,25 @@ public class StillImageSegmentationTransactor extends BaseTransactor<MLImageSegm
     private int[] byteArrToIntArr(byte[] masks) {
         int[] results = new int[masks.length];
         for (int i = 0; i < masks.length; i++) {
-            if (masks[i] == 1) {
+            if (masks[i] == MLImageSegmentationClassification.TYPE_HUMAN) {
                 results[i] = Color.BLACK;
-            } else if (masks[i] == 2) {
+            } else if (masks[i] == MLImageSegmentationClassification.TYPE_SKY) {
                 results[i] = Color.BLUE;
-            } else if (masks[i] == 3) {
+            } else if (masks[i] == MLImageSegmentationClassification.TYPE_GRASS) {
                 results[i] = Color.DKGRAY;
-            } else if (masks[i] == 4) {
+            } else if (masks[i] == MLImageSegmentationClassification.TYPE_FOOD) {
                 results[i] = Color.YELLOW;
-            } else if (masks[i] == 5) {
+            } else if (masks[i] == MLImageSegmentationClassification.TYPE_CAT) {
                 results[i] = Color.LTGRAY;
-            } else if (masks[i] == 6) {
+            } else if (masks[i] == MLImageSegmentationClassification.TYPE_BUILD) {
                 results[i] = Color.CYAN;
-            } else if (masks[i] == 7) {
+            } else if (masks[i] == MLImageSegmentationClassification.TYPE_FLOWER) {
                 results[i] = Color.RED;
-            } else if (masks[i] == 8) {
+            } else if (masks[i] == MLImageSegmentationClassification.TYPE_WATER) {
                 results[i] = Color.GRAY;
-            } else if (masks[i] == 9) {
+            } else if (masks[i] == MLImageSegmentationClassification.TYPE_SAND) {
                 results[i] = Color.MAGENTA;
-            } else if (masks[i] == 10) {
+            } else if (masks[i] == MLImageSegmentationClassification.TYPE_MOUNTAIN) {
                 results[i] = Color.GREEN;
             } else {
                 results[i] = Color.WHITE;

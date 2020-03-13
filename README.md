@@ -1,4 +1,4 @@
-## ai-mlkit-sample
+## HUAWEI-HMS-MLKit-Sample
 
 
 ## build status

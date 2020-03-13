@@ -27,7 +27,8 @@
     replacing the sample-agconnect-services.json in the project.
 	Attention: The package name in the sample code can not be used to apply for agconnect-services.json.
 	You can use a custom package name to apply for agconnect-services.json.
-	You only need to modify the applicationId in appai_mlkit_sample\app\build.gradle to the same package name as the applied agconnect-services.json to experience the mlkit on-Cloud services.
+	You only need to modify the applicationId in app HUAWEI-HMS-MLKit-Sample
+\app\build.gradle to the same package name as the applied agconnect-services.json to experience the mlkit on-Cloud services.
 
 
 ## Installation
@@ -139,4 +140,4 @@
       - LensEngine：camera that generates continuous image data for detection.
 
 ##  License
-    ai_mlkit_sample is licensed under the [Apache License, version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
+    HUAWEI-HMS-MLKit-Sample is licensed under the [Apache License, version 2.0](http://www.apache.org/licenses/LICENSE-2.0).

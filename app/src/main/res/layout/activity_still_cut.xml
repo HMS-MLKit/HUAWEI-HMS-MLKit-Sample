@@ -20,7 +20,7 @@
             android:scaleType="fitXY"></ImageView>
     </RelativeLayout>
 
-    <com.huawei.hms.mlkit.sample.views.overlay.GraphicOverlay
+    <com.mlkit.sample.views.overlay.GraphicOverlay
         android:id="@+id/previewOverlay"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"

@@ -41,7 +41,7 @@
     </RelativeLayout>
 
 
-    <com.huawei.hms.mlkit.sample.views.overlay.GraphicOverlay
+    <com.mlkit.sample.views.overlay.GraphicOverlay
         android:id="@+id/previewOverlay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -144,7 +144,7 @@
                 android:textColor="@color/black_color"
                 android:textSize="13sp" />
 
-            <com.huawei.hms.mlkit.sample.views.color.ColorSelector
+            <com.mlkit.sample.views.color.ColorSelector
                 android:id="@+id/color_selector"
                 android:layout_width="350dp"
                 android:layout_height="10dp"

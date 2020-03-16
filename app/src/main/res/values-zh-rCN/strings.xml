@@ -67,7 +67,7 @@
     <string name="image_segmentation_s">图像分割</string>
     <string name="document_recognition_s">文档识别</string>
     <string name="photographed_shopping_s">拍照购</string>
-    <string name="face_detection_s">人脸识别</string>
+    <string name="face_detection_s">人脸检测</string>
     <string name="object_detection_s">对象检测</string>
     <string name="image_classification_s">图片分类</string>
     <string name="landmark_s">地标识别</string>
@@ -77,7 +77,7 @@
     <string name="image_segmentation">图像分割</string>
     <string name="translate">翻译</string>
     <string name="photographed_shopping">拍照购</string>
-    <string name="face_detection">人脸识别</string>
+    <string name="face_detection">人脸检测</string>
     <string name="object_detection">对象检测</string>
     <string name="image_classification">图片分类</string>
     <string name="landmark">地标识别</string>

@@ -1,4 +1,4 @@
-## HUAWEI-HMS-MLKit-Sample
+# HUAWEI-HMS-MLKit-Sample
 
 
 ## build status
@@ -11,32 +11,35 @@
  * [Installation](#installation)
  * [Configuration ](#configuration )
  * [Supported Environments](#supported-environments)
- * [Sample Code](#Sample Code)
+ * [Sample-Code](#Sample-Code)
  * [License](#license)
 
 
 ## Introduction
-    The sample code mainly shows the use of Huawei Machine Learning SDK.
+The sample code mainly shows the use of Huawei Machine Learning SDK.
 
-	Including face recognition, text recognition, image classification, landmark recognition, object detection and tracking, translation, language detection, image segmentation. Product visual search will coming soon.
+Including face recognition, text recognition, image classification, landmark recognition, object detection and tracking, translation, language detection, image segmentation. Product visual search will coming soon.
 
-	It includes both camera capture video for real-time detection and still image recognition.
+It includes both camera capture video for real-time detection and still image recognition.
 
-    If you want to use cloud analyzer, such as cloud text analyzer(document and cloud text), cloud image classification analyzer, landmark analyzer, translation, language detection,
-    you need to apply for an agconnect-services.json file in the developer alliance(https://developer.huawei.com/consumer/en/doc/development/HMS-Guides/ml-preparations4),
-    replacing the sample-agconnect-services.json in the project.
-	Attention: The package name in the sample code can not be used to apply for agconnect-services.json.
-	You can use a custom package name to apply for agconnect-services.json.
-	You only need to modify the applicationId in app HUAWEI-HMS-MLKit-Sample
+If you want to use cloud analyzer, such as cloud text analyzer(document and cloud text), cloud image classification analyzer, landmark analyzer, translation, language detection,
+you need to apply for an agconnect-services.json file in the developer alliance(https://developer.huawei.com/consumer/en/doc/development/HMS-Guides/ml-preparations4), replacing the sample-agconnect-services.json in the project.
+
+Attention: The package name in this project can not be used to apply for agconnect-services.json. You can use a custom package name to apply for agconnect-services.json.
+
+You only need to modify the applicationId in app HUAWEI-HMS-MLKit-Sample
 \app\build.gradle to the same package name as the applied agconnect-services.json to experience the mlkit on-Cloud services.
 
 
 ## Installation
-    Download the sample code and open in android Studio.
+You can find the app-release.apk in code->releases->app-release.apk, you can download the APK, copy it to your phone, install and experience it. if you have installed adb on your computer, open the cmd window and install the application on your phone through adb install app-release. apk.
+
+Download the HUAWEI-HMS-MLKit-Sample code and open in Android Studio, after ensuring that your device is connected to the network, obtain the apk through build.
 
 
 ## Configuration
-    To use functions provided by packages in examples, You need to add the dependencies to the build.gradle file as follows:
+To use functions provided by packages in examples, You need to add the dependencies to the build.gradle file as follows:
+
     implementation 'com.huawei.hms:ml-computer-vision-ocr-cn-model:1.0.2.300'
     implementation 'com.huawei.hms:ml-computer-vision-ocr-jk-model:1.0.2.300'
     implementation 'com.huawei.hms:ml-computer-vision-ocr-latin-model:1.0.2.300'
@@ -51,11 +54,11 @@
     implementation 'com.huawei.hms:ml-computer-language-detection:1.0.2.300'
 
 ## Supported Environments
-	android 4.4 or a later version is recommended.
+android 4.4 or a later version is recommended.
 
 
 ## Sample Code
-   Sample code majors activitys as follows:
+Sample code majors activitys as follows:
    1. Choose TakePhotoActivity to see a demo of the following:
       - Camera background replacement
       - Picture view
@@ -140,4 +143,4 @@
       - LensEngine：camera that generates continuous image data for detection.
 
 ##  License
-    HUAWEI-HMS-MLKit-Sample is licensed under the [Apache License, version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
+HUAWEI-HMS-MLKit-Sample is licensed under the [Apache License, version 2.0](http://www.apache.org/licenses/LICENSE-2.0).

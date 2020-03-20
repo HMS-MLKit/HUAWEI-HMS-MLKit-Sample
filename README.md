@@ -32,11 +32,8 @@ The following are screenshots of the apk running interface. The first is the mai
 The first is the interface for translation and language detection, the second is a demonstration of object detection and tracking, and the third is a text recognition demonstration.
 
 <table><tr>
- Translation and language detection
 <td><img src="https://github.com/HMS-MLKit/HUAWEI-HMS-MLKit-Sample/blob/master/resources/language.jpg" width=200 border=2></td>
-Object
 <td><img src="https://github.com/HMS-MLKit/HUAWEI-HMS-MLKit-Sample/blob/master/resources/object.jpg" width=200 border=2></td>
-Text recognition
 <td><img src="https://github.com/HMS-MLKit/HUAWEI-HMS-MLKit-Sample/blob/master/resources/text.jpg" width=200 border=2></td>
 </tr></table>
 

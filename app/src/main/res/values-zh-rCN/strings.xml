@@ -46,9 +46,10 @@
 
     <string name="cloud_classification">云端图像分类</string>
     <string name="cloud_text">云端文字识别</string>
-    <string name="select_from_album">从相册选择图像</string>
+    <string name="select_from_album">从相册选择图片</string>
+    <string name="video_frame">视频流</string>
     <string name="take_photo">拍照</string>
-    <string name="idcard_recognition">身份证识别</string>
+    <string name="icr">身份证识别</string>
     <string name="detector_still_desc">云端图像识别</string>
     <string name="detector_live_desc">相机实时连续识别</string>
     <string name="more_face_datas">采集更多人脸数据</string>
@@ -67,19 +68,25 @@
     <string name="image_segmentation_s">图像分割</string>
     <string name="document_recognition_s">文档识别</string>
     <string name="photographed_shopping_s">拍照购</string>
-    <string name="face_detection_s">人脸检测</string>
+    <string name="face_detection_s">人脸识别</string>
     <string name="object_detection_s">对象检测</string>
     <string name="image_classification_s">图片分类</string>
     <string name="landmark_s">地标识别</string>
     <string name="text_detection_s">文字识别</string>
     <string name="idcard_recognition_s">身份证识别</string>
+    <string name="asr_s">语音识别</string>
+    <string name="bcr_s">银行卡识别</string>
+    <string name="ucr_s">通用卡证识别</string>
 
     <string name="image_segmentation">图像分割</string>
-    <string name="translate">翻译</string>
-    <string name="photographed_shopping">拍照购</string>
+    <string name="translate">文本翻译</string>
+    <string name="asr">语音识别</string>
+    <string name="bcr">银行卡识别</string>
+    <string name="ucr">通用卡证识别</string>
+    <string name="photographed_shopping">拍照购物</string>
     <string name="face_detection">人脸检测</string>
     <string name="object_detection">对象检测</string>
-    <string name="image_classification">图片分类</string>
+    <string name="image_classification">图像分类</string>
     <string name="landmark">地标识别</string>
     <string name="text_detection">文字识别</string>
     <string name="document_recognition">文档识别</string>
@@ -90,9 +97,9 @@
     <string name="language_recognition">语种识别</string>
     <string name="elapsed_time">耗时： </string>
     <string name="zero_character"> 0 字符</string>
-    <string name="image_category">视觉类</string>
+    <string name="image_category">图像类</string>
     <string name="language_category">语言类</string>
-    <string name="other_category">其他类</string>
+    <string name="text_category">文本类</string>
     <string name="translate_text_hint">机器学习</string>
     <string name="background_substitution">背景替换</string>
     <string name="cutout">人像抠图</string>
@@ -109,18 +116,32 @@
     <string name="target_object">目标</string>
     <string name="color">颜色</string>
 
-    <string name="rn_eid_upload_self_photo" priority="translator">"请上传本人身份证照片"</string>
-    <string name="rn_eid_upload_face" priority="translator">"上传人像面"</string>
-    <string name="rn_eid_upload_back" priority="translator">"上传国徽面"</string>
-    <string name="rn_eid_hint_upload_valid_photo" priority="translator">"请上传有效身份证照片"</string>
-    <string name="rn_eid_hint_image_not_complete" priority="translator">"智能检测识别到图片可能存在部分遮挡，如果清晰可见请忽略"</string>
-    <string name="rn_eid_hint_ensure_user_info_security" priority="translator">"我们将依法保护您的个人信息安全"</string>
-    <string name="rn_eid_take_origin_card" priority="translator">"检测结果"</string>
+    <string name="icr_upload_self_photo">"请上传本人身份证照片"</string>
+    <string name="icr_upload_face">"上传人像面"</string>
+    <string name="icr_upload_back">"上传国徽面"</string>
+    <string name="icr_hint_upload_valid_photo">"请上传有效身份证照片"</string>
+    <string name="icr_hint_image_not_complete">"智能检测识别到图片可能存在部分遮挡，如果清晰可见请忽略"</string>
+    <string name="icr_hint_ensure_user_info_security">"我们将依法保护您的个人信息安全"</string>
+    <string name="recognition_results">"检测结果"</string>
+    <string name="icr_mark">注：只用于中国大陆地区</string>
     <string name="device_side">端侧</string>
     <string name="cloud_side">云侧</string>
+
+    <string name="gcr_upload_self_photo">"请上传卡证"</string>
+    <string name="gcr_upload">"上传卡证"</string>
+    <string name="hk_pass">港澳台通行证</string>
+    <string name="hk_id_card">"香港身份证"</string>
+    <string name="home_card">港澳台居民来往大陆通行证</string>
+    <string name="click_to_switch"><u>点击切换</u></string>
+    <string name="vedio_tip">"正在识别，请对齐边缘"</string>
+    <string name="capture_tip">"正在拍照，请对齐边缘"</string>
+
+
+    <string name="bcr_upload_self_photo">"请上传银行卡"</string>
+    <string name="bcr_upload">"上传银行卡"</string>
 
     <string name="similar_products">相似商品</string>
     <string name="empty">无</string>
 
-    <string name="idcard_mark">注：只用于中国大陆地区</string>
+
 </resources>

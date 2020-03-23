@@ -83,7 +83,7 @@ public final class StartActivity extends BaseActivity
                 this.startActivity(new Intent(StartActivity.this, TextRecognitionActivity.class));
                 break;
             case R.id.layout_shopping:
-                Toast.makeText(this.getApplicationContext(), this.getText(R.string.coming_soon), Toast.LENGTH_SHORT).show();
+                this.startActivity(new Intent(StartActivity.this, ProductVisionSearchActivity.class));
                 break;
             case R.id.layout_translate:
                 this.startActivity(new Intent(StartActivity.this, TranslatorActivity.class));
@@ -180,7 +180,7 @@ public final class StartActivity extends BaseActivity
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-							// Open the corresponding setting interface according to the package name.
+                            // Open the corresponding setting interface according to the package name.
                             intent.setData(Uri.parse("package:" + StartActivity.this.getPackageName()));
                             StartActivity.this.startActivityForResult(intent, 200);
                             StartActivity.this.startActivity(intent);

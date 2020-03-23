@@ -14,22 +14,15 @@
  *    limitations under the License.
  */
 
-package com.mlkit.sample.activity.fragment;
+package com.mlkit.sample.processor.gcr;
 
-import android.view.View;
+import com.mlkit.sample.activity.entity.GeneralCardResult;
 
-import com.mlkit.sample.activity.entity.GridViewItem;
-
-
-import java.util.ArrayList;
-
-public class OtherCategoryFragment extends BaseFragment {
-    @Override
-    protected void initClickEvent(View view) {
-    }
-
-    @Override
-    protected void initData() {
-        this.mDataList = new ArrayList<GridViewItem>();
-    }
+/**
+ * Common interface for post-processing plugins
+ *
+ * @since 2020-03-12
+ */
+public interface GeneralCardProcessor {
+    GeneralCardResult getResult();
 }

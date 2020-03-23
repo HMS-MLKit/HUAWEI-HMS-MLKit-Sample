@@ -206,7 +206,7 @@
                         android:layout_height="@dimen/start_icon_width"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
-                        android:src="@drawable/icon_idcard"></ImageView>
+                        android:src="@drawable/icon_icr"></ImageView>
 
                     <ImageView
                         android:layout_width="@dimen/icon_new_width"
@@ -222,7 +222,7 @@
                         android:layout_gravity="center_horizontal"
                         android:gravity="center"
                         android:paddingBottom="5dp"
-                        android:text="@string/idcard_recognition"
+                        android:text="@string/icr"
                         android:textColor="@color/secondary_text_color"
                         android:textSize="11sp"></TextView>
 

@@ -1,8 +1,9 @@
 buildscript {
     repositories {
-        google()
+        /*google()
         jcenter()
-        maven { url "http://developer.huawei.com/repo/" }
+        maven { url "http://developer.huawei.com/repo/" }*/
+        maven { url "http://szg1.artifactory.inhuawei.com/artifactory/sz-maven-public/" }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.2'
@@ -12,9 +13,10 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
+       /* google()
         jcenter()
-        maven { url "http://developer.huawei.com/repo/" }
+        maven { url "http://developer.huawei.com/repo/" }*/
+        maven { url "http://szg1.artifactory.inhuawei.com/artifactory/sz-maven-public/" }
     }
 }
 

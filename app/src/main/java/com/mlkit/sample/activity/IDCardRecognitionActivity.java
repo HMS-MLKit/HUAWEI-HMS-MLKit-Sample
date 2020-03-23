@@ -14,6 +14,7 @@
  *    limitations under the License.
  */
 
+
 package com.mlkit.sample.activity;
 
 import android.Manifest;
@@ -267,7 +268,7 @@ public class IDCardRecognitionActivity extends AppCompatActivity implements View
         @Override
         public void onFailure(int recCode, Bitmap bitmap) {
             Toast.makeText(IDCardRecognitionActivity.this.getApplicationContext(), R.string.get_data_failed, Toast.LENGTH_SHORT).show();
-            Log.i(IDCardRecognitionActivity.TAG, "IdCallBack onRecFailed");
+            Log.i(IDCardRecognitionActivity.TAG, "IdCallBack onRecFailed: " + recCode);
         }
 
         @Override

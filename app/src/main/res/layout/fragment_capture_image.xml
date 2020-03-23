@@ -23,7 +23,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:text="@string/click_add_picture"
-            android:textColor="#99000000"
+            android:textColor="@color/text_color"
             android:textSize="14sp" />
     </RelativeLayout>
 </RelativeLayout>

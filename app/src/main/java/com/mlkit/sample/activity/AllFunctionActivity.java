@@ -24,9 +24,10 @@ import android.widget.TextView;
 
 import com.mlkit.sample.R;
 import com.mlkit.sample.activity.adapter.TabFragmentAdapter;
+import com.mlkit.sample.activity.fragment.ImageCategoryFragment;
 import com.mlkit.sample.activity.fragment.LanguageCategoryFragment;
-import com.mlkit.sample.activity.fragment.OtherCategoryFragment;
-import com.mlkit.sample.activity.fragment.PictureCategoryFragment;
+import com.mlkit.sample.activity.fragment.TextCategoryFragment;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,9 +72,9 @@ public class AllFunctionActivity extends BaseActivity implements View.OnClickLis
         this.mViewPager.setOnPageChangeListener(new PagerChangeListener());
         // Add fragment to the collection list.
         this.mFragmentList = new ArrayList<>();
-        this.mFragmentList.add(new PictureCategoryFragment());
+        this.mFragmentList.add(new ImageCategoryFragment());
         this.mFragmentList.add(new LanguageCategoryFragment());
-        this.mFragmentList.add(new OtherCategoryFragment());
+        this.mFragmentList.add(new TextCategoryFragment());
 
         this.mAdapter = new TabFragmentAdapter(this.getSupportFragmentManager(), this.mFragmentList);
         this.mViewPager.setAdapter(this.mAdapter);

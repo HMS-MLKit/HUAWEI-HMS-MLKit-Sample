@@ -83,6 +83,7 @@ public final class FaceDetectionActivity extends BaseActivity
                     .setFeatureType(MLFaceAnalyzerSetting.TYPE_PRECISION)
                     .setShapeType(MLFaceAnalyzerSetting.TYPE_SHAPES)
                     .setKeyPointType(MLFaceAnalyzerSetting.TYPE_KEYPOINTS)
+                    .allowTracing()
                     .create();
 
         } else {
@@ -91,6 +92,7 @@ public final class FaceDetectionActivity extends BaseActivity
                     .setPerformanceType(MLFaceAnalyzerSetting.TYPE_SPEED)
                     .setShapeType(MLFaceAnalyzerSetting.TYPE_SHAPES)
                     .setKeyPointType(MLFaceAnalyzerSetting.TYPE_KEYPOINTS)
+                    .allowTracing()
                     .create();
         }
         this.lensEngine.setMachineLearningFrameTransactor(new LocalFaceTransactor(detectorOptions, this.getApplicationContext(), isOpen));

@@ -55,8 +55,17 @@
             android:name=".activity.imgseg.StillCutPhotoActivity"
             android:exported="true" />
 
-        <activity android:name=".activity.IDCardRecognitionActivity"
+        <activity
+            android:name=".activity.IDCardRecognitionActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"></activity>
+
+        <activity
+            android:name=".activity.GeneralCardRecognitionActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"></activity>
+        <activity
+            android:name=".activity.BankCardRecognitionActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"></activity>
+        <activity android:name=".activity.ProductVisionSearchActivity"></activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"

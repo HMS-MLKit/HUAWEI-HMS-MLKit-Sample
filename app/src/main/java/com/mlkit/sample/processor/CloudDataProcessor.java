@@ -14,8 +14,7 @@
  *    limitations under the License.
  */
 
-package com.mlkit.sample.manager;
-
+package com.mlkit.sample.processor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -31,7 +30,7 @@ import com.huawei.hms.mlsdk.text.MLText;
 
 import java.util.List;
 
-public class CloudDataManager {
+public class CloudDataProcessor {
 
     private GraphicOverlay mGraphicOverlay;
 
@@ -39,10 +38,16 @@ public class CloudDataManager {
 
     private MLText mHmsMLVisionText;
 
-    public CloudDataManager(GraphicOverlay mGraphicOverlay, Bitmap mBitmapCopyForTap, MLText mHmsMLVisionText) {
-        this.mGraphicOverlay = mGraphicOverlay;
-        this.mBitmapCopyForTap = mBitmapCopyForTap;
-        this.mHmsMLVisionText = mHmsMLVisionText;
+    public void setGraphicOverlay (GraphicOverlay graphicOverlay) {
+        this.mGraphicOverlay = graphicOverlay;
+    }
+
+    public void setBitmap(Bitmap bitmapCopyForTap) {
+        this.mBitmapCopyForTap = bitmapCopyForTap;
+    }
+
+    public void setText(MLText text) {
+        this.mHmsMLVisionText = text;
     }
 
     public void drawView(Canvas canvas, boolean flag) {
@@ -164,7 +169,7 @@ public class CloudDataManager {
 
     public void drawCloudDocText(MLDocument text, Canvas canvas) {
         Paint textPaint = new Paint();
-        textPaint.setColor(Color.WHITE);
+        textPaint.setColor(Color.parseColor("#EE6A50"));
 
         List<MLDocument.Block> blocks = text.getBlocks();
         for (int i = 0; i < blocks.size(); i++) {
@@ -183,3 +188,4 @@ public class CloudDataManager {
         }
     }
 }
+

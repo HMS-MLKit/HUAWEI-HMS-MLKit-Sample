@@ -9,9 +9,7 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_height"
-        android:background="@color/white"
-        android:minHeight="?attr/actionBarSize">
-
+        android:background="@color/white">
 
         <TextView
             android:id="@+id/back"
@@ -21,7 +19,7 @@
             android:drawableLeft="@drawable/black_back"
             android:text="@string/back"
             android:textColor="@color/secondary_text_color"
-            android:textSize="14sp" />
+            android:textSize="@dimen/toolbar_back_size" />
 
         <TextView
             android:id="@+id/text"
@@ -30,7 +28,7 @@
             android:layout_gravity="center"
             android:text="@string/settings"
             android:textColor="@color/secondary_text_color"
-            android:textSize="17sp" />
+            android:textSize="@dimen/toolbar_title_size" />
     </androidx.appcompat.widget.Toolbar>
 
 
@@ -55,7 +53,7 @@
                 android:text="@string/versions"
                 android:textColor="@color/secondary_text_color"
                 android:textSize="16sp" />
-s
+
             <TextView
                 android:id="@+id/version"
                 android:layout_width="wrap_content"
@@ -67,9 +65,11 @@ s
                 android:textSize="14sp" />
 
         </RelativeLayout>
-        <View style="@style/common_line"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"/>
+
+        <View
+            style="@style/common_line"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp" />
     </LinearLayout>
 
 

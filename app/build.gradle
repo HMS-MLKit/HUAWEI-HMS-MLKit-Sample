@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     buildToolsVersion "28.0.3"
     defaultConfig {
-        applicationId "com.mlkit.sample"
+        applicationId "com.mlkit.sample.test"
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
@@ -13,11 +13,11 @@ android {
     }
     signingConfigs {
         release {
-                storeFile file("./mlkitSampleTest.jks")
-                storePassword '111111'
-                keyAlias 'mlkit'
-                keyPassword '111111'
-                v2SigningEnabled false
+            storeFile file("./mlkitSampleTest.jks")
+            storePassword '111111'
+            keyAlias 'mlkit'
+            keyPassword '111111'
+            v2SigningEnabled false
         }
     }
     buildTypes {
@@ -42,20 +42,24 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.huawei.hms:ml-computer-vision:1.0.2.300'
     implementation 'com.huawei.hms:ml-computer-translate:1.0.2.300'
     implementation 'com.huawei.hms:ml-computer-language-detection:1.0.2.300'
+    implementation 'com.huawei.hms:ml-computer-vision:1.0.3.137'
+    implementation 'com.huawei.hms:ml-computer-vision-ocr-cn-model:1.0.3.132'
+    implementation 'com.huawei.hms:ml-computer-vision-ocr-jk-model:1.0.3.132'
+    implementation 'com.huawei.hms:ml-computer-vision-ocr-latin-model:1.0.3.132'
+   // implementation 'com.huawei.hms:ml-computer-card-gcr-plugin:1.0.3.140'
 
-    implementation 'com.huawei.hms:ml-computer-vision-ocr-cn-model:1.0.2.300'
-    implementation 'com.huawei.hms:ml-computer-vision-ocr-jk-model:1.0.2.300'
-    implementation 'com.huawei.hms:ml-computer-vision-ocr-latin-model:1.0.2.300'
     implementation 'com.huawei.hms:ml-computer-vision-image-segmentation-body-model:1.0.2.300'
     implementation 'com.huawei.hms:ml-computer-vision-image-segmentation-multiclass-model:1.0.2.300'
     implementation 'com.huawei.hms:ml-computer-vision-image-classification-model:1.0.2.300'
     implementation 'com.huawei.hms:ml-computer-vision-object-detection-model:1.0.2.300'
-    implementation 'com.huawei.hms:ml-computer-vision-face-recognition-model:1.0.2.300'
-    implementation 'com.huawei.hms:ml-computer-card-icr-cn-model:1.0.2.300'
-    implementation 'com.huawei.hms:ml-computer-card-icr-cn-plugin:1.0.2.300'
+    implementation 'com.huawei.hms:ml-computer-vision-face-recognition-model:1.0.0.325'
+    implementation 'com.huawei.hms:ml-computer-card-icr-cn-model:1.0.3.137'
+    implementation 'com.huawei.hms:ml-computer-card-icr-cn-plugin:1.0.3.137'
+    implementation 'com.huawei.hms:ml-computer-card-bcr-model:1.0.3.125'
+   // implementation 'com.huawei.hms:ml-computer-card-bcr-plugin:1.0.3.125'
+
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'

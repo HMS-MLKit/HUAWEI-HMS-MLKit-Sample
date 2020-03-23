@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.mlkit.sample.manager;
+package com.mlkit.sample.processor;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -28,7 +28,7 @@ import com.huawei.hms.mlsdk.text.MLText;
 
 import java.util.List;
 
-public class LocalDataManager {
+public class LocalDataProcessor {
     private float previewWidth;
     private float previewHeight;
     private float widthScaleValue = 1.0f;

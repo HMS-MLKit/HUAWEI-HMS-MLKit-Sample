@@ -29,21 +29,27 @@ import android.widget.TextView;
 import com.mlkit.sample.R;
 
 public class AddPictureDialog extends Dialog implements View.OnClickListener {
+    public static final int TYPE_NORMAL = 1;
+    public static final int TYPE_CUSTOM = 2;
     private TextView tvTakePicture;
     private TextView tvSelectImage;
-    private TextView tvCancel;
+    private TextView tvExtend;
     private Context context;
     private ClickListener clickListener;
+    private int type;
 
     public interface ClickListener {
-        void takePicture();
+         void takePicture();
 
         void selectImage();
+
+        void doExtend();
     }
 
-    public AddPictureDialog(Context context) {
+    public AddPictureDialog(Context context, int type) {
         super(context, R.style.MyDialogStyle);
         this.context = context;
+        this.type = type;
     }
 
     @Override
@@ -59,11 +65,13 @@ public class AddPictureDialog extends Dialog implements View.OnClickListener {
 
         this.tvTakePicture = view.findViewById(R.id.take_photo);
         this.tvSelectImage = view.findViewById(R.id.select_image);
-        this.tvCancel = view.findViewById(R.id.cancel);
-
+        this.tvExtend = view.findViewById(R.id.extend);
+        if (type == TYPE_CUSTOM) {
+            this.tvExtend.setText(R.string.video_frame);
+        }
         this.tvTakePicture.setOnClickListener(this);
         this.tvSelectImage.setOnClickListener(this);
-        this.tvCancel.setOnClickListener(this);
+        this.tvExtend.setOnClickListener(this);
 
         this.setCanceledOnTouchOutside(true);
         Window dialogWindow = this.getWindow();
@@ -78,20 +86,20 @@ public class AddPictureDialog extends Dialog implements View.OnClickListener {
         this.clickListener = clickListener;
     }
 
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.take_photo:
-                this.clickListener.takePicture();
                 this.dismiss();
+                this.clickListener.takePicture();
                 break;
             case R.id.select_image:
+                this.dismiss();
                 this.clickListener.selectImage();
-                this.dismiss();
                 break;
-            case R.id.cancel:
+            case R.id.extend:
                 this.dismiss();
+                this.clickListener.doExtend();
                 break;
         }
     }

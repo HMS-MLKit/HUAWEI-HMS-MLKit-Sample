@@ -19,6 +19,7 @@ package com.mlkit.sample.activity.fragment;
 import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.mlkit.sample.R;
 import com.mlkit.sample.activity.TranslatorActivity;
@@ -28,9 +29,9 @@ import java.util.ArrayList;
 
 public class LanguageCategoryFragment extends BaseFragment {
 
-    private static final int[] language_icons = {R.drawable.icon_translate};
+    private static final int[] language_icons = {R.drawable.icon_translate, R.drawable.icon_asr};
 
-    private static final int[] language_titles = {R.string.translate};
+    private static final int[] language_titles = {R.string.translate, R.string.asr};
 
     @Override
     protected void initClickEvent(View view) {
@@ -43,6 +44,9 @@ public class LanguageCategoryFragment extends BaseFragment {
                 switch (position) {
                     case 0:
                         LanguageCategoryFragment.this.startActivity(new Intent(LanguageCategoryFragment.this.getActivity(), TranslatorActivity.class));
+                        break;
+                    case 1:
+                        Toast.makeText(getActivity(), R.string.coming_soon, Toast.LENGTH_SHORT).show();
                         break;
                     default:
                         break;

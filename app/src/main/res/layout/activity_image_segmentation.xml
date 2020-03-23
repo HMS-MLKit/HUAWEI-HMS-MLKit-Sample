@@ -7,8 +7,7 @@
     android:fitsSystemWindows="true"
     android:background="#ffffff"
     tools:context=".activity.imgseg.ImageSegmentationActivity">
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_height"
         android:minHeight="?attr/actionBarSize">
@@ -20,19 +19,10 @@
             android:layout_centerVertical="true"
             android:drawableLeft="@drawable/black_back"
             android:text="@string/back"
+            android:padding="@dimen/icon_back_margin"
             android:textColor="@color/secondary_text_color"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/text"
-            android:visibility="gone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/image_segmentation_s"
-            android:textColor="@color/secondary_text_color"
-            android:textSize="17sp" />
-    </androidx.appcompat.widget.Toolbar>
+            android:textSize="@dimen/toolbar_back_size" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,7 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/background_substitution"
-                    android:textSize="15sp"
+                    android:textSize="@dimen/tab_title_text_size"
                     android:textColor="@color/button_background"
                     android:layout_centerInParent="true"
                     />
@@ -82,7 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/cutout"
-                    android:textSize="15sp"
+                    android:textSize="@dimen/tab_title_text_size"
                     android:textColor="@color/secondary_text_color"
                     android:layout_centerInParent="true"
                     />
@@ -114,7 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/image_segmentation"
-                    android:textSize="15sp"
+                    android:textSize="@dimen/tab_title_text_size"
                     android:textColor="@color/secondary_text_color"
                     android:layout_centerInParent="true"
                     />

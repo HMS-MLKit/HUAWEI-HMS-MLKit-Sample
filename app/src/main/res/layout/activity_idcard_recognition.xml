@@ -35,7 +35,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="right"
-            android:visibility="gone"
             android:layout_marginRight="15dp"
             android:orientation="horizontal">
 
@@ -107,14 +106,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="@dimen/margin_l"
-                android:layout_marginLeft="@dimen/margin_l"
                 android:layout_marginTop="@dimen/margin_l"
                 android:layout_marginEnd="@dimen/margin_l"
-                android:layout_marginRight="@dimen/margin_l"
                 android:fontFamily="HwChinese-regular"
                 android:gravity="center_horizontal"
-                android:text="@string/rn_eid_upload_self_photo"
-                android:textColor="?android:attr/textColorPrimary"
+                android:text="@string/icr_upload_self_photo"
+                android:textColor="@color/text_color"
                 android:textSize="15sp" />
 
 
@@ -131,7 +128,6 @@
                     android:layout_width="170dp"
                     android:layout_height="108dp"
                     android:layout_marginStart="35dp"
-                    android:layout_marginLeft="35dp"
                     android:layout_marginTop="21dp"
                     android:adjustViewBounds="true"
                     android:src="@drawable/icon_idcard_portrait" />
@@ -160,7 +156,7 @@
                         android:layout_height="40dp"
                         android:layout_gravity="center_horizontal"
                         android:gravity="center_horizontal"
-                        android:src="@drawable/icon_idcard_addto" />
+                        android:src="@drawable/icon_card_add" />
 
                     <TextView
                         android:id="@+id/rn_eid_upload_face_text"
@@ -168,14 +164,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginStart="@dimen/margin_l"
-                        android:layout_marginLeft="@dimen/margin_l"
                         android:layout_marginTop="@dimen/margin_m"
                         android:layout_marginEnd="@dimen/margin_l"
-                        android:layout_marginRight="@dimen/margin_l"
                         android:fontFamily="HwChinese-regular"
                         android:gravity="center_horizontal"
-                        android:text="@string/rn_eid_upload_face"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:text="@string/icr_upload_face"
+                        android:textColor="@color/text_color"
                         android:textSize="13sp" />
                 </LinearLayout>
 
@@ -186,12 +180,10 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="12dp"
-                    android:layout_marginLeft="12dp"
                     android:layout_marginEnd="12dp"
-                    android:layout_marginRight="12dp"
                     android:fontFamily="HwChinese-regular"
                     android:gravity="center_horizontal"
-                    android:text="@string/rn_eid_hint_upload_valid_photo"
+                    android:text="@string/icr_hint_upload_valid_photo"
                     android:textColor="@color/color_red_card"
                     android:textSize="12sp"
                     android:visibility="gone" />
@@ -205,7 +197,7 @@
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="4dp"
                     android:layout_marginRight="4dp"
-                    android:src="@drawable/icon_idcard_off"
+                    android:src="@drawable/icon_card_off"
                     android:visibility="gone" />
             </RelativeLayout>
 
@@ -215,13 +207,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="@dimen/margin_l"
-                android:layout_marginLeft="@dimen/margin_l"
                 android:layout_marginTop="@dimen/margin_m"
                 android:layout_marginEnd="@dimen/margin_l"
-                android:layout_marginRight="@dimen/margin_l"
                 android:fontFamily="HwChinese-regular"
                 android:gravity="center_horizontal"
-                android:text="@string/rn_eid_hint_image_not_complete"
+                android:text="@string/icr_hint_image_not_complete"
                 android:textColor="@color/color_red_card"
                 android:textSize="12sp"
                 android:visibility="gone" />
@@ -267,7 +257,7 @@
                         android:layout_height="40dp"
                         android:layout_gravity="center_horizontal"
                         android:gravity="center_horizontal"
-                        android:src="@drawable/icon_idcard_addto" />
+                        android:src="@drawable/icon_card_add" />
 
                     <TextView
                         android:id="@+id/rn_eid_upload_back_text"
@@ -275,14 +265,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginStart="@dimen/margin_l"
-                        android:layout_marginLeft="@dimen/margin_l"
                         android:layout_marginTop="@dimen/margin_m"
                         android:layout_marginEnd="@dimen/margin_l"
-                        android:layout_marginRight="@dimen/margin_l"
                         android:fontFamily="HwChinese-regular"
                         android:gravity="center_horizontal"
-                        android:text="@string/rn_eid_upload_back"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:text="@string/icr_upload_back"
+                        android:textColor="@color/text_color"
                         android:textSize="13sp" />
                 </LinearLayout>
 
@@ -298,7 +286,7 @@
                     android:layout_marginRight="12dp"
                     android:fontFamily="HwChinese-regular"
                     android:gravity="center_horizontal"
-                    android:text="@string/rn_eid_hint_upload_valid_photo"
+                    android:text="@string/icr_hint_upload_valid_photo"
                     android:textColor="@color/color_red_card"
                     android:textSize="12sp"
                     android:visibility="gone" />
@@ -312,26 +300,9 @@
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="4dp"
                     android:layout_marginRight="4dp"
-                    android:src="@drawable/icon_idcard_off"
+                    android:src="@drawable/icon_card_off"
                     android:visibility="gone" />
             </RelativeLayout>
-
-            <TextView
-                android:id="@+id/rn_back_not_complete"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginStart="@dimen/margin_l"
-                android:layout_marginLeft="@dimen/margin_l"
-                android:layout_marginTop="@dimen/margin_m"
-                android:layout_marginEnd="@dimen/margin_l"
-                android:layout_marginRight="@dimen/margin_l"
-                android:fontFamily="HwChinese-regular"
-                android:gravity="center_horizontal"
-                android:text="@string/rn_eid_hint_image_not_complete"
-                android:textColor="#FFFA2A2D"
-                android:textSize="12sp"
-                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/rn_eid_hint_ensure_user_info_security_text"
@@ -339,13 +310,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="@dimen/margin_l"
-                android:layout_marginLeft="@dimen/margin_l"
                 android:layout_marginTop="@dimen/margin_m"
                 android:layout_marginEnd="@dimen/margin_l"
-                android:layout_marginRight="@dimen/margin_l"
                 android:fontFamily="HwChinese-regular"
                 android:gravity="center_horizontal"
-                android:text="@string/rn_eid_hint_ensure_user_info_security"
+                android:text="@string/icr_hint_ensure_user_info_security"
                 android:textColor="@color/secondary_text_color"
                 android:textSize="12sp" />
 
@@ -356,20 +325,17 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="24dp"
-                android:layout_marginLeft="24dp"
                 android:layout_marginTop="@dimen/idcard_result_margin"
                 android:layout_marginEnd="24dp"
-                android:layout_marginRight="24dp"
                 android:fontFamily="HwChinese-medium"
-                android:text="@string/rn_eid_take_origin_card"
-                android:textColor="?android:attr/textColorPrimary"
+                android:text="@string/recognition_results"
+                android:textColor="@color/text_color"
                 android:textSize="16sp" />
-            <!-- Add by wfp -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/idcard_margin"
-                android:layout_marginLeft="@dimen/idcard_margin"
                 android:layout_marginTop="@dimen/idcard_result_margin"
                 android:layout_marginEnd="@dimen/idcard_margin"
                 android:layout_marginRight="@dimen/idcard_margin">
@@ -390,7 +356,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="5dp"
-        android:text="@string/idcard_mark"
+        android:text="@string/icr_mark"
         android:textColor="@color/secondary_text_color"
         android:textSize="12sp">
 

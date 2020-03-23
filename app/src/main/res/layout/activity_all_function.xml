@@ -18,14 +18,14 @@
             android:layout_centerVertical="true"
             android:drawableLeft="@drawable/black_back"
             android:text="@string/back"
-            android:padding="15dp"
+            android:padding="@dimen/icon_back_margin"
             android:textColor="@color/secondary_text_color"
-            android:textSize="14sp" />
+            android:textSize="@dimen/toolbar_back_size" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="@dimen/toolbar_height"
         android:orientation="horizontal">
 
         <RelativeLayout
@@ -46,7 +46,7 @@
                     android:layout_centerInParent="true"
                     android:text="@string/image_category"
                     android:textColor="@color/button_background"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/tab_title_text_size" />
 
                 <View
                     android:id="@+id/line_one"
@@ -78,7 +78,7 @@
                     android:layout_centerInParent="true"
                     android:text="@string/language_category"
                     android:textColor="@color/secondary_text_color"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/tab_title_text_size" />
 
                 <View
                     android:id="@+id/line_two"
@@ -109,9 +109,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="@string/other_category"
+                    android:text="@string/text_category"
                     android:textColor="@color/secondary_text_color"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/tab_title_text_size" />
 
                 <View
                     android:id="@+id/line_three"

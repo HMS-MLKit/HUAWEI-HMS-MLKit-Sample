@@ -41,10 +41,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.huawei.hms.mlsdk.document.MLDocument;
+import com.huawei.hms.mlsdk.text.MLText;
 import com.mlkit.sample.R;
 import com.mlkit.sample.activity.dialog.AddPictureDialog;
 import com.mlkit.sample.callback.CouldInfoResultCallBack;
-import com.mlkit.sample.manager.CloudDataManager;
+import com.mlkit.sample.processor.CloudDataProcessor;
 import com.mlkit.sample.util.BitmapUtils;
 import com.mlkit.sample.util.Constant;
 import com.mlkit.sample.views.overlay.ZoomImageView;
@@ -54,8 +56,7 @@ import com.mlkit.sample.transactor.RemoteImageClassificationTransactor;
 import com.mlkit.sample.transactor.RemoteLandmarkTransactor;
 import com.mlkit.sample.transactor.DocumentTextTransactor;
 import com.mlkit.sample.transactor.RemoteTextTransactor;
-import com.huawei.hms.mlsdk.document.MLDocument;
-import com.huawei.hms.mlsdk.text.MLText;
+
 
 import java.lang.ref.WeakReference;
 
@@ -94,7 +95,7 @@ public final class RemoteDetectionActivity extends BaseActivity implements OnCli
 
     private boolean flag = true;
 
-    private CloudDataManager cloudDataManager;
+    private CloudDataProcessor cloudDataProcessor;
 
     private AddPictureDialog addPictureDialog;
 
@@ -186,6 +187,7 @@ public final class RemoteDetectionActivity extends BaseActivity implements OnCli
         this.getImageButton = this.findViewById(R.id.getImageButton);
         this.getImageButton.setOnClickListener(this);
         this.changeImageView.setOnDoubleTapListener(this.onDoubleTapListener);
+        this.cloudDataProcessor = new CloudDataProcessor();
         this.createImageTransactor();
         this.createDialog();
         this.isLandScape = (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE);
@@ -236,7 +238,7 @@ public final class RemoteDetectionActivity extends BaseActivity implements OnCli
     }
 
     private void createDialog(){
-        this.addPictureDialog = new AddPictureDialog(this);
+        this.addPictureDialog = new AddPictureDialog(this, AddPictureDialog.TYPE_NORMAL);
         final Intent intent = new Intent(RemoteDetectionActivity.this, RemoteDetectionActivity.class);
         intent.putExtra(Constant.MODEL_TYPE, Constant.CLOUD_IMAGE_CLASSIFICATION);
         this.addPictureDialog.setClickListener(new AddPictureDialog.ClickListener() {
@@ -248,6 +250,11 @@ public final class RemoteDetectionActivity extends BaseActivity implements OnCli
             @Override
             public void selectImage() {
                 RemoteDetectionActivity.this.selectLocalImage();
+            }
+
+            @Override
+            public void doExtend() {
+
             }
         });
     }
@@ -407,10 +414,12 @@ public final class RemoteDetectionActivity extends BaseActivity implements OnCli
             RemoteDetectionActivity.this.changeImageView.setVisibility(View.VISIBLE);
             RemoteDetectionActivity.this.bitmapCopy = Bitmap.createBitmap(originalCameraImage).copy(Bitmap.Config.ARGB_8888, true);
             RemoteDetectionActivity.this.bitmapCopyForTap = Bitmap.createBitmap(originalCameraImage).copy(Bitmap.Config.ARGB_8888, true);
-            RemoteDetectionActivity.this.cloudDataManager = new CloudDataManager(graphicOverlay, RemoteDetectionActivity.this.bitmapCopyForTap, text);
+            RemoteDetectionActivity.this.cloudDataProcessor.setGraphicOverlay(graphicOverlay);
+            RemoteDetectionActivity.this.cloudDataProcessor.setBitmap(RemoteDetectionActivity.this.bitmapCopyForTap);
+            RemoteDetectionActivity.this.cloudDataProcessor.setText(text);
             RemoteDetectionActivity.this.changeImageView.setImageBitmap(RemoteDetectionActivity.this.bitmapCopy);
             Canvas canvas = new Canvas(RemoteDetectionActivity.this.bitmapCopy);
-            RemoteDetectionActivity.this.cloudDataManager.drawView(canvas, true);
+            RemoteDetectionActivity.this.cloudDataProcessor.drawView(canvas, true);
         }
 
         @Override
@@ -420,14 +429,14 @@ public final class RemoteDetectionActivity extends BaseActivity implements OnCli
             Bitmap bitmap = Bitmap.createBitmap(originalCameraImage).copy(Bitmap.Config.ARGB_8888, true);
             RemoteDetectionActivity.this.changeImageView.setImageBitmap(bitmap);
             Canvas canvas = new Canvas(bitmap);
-            RemoteDetectionActivity.this.cloudDataManager.drawCloudDocText(text, canvas);
+            RemoteDetectionActivity.this.cloudDataProcessor.drawCloudDocText(text, canvas);
         }
     }
 
     private class MyOnDoubleTapListener implements GestureDetector.OnDoubleTapListener {
         @Override
         public boolean onSingleTapConfirmed(MotionEvent motionEvent) {
-            if (!RemoteDetectionActivity.this.selectedMode.equals(Constant.CLOUD_TEXT_DETECTION)) {
+            if (!RemoteDetectionActivity.this.selectedMode.equals(Constant.CLOUD_TEXT_DETECTION) ) {
                 Log.d(RemoteDetectionActivity.TAG, "selectedMode:" + RemoteDetectionActivity.this.selectedMode);
                 return false;
             }
@@ -439,7 +448,7 @@ public final class RemoteDetectionActivity extends BaseActivity implements OnCli
             TransitionDrawable transitionDrawable;
             if (RemoteDetectionActivity.this.flag) {
                 Canvas canvas = new Canvas(RemoteDetectionActivity.this.bitmapCopyForTap);
-                RemoteDetectionActivity.this.cloudDataManager.drawView(canvas, false);
+                RemoteDetectionActivity.this.cloudDataProcessor.drawView(canvas, false);
                 transitionDrawable = new TransitionDrawable(new Drawable[]{bitmap_drawable, bitmapcopy_drawable});
             } else {
                 transitionDrawable = new TransitionDrawable(new Drawable[]{bitmapcopy_drawable, bitmap_drawable});

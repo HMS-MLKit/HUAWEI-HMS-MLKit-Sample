@@ -7,31 +7,12 @@
     android:fitsSystemWindows="true"
     android:keepScreenOn="true">
 
-
-    <!--    <LinearLayout-->
-    <!--        android:layout_width="45dp"-->
-    <!--        android:layout_height="45dp"-->
-    <!--        android:layout_below="@+id/toolbar"-->
-    <!--        android:id="@+id/linear_save"-->
-    <!--        android:layout_alignParentRight="true"-->
-    <!--        android:background="@color/white">-->
-    <!--ImageView
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_gravity="center"
-        android:src="@drawable/icons_save"
-        android:layout_below="@+id/toolbar"
-        android:layout_alignParentRight="true"
-        android:tint="@color/black">
-    </ImageView-->
-    <!--    </LinearLayout>-->
-
-
     <RelativeLayout
-        android:layout_alignParentTop="true"
-        android:layout_above="@+id/linear_views"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/linear_views"
+        android:layout_alignParentTop="true">
+
         <ImageView
             android:id="@+id/image_preview"
             android:layout_width="wrap_content"
@@ -53,46 +34,20 @@
 
     <ImageButton
         android:id="@+id/back"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/icon_back_width"
+        android:layout_height="@dimen/icon_back_height"
+        android:layout_marginLeft="@dimen/icon_back_margin"
+        android:layout_marginTop="@dimen/icon_back_margin"
         android:background="@drawable/button_circle_background"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="15dp"
         android:src="@drawable/black_back" />
-
 
     <LinearLayout
         android:id="@+id/linear_views"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#66ffffff"
+        android:background="@color/white"
         android:orientation="vertical">
-
-        <RelativeLayout
-            android:id="@+id/imageChooser"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_above="@+id/line4"
-            android:visibility="gone">
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="15dp"
-                android:src="@mipmap/album_black"></ImageView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="45dp"
-                android:gravity="center"
-                android:text="选择图片"
-                android:textColor="@color/secondary_text_color"
-                android:textSize="11sp"></TextView>
-        </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/objectChooser"
@@ -107,8 +62,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="15dp"
                 android:text="@string/target_object"
-                android:textColor="@color/black_color"
-                android:textSize="13sp" />
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/dialog_text_size" />
 
             <HorizontalScrollView
                 android:id="@+id/scroll_objects"
@@ -141,8 +96,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="15dp"
                 android:text="@string/color"
-                android:textColor="@color/black_color"
-                android:textSize="13sp" />
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/dialog_text_size" />
 
             <com.mlkit.sample.views.color.ColorSelector
                 android:id="@+id/color_selector"

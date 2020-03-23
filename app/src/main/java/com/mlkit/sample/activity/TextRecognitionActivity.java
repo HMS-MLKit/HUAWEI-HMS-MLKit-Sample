@@ -42,7 +42,7 @@ import com.mlkit.sample.camera.CameraConfiguration;
 import com.mlkit.sample.camera.LensEngine;
 import com.mlkit.sample.camera.LensEnginePreview;
 import com.mlkit.sample.util.BitmapUtils;
-import com.mlkit.sample.manager.LocalDataManager;
+import com.mlkit.sample.processor.LocalDataProcessor;
 import com.mlkit.sample.transactor.LocalTextTransactor;
 import com.mlkit.sample.util.Constant;
 import com.mlkit.sample.util.SharedPreferencesUtil;
@@ -255,7 +255,7 @@ public final class TextRecognitionActivity extends BaseActivity
     }
 
     private void createAddPictureDialog(){
-        this.addPictureDialog = new AddPictureDialog(this);
+        this.addPictureDialog = new AddPictureDialog(this, AddPictureDialog.TYPE_NORMAL);
         final Intent intent = new Intent(TextRecognitionActivity.this, RemoteDetectionActivity.class);
         intent.putExtra(Constant.MODEL_TYPE, Constant.CLOUD_TEXT_DETECTION);
         this.addPictureDialog.setClickListener(new AddPictureDialog.ClickListener() {
@@ -269,6 +269,11 @@ public final class TextRecognitionActivity extends BaseActivity
             public void selectImage() {
                 intent.putExtra(Constant.ADD_PICTURE_TYPE, Constant.TYPE_SELECT_IMAGE);
                 TextRecognitionActivity.this.startActivity(intent);
+            }
+
+            @Override
+            public void doExtend() {
+
             }
         });
     }
@@ -375,15 +380,15 @@ public final class TextRecognitionActivity extends BaseActivity
 
     private void takePicture() {
         this.zoomImageLayout.setVisibility(View.VISIBLE);
-        LocalDataManager localDataManager = new LocalDataManager();
-        localDataManager.setLandScape(this.isLandScape);
+        LocalDataProcessor localDataProcessor = new LocalDataProcessor();
+        localDataProcessor.setLandScape(this.isLandScape);
         this.bitmap = BitmapUtils.getBitmap(this.localTextTransactor.getTransactingImage(), this.localTextTransactor.getTransactingMetaData());
 
-        float previewWidth = localDataManager.getMaxWidthOfImage(this.localTextTransactor.getTransactingMetaData());
-        float previewHeight = localDataManager.getMaxHeightOfImage(this.localTextTransactor.getTransactingMetaData());
+        float previewWidth = localDataProcessor.getMaxWidthOfImage(this.localTextTransactor.getTransactingMetaData());
+        float previewHeight = localDataProcessor.getMaxHeightOfImage(this.localTextTransactor.getTransactingMetaData());
         if (this.isLandScape) {
-            previewWidth = localDataManager.getMaxHeightOfImage(this.localTextTransactor.getTransactingMetaData());
-            previewHeight = localDataManager.getMaxWidthOfImage(this.localTextTransactor.getTransactingMetaData());
+            previewWidth = localDataProcessor.getMaxHeightOfImage(this.localTextTransactor.getTransactingMetaData());
+            previewHeight = localDataProcessor.getMaxWidthOfImage(this.localTextTransactor.getTransactingMetaData());
         }
         this.bitmapCopy = Bitmap.createBitmap(this.bitmap).copy(Bitmap.Config.ARGB_8888, true);
 
@@ -392,11 +397,11 @@ public final class TextRecognitionActivity extends BaseActivity
         float max = Math.max(previewWidth, previewHeight);
 
         if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            localDataManager.setCameraInfo(this.graphicOverlay, canvas, min, max);
+            localDataProcessor.setCameraInfo(this.graphicOverlay, canvas, min, max);
         } else {
-            localDataManager.setCameraInfo(this.graphicOverlay, canvas, max, min);
+            localDataProcessor.setCameraInfo(this.graphicOverlay, canvas, max, min);
         }
-        localDataManager.drawHmsMLVisionText(canvas, this.localTextTransactor.getLastResults().getBlocks());
+        localDataProcessor.drawHmsMLVisionText(canvas, this.localTextTransactor.getLastResults().getBlocks());
         this.zoomImageView.setImageBitmap(this.bitmapCopy);
     }
 }

@@ -75,7 +75,7 @@ public final class ImageClassificationActivity extends BaseActivity
         if (Camera.getNumberOfCameras() == 1) {
             this.facingSwitch.setVisibility(View.GONE);
         }
-        this.crateDialog();
+        this.createDialog();
         this.createLensEngine();
         this.startLensEngine();
         this.setStatusBar();
@@ -90,8 +90,8 @@ public final class ImageClassificationActivity extends BaseActivity
         }
     }
 
-    private void crateDialog(){
-        this.addPictureDialog = new AddPictureDialog(this);
+    private void createDialog(){
+        this.addPictureDialog = new AddPictureDialog(this, AddPictureDialog.TYPE_NORMAL);
         final Intent intent = new Intent(ImageClassificationActivity.this, RemoteDetectionActivity.class);
         intent.putExtra(Constant.MODEL_TYPE, Constant.CLOUD_IMAGE_CLASSIFICATION);
         this.addPictureDialog.setClickListener(new AddPictureDialog.ClickListener() {
@@ -105,6 +105,11 @@ public final class ImageClassificationActivity extends BaseActivity
             public void selectImage() {
                 intent.putExtra(Constant.ADD_PICTURE_TYPE, Constant.TYPE_SELECT_IMAGE);
                 ImageClassificationActivity.this.startActivity(intent);
+            }
+
+            @Override
+            public void doExtend() {
+
             }
         });
     }

@@ -22,27 +22,26 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.mlkit.sample.R;
+import com.mlkit.sample.activity.ProductVisionSearchActivity;
 import com.mlkit.sample.activity.RemoteDetectionActivity;
 import com.mlkit.sample.activity.FaceDetectionActivity;
-import com.mlkit.sample.activity.IDCardRecognitionActivity;
 import com.mlkit.sample.activity.ImageClassificationActivity;
 import com.mlkit.sample.activity.ObjectDetectionActivity;
-import com.mlkit.sample.activity.TextRecognitionActivity;
 import com.mlkit.sample.activity.entity.GridViewItem;
 import com.mlkit.sample.activity.imgseg.ImageSegmentationActivity;
 import com.mlkit.sample.util.Constant;
 
 import java.util.ArrayList;
 
-public class PictureCategoryFragment extends BaseFragment {
+public class ImageCategoryFragment extends BaseFragment {
 
     private static final int[] image_icons = {R.drawable.icon_segmentation, R.drawable.icon_face,
             R.drawable.icon_shopping, R.drawable.icon_object, R.drawable.icon_classification,
-            R.drawable.icon_landmark, R.drawable.icon_text, R.drawable.icon_idcard};
+            R.drawable.icon_landmark};
 
     private static final int[] image_titles = {R.string.image_segmentation, R.string.face_detection,
             R.string.photographed_shopping, R.string.object_detection, R.string.image_classification,
-            R.string.landmark, R.string.text_detection, R.string.idcard_recognition};
+            R.string.landmark};
 
     @Override
     protected void initClickEvent(View view) {
@@ -57,44 +56,35 @@ public class PictureCategoryFragment extends BaseFragment {
                 switch (position) {
                     case 0:
                         // Image Segmentation
-                        PictureCategoryFragment.this.startActivity(
-                                new Intent(PictureCategoryFragment.this.getActivity(), ImageSegmentationActivity.class));
+                        ImageCategoryFragment.this.startActivity(
+                                new Intent(ImageCategoryFragment.this.getActivity(), ImageSegmentationActivity.class));
                         break;
                     case 1:
                         // Face detection
-                        PictureCategoryFragment.this.startActivity(
-                                new Intent(PictureCategoryFragment.this.getActivity(), FaceDetectionActivity.class));
+                        ImageCategoryFragment.this.startActivity(
+                                new Intent(ImageCategoryFragment.this.getActivity(), FaceDetectionActivity.class));
                         break;
                     case 2:
                         // Product Visual Search
-                        Toast.makeText(PictureCategoryFragment.this.getActivity(), PictureCategoryFragment.this.getText(R.string.coming_soon), Toast.LENGTH_SHORT).show();
+                        ImageCategoryFragment.this.startActivity(
+                                new Intent(ImageCategoryFragment.this.getActivity(), ProductVisionSearchActivity.class));
                         break;
                     case 3:
                         // Object detection and tracking
-                        PictureCategoryFragment.this.startActivity(
-                                new Intent(PictureCategoryFragment.this.getActivity(), ObjectDetectionActivity.class));
+                        ImageCategoryFragment.this.startActivity(
+                                new Intent(ImageCategoryFragment.this.getActivity(), ObjectDetectionActivity.class));
                         break;
                     case 4:
                         // Image classification
-                        PictureCategoryFragment.this.startActivity(
-                                new Intent(PictureCategoryFragment.this.getActivity(), ImageClassificationActivity.class));
+                        ImageCategoryFragment.this.startActivity(
+                                new Intent(ImageCategoryFragment.this.getActivity(), ImageClassificationActivity.class));
                         break;
                     case 5:
                         // Landmark recognition
                         this.intent =
-                                new Intent(PictureCategoryFragment.this.getActivity(), RemoteDetectionActivity.class);
+                                new Intent(ImageCategoryFragment.this.getActivity(), RemoteDetectionActivity.class);
                         this.intent.putExtra(Constant.MODEL_TYPE, Constant.CLOUD_LANDMARK_DETECTION);
-                        PictureCategoryFragment.this.startActivity(this.intent);
-                        break;
-                    case 6:
-                        // Text recognition
-                        PictureCategoryFragment.this.startActivity(
-                                new Intent(PictureCategoryFragment.this.getActivity(), TextRecognitionActivity.class));
-                        break;
-                    case 7:
-                        // Card recognition
-                        PictureCategoryFragment.this.startActivity(
-                                new Intent(PictureCategoryFragment.this.getActivity(), IDCardRecognitionActivity.class));
+                        ImageCategoryFragment.this.startActivity(this.intent);
                         break;
                     default:
                         break;
@@ -107,8 +97,8 @@ public class PictureCategoryFragment extends BaseFragment {
     protected void initData() {
         this.mDataList = new ArrayList<GridViewItem>();
         GridViewItem item;
-        for (int i = 0; i < PictureCategoryFragment.image_icons.length; i++) {
-            item = new GridViewItem(PictureCategoryFragment.image_icons[i], PictureCategoryFragment.image_titles[i]);
+        for (int i = 0; i < ImageCategoryFragment.image_icons.length; i++) {
+            item = new GridViewItem(ImageCategoryFragment.image_icons[i], ImageCategoryFragment.image_titles[i]);
             this.mDataList.add(item);
         }
     }

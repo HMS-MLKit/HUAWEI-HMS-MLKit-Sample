@@ -24,17 +24,17 @@ It includes both camera capture video for real-time detection and still image re
 
 The following are screenshots of the apk running interface. The first is the main page, the second is the segmentation video stream segmentation interface, and the third is the portrait segmentation function demo.
 <table><tr>
-<td><img src="https://github.com/HMS-MLKit/HUAWEI-HMS-MLKit-Sample/blob/master/resources/main.jpg" width=200 title="main page" border=2></td>
-<td><img src="https://github.com/HMS-MLKit/HUAWEI-HMS-MLKit-Sample/blob/master/resources/imageSegmentMain.jpg" width=200 border=2></td>
-<td><img src="https://github.com/HMS-MLKit/HUAWEI-HMS-MLKit-Sample/blob/master/resources/imageSegmentVideo.gif" width=200 border=2></td>
+<td><img src="https://github.com/HMS-MLKit/HUAWEI-HMS-MLKit-Sample/blob/master/MLKit-Sample/resources/main.jpg" width=200 title="main page" border=2></td>
+<td><img src="https://github.com/HMS-MLKit/HUAWEI-HMS-MLKit-Sample/blob/master/MLKit-Sample/resources/imageSegmentMain.jpg" width=200 border=2></td>
+<td><img src="https://github.com/HMS-MLKit/HUAWEI-HMS-MLKit-Sample/blob/master/MLKit-Sample/resources/imageSegmentVideo.gif" width=200 border=2></td>
 </tr></table>
 
 The first is the interface for translation and language detection, the second is a demonstration of object detection and tracking, and the third is a text recognition demonstration.
 
 <table><tr>
-<td><img src="https://github.com/HMS-MLKit/HUAWEI-HMS-MLKit-Sample/blob/master/resources/language.jpg" width=200 border=2></td>
-<td><img src="https://github.com/HMS-MLKit/HUAWEI-HMS-MLKit-Sample/blob/master/resources/object.jpg" width=200 border=2></td>
-<td><img src="https://github.com/HMS-MLKit/HUAWEI-HMS-MLKit-Sample/blob/master/resources/text.jpg" width=200 border=2></td>
+<td><img src="https://github.com/HMS-MLKit/HUAWEI-HMS-MLKit-Sample/blob/master/MLKit-Sample/resources/language.jpg" width=200 border=2></td>
+<td><img src="https://github.com/HMS-MLKit/HUAWEI-HMS-MLKit-Sample/blob/master/MLKit-Sample/resources/object.jpg" width=200 border=2></td>
+<td><img src="https://github.com/HMS-MLKit/HUAWEI-HMS-MLKit-Sample/blob/master/MLKit-Sample/resources/text.jpg" width=200 border=2></td>
 </tr></table>
 
 If you want to use cloud analyzer, such as cloud text analyzer(document and cloud text), cloud image classification analyzer, landmark analyzer, translation, language detection,

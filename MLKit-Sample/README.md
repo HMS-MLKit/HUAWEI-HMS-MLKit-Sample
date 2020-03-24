@@ -158,4 +158,4 @@ Sample code majors activitys as follows:
       - LensEngine：camera that generates continuous image data for detection.
 
 ##  License
-HUAWEI-HMS-MLKit-Sample is licensed under the [Apache License, version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
+HUAWEI-HMS-MLKit-Sample/MLKit-Sample is licensed under the [Apache License, version 2.0](http://www.apache.org/licenses/LICENSE-2.0).

@@ -1,5 +1,3 @@
-package com.mlkit.sample.camera;
-
 /*
  * Copyright (C) The Android Open Source Project
  *
@@ -18,6 +16,8 @@ package com.mlkit.sample.camera;
  *   2019.12.15-Changed modify to use LensEngine
  *                  Huawei Technologies Co., Ltd.
  */
+
+package com.mlkit.sample.camera;
 
 import android.content.Context;
 import android.content.res.Configuration;

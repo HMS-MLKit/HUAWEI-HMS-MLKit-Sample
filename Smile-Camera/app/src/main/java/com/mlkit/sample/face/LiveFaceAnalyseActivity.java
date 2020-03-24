@@ -1,4 +1,3 @@
-package com.mlkit.sample.face;
 /*
  * Copyright 2020. Huawei Technologies Co., Ltd. All rights reserved.
  *
@@ -14,6 +13,8 @@ package com.mlkit.sample.face;
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
+
+package com.mlkit.sample.face;
 
 import android.Manifest;
 import android.content.Context;

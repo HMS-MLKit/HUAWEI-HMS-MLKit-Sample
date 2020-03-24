@@ -22,7 +22,7 @@ import com.mlkit.sample.views.overlay.GraphicOverlay;
 import com.huawei.hms.mlsdk.document.MLDocument;
 import com.huawei.hms.mlsdk.text.MLText;
 
-public interface CouldInfoResultCallBack {
+public interface CloudInfoResultCallBack {
     void onSuccessForText(Bitmap originalCameraImage, MLText text, GraphicOverlay graphicOverlay);
 
     void onSuccessForDoc(Bitmap originalCameraImage, MLDocument text, GraphicOverlay graphicOverlay);

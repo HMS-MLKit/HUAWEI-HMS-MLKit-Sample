@@ -23,7 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.huawei.hmf.tasks.Task;
-import com.mlkit.sample.callback.CouldInfoResultCallBack;
+import com.mlkit.sample.callback.CloudInfoResultCallBack;
 import com.mlkit.sample.camera.FrameMetadata;
 import com.mlkit.sample.util.Constant;
 import com.mlkit.sample.views.overlay.GraphicOverlay;
@@ -39,7 +39,7 @@ public class RemoteTextTransactor extends BaseTransactor<MLText> {
 
     private final MLTextAnalyzer detector;
 
-    private CouldInfoResultCallBack callBack;
+    private CloudInfoResultCallBack callBack;
 
     private Handler handler;
 
@@ -56,7 +56,7 @@ public class RemoteTextTransactor extends BaseTransactor<MLText> {
         return this.detector.asyncAnalyseFrame(image);
     }
 
-    public void addCouldTextResultCallBack(CouldInfoResultCallBack callBack) {
+    public void addCouldTextResultCallBack(CloudInfoResultCallBack callBack) {
         this.callBack = callBack;
     }
 

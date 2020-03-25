@@ -11,4 +11,4 @@ cp MLKit-Sample/app/sample-agconnect-services.json Smile-Camera/app/agconnect-se
 echo "Copy agc file end."
 
 # Build
-./gradlew clean build
+./gradlew build

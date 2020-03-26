@@ -43,7 +43,7 @@ import android.widget.Toast;
 
 import com.mlkit.sample.R;
 import com.mlkit.sample.activity.dialog.AddPictureDialog;
-import com.mlkit.sample.callback.CouldInfoResultCallBack;
+import com.mlkit.sample.callback.CloudInfoResultCallBack;
 import com.mlkit.sample.manager.CloudDataManager;
 import com.mlkit.sample.util.BitmapUtils;
 import com.mlkit.sample.util.Constant;
@@ -98,7 +98,7 @@ public final class RemoteDetectionActivity extends BaseActivity implements OnCli
 
     private AddPictureDialog addPictureDialog;
 
-    private CouldInfoResultCallBack textResultCallBack = new MyCouldInfoResultCallBack();
+    private CloudInfoResultCallBack textResultCallBack = new MyCloudInfoResultCallBack();
 
     private GestureDetector.OnDoubleTapListener onDoubleTapListener = new MyOnDoubleTapListener();
 
@@ -397,7 +397,7 @@ public final class RemoteDetectionActivity extends BaseActivity implements OnCli
         }
     }
 
-    class MyCouldInfoResultCallBack implements CouldInfoResultCallBack {
+    class MyCloudInfoResultCallBack implements CloudInfoResultCallBack {
         @Override
         public void onSuccessForText(Bitmap originalCameraImage, MLText text, GraphicOverlay graphicOverlay) {
             if (text == null) {

@@ -38,7 +38,7 @@ The first is the interface for translation and language detection, the second is
 </tr></table>
 
 If you want to use cloud analyzer, such as cloud text analyzer(document and cloud text), cloud image classification analyzer, landmark analyzer, translation, language detection,
-you need to apply for an agconnect-services.json file in the developer alliance(https://developer.huawei.com/consumer/en/doc/development/HMS-Guides/ml-preparations4), replacing the sample-agconnect-services.json in the project.
+you need to apply for an agconnect-services.json file in the developer alliance(https://developer.huawei.com/consumer/en/doc/development/HMS-Guides/ml-preparations-4), replacing the sample-agconnect-services.json in the project.
 
 Attention: The package name in this project can not be used to apply for agconnect-services.json. You can use a custom package name to apply for agconnect-services.json.
 

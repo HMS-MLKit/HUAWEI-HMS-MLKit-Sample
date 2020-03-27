@@ -1,3 +1,4 @@
 include 'ID-Photo-DIY:app'
 include 'MLKit-Sample:app'
 include 'Smile-Camera:app'
+include 'Photo-Translate:app'

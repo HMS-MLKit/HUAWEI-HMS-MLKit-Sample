@@ -176,6 +176,7 @@ public class RemoteTranslateActivity extends AppCompatActivity {
         try {
             fis = new FileInputStream(path);
             this.originBitmap = BitmapFactory.decodeStream(fis);
+            this.originBitmap = this.originBitmap.copy(Bitmap.Config.ARGB_4444, true);
             this.preview.setImageBitmap(this.originBitmap);
         } catch (IOException error) {
             error.printStackTrace();
@@ -254,6 +255,7 @@ public class RemoteTranslateActivity extends AppCompatActivity {
     }
 
     private void remoteDetectSuccess(MLText mlTexts) {
+        this.sourceText = "";
         List<MLText.Block> blocks = mlTexts.getBlocks();
         List<MLText.TextLine> lines = new ArrayList<>();
         for (MLText.Block block : blocks) {

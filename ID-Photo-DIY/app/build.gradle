@@ -5,11 +5,20 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.mlkit.sample.idphoto"
-        minSdkVersion 28
+        minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    // Support simulator.
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'x86', 'armeabi-v7a','x86_64'
+            universalApk true
+        }
     }
     buildTypes {
         release {

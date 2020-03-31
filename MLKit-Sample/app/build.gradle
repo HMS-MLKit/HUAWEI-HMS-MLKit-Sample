@@ -11,6 +11,15 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    // Support simulator.
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'x86', 'armeabi-v7a','x86_64'
+            universalApk true
+        }
+    }
     signingConfigs {
         release {
                 storeFile file("./mlkitSampleTest.jks")

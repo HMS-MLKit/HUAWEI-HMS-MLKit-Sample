@@ -282,8 +282,8 @@ public class RemoteTranslateActivity extends AppCompatActivity {
     private void remoteDisplaySuccess(String test) {
         String[] sourceLines = sourceText.split("\n");
         String[] drtLines = test.split("\n");
-        for (int i = 0; i < sourceLines.length; i++) {
-            this.textView.append(sourceLines[i] + "-> " +drtLines[i] + "\n");
+        for (int i = 0; i < sourceLines.length && i < drtLines.length; i++) {
+            this.textView.append(sourceLines[i] + "-> " + drtLines[i] + "\n");
         }
         Toast.makeText(RemoteTranslateActivity.this.getApplicationContext(), R.string.translate_success, Toast.LENGTH_SHORT).show();
     }

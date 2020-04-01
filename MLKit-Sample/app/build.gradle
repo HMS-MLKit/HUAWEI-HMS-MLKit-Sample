@@ -20,29 +20,11 @@ android {
             universalApk true
         }
     }
-    signingConfigs {
-        release {
-                storeFile file("./mlkitSampleTest.jks")
-                storePassword '111111'
-                keyAlias 'mlkit'
-                keyPassword '111111'
-                v2SigningEnabled false
-        }
-    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
         }
-    }
-    repositories {
-        flatDir {
-            dirs 'libs'
-        }
-    }
-    lintOptions {
-        disable 'GoogleAppIndexingWarning'
     }
     aaptOptions {
         noCompress "mslite"

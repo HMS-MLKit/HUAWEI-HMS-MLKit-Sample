@@ -12,7 +12,7 @@
 ## Introduction
 The sample code mainly shows the use of Huawei Machine Learning SDK.
 
-It uses text recognition and translation of Huawei Machine Learning SDK. It uses still image of text to translate words in the photo into the language you want. Currently, the following languages are supported: Simplified Chinese (zh), English (en), French (fr), Arabic (ar), Thai (th), Spanish (es), and Turkish (tr). 
+It uses text recognition and translation of Huawei Machine Learning SDK. It uses still image of text to translate words in the photo into the language you want. Currently, the following languages are supported: Simplified Chinese (zh), English (en), French (fr), Arabic (ar), Thai (th), Spanish (es), and Turkish (tr).
 
 You need to use cloud analyzer, such as cloud text analyzer and translator.
 So you need to apply for an agconnect-services.json file in the developer alliance(https://developer.huawei.com/consumer/en/doc/development/HMS-Guides/ml-preparations-4), replacing the sample-agconnect-services.json in the project.
@@ -26,8 +26,8 @@ You only need to modify the applicationId in app Photo-Translate
 ## Configuration
 To use functions provided by packages in examples, You need to add the dependencies to the build.gradle file as follows:
 
-    implementation 'com.huawei.hms:ml-computer-vision:1.0.2.300'
-    implementation 'com.huawei.hms:ml-computer-translate:1.0.2.300'
+    implementation 'com.huawei.hms:ml-computer-vision-cloud:1.0.3.300'
+    implementation 'com.huawei.hms:ml-computer-translate:1.0.3.300'
 
 ## Supported Environments
 android 4.4 or a later version is recommended.
@@ -51,7 +51,7 @@ Sample code majors activitys as follows:
    2. Translation
 	  - MLTranslatorFactory.getInstance().getRemoteTranslator(settings)：Create a translator.
 	  - MLRemoteTranslator.asyncTranslate(sourceText): Parse out text from source language to target language, sourceText indicates the language to be detected.
-   
+
 
 ##  License
 HUAWEI-HMS-MLKit-Sample/Photo-Translate is licensed under the [Apache License, version 2.0](http://www.apache.org/licenses/LICENSE-2.0).

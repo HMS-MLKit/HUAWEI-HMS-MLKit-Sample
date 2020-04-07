@@ -47,26 +47,24 @@ You only need to modify the applicationId in app HUAWEI-HMS-MLKit-Sample
 
 
 ## Installation
-You can find the app-release.apk in code->releases->app-release.apk, you can download the APK, copy it to your phone, install and experience it. if you have installed adb on your computer, open the cmd window and install the application on your phone through adb install app-release. apk.
-
 Download the HUAWEI-HMS-MLKit-Sample code and open in Android Studio, after ensuring that your device is connected to the network, obtain the apk through build.
 
 
 ## Configuration
 To use functions provided by packages in examples, You need to add the dependencies to the build.gradle file as follows:
 
-    implementation 'com.huawei.hms:ml-computer-vision-ocr-cn-model:1.0.2.300'
-    implementation 'com.huawei.hms:ml-computer-vision-ocr-jk-model:1.0.2.300'
-    implementation 'com.huawei.hms:ml-computer-vision-ocr-latin-model:1.0.2.300'
-    implementation 'com.huawei.hms:ml-computer-vision-image-classification-model:1.0.2.300'
-    implementation 'com.huawei.hms:ml-computer-vision-object-detection-model:1.0.2.300'
-    implementation 'com.huawei.hms:ml-computer-vision-face-recognition-model:1.0.2.300'
-    implementation 'com.huawei.hms:ml-computer-card-icr-cn-model:1.0.2.300'
-    implementation 'com.huawei.hms:ml-computer-vision-image-segmentation-model:1.0.2.300'
-    implementation 'com.huawei.hms:ml-computer-vision:1.0.2.300'
-    implementation 'com.huawei.hms:ml-computer-translate:1.0.2.300'
-    implementation 'com.huawei.hms:ml-computer-card-icr-cn-plugin:1.0.2.300'
-    implementation 'com.huawei.hms:ml-computer-language-detection:1.0.2.300'
+    implementation 'com.huawei.hms:ml-computer-vision-ocr-cn-model:1.0.3.300'
+    implementation 'com.huawei.hms:ml-computer-vision-ocr-jk-model:1.0.3.300'
+    implementation 'com.huawei.hms:ml-computer-vision-ocr-latin-model:1.0.3.300'
+    implementation 'com.huawei.hms:ml-computer-vision-image-classification-model:1.0.3.300'
+    implementation 'com.huawei.hms:ml-computer-vision-object-detection-model:1.0.3.300'
+    implementation 'com.huawei.hms:ml-computer-vision-face-recognition-model:1.0.3.300'
+    implementation 'com.huawei.hms:ml-computer-card-icr-cn-model:1.0.3.300'
+    implementation 'com.huawei.hms:ml-computer-vision-image-segmentation-model:1.0.3.300'
+    implementation 'com.huawei.hms:ml-computer-vision:1.0.3.300'
+    implementation 'com.huawei.hms:ml-computer-translate:1.0.3.300'
+    implementation 'com.huawei.hms:ml-computer-card-icr-cn-plugin:1.0.3.300'
+    implementation 'com.huawei.hms:ml-computer-language-detection:1.0.3.300'
 
 ## Supported Environments
 android 4.4 or a later version is recommended.
@@ -81,26 +79,24 @@ Sample code majors activitys as follows:
    2. Choose LoadPhotoActivity to see a demo of the following:
 	  - Image Segmentation(Segments the pixels representing specific elements (such as human body, plant, and sky) from an image)
    3. Choose IDCardRecognitionActivity to see a demo of the following:
-      - Product Visual Search(Recognizes product information such as the product category in an image)
-   4. Choose IDIdentificationActivity to see a demo of the following:
       - Chinese IDCard Recognition(Recognizes text in images of second-generation ID cards of Chinese mainland residents)
-   5. Choose ObjectDetectionActivity to see a demo of the following:
+   4. Choose ObjectDetectionActivity to see a demo of the following:
       - Object detection (Detects and tracks an object in images or video streams)
-   6. Choose ImageClassificationActivity to see a demo of the following:
+   5. Choose ImageClassificationActivity to see a demo of the following:
       - Image Classification(Classifies entities in images, such as people, objects, environments, activities, or artwork to define image themes and application scenarios)
-   7. Choose FaceDetectionActivity to see a demo of the following:
+   6. Choose FaceDetectionActivity to see a demo of the following:
       - Face detection (Detects and tracks faces)
       - Camera front and back flip
-   8. Choose TranslatorActivity to see a demo of the following:
+   7. Choose TranslatorActivity to see a demo of the following:
       - Language translation function
       - Automatic language monitoring for input text
       - Multi language support
-   9. Choose TextRecognitionActivity to see a demo of the following:
+   8. Choose TextRecognitionActivity to see a demo of the following:
       - Dynamic and real-time text recognition
       - Take photos after identifying words
       - Generated photos can be zoomed
       - It can load photos in the local album and parse the text in the photos (Cloud)
-   10. Choose CloudDetectionActivity to see a demo of the following:
+   9. Choose CloudDetectionActivity to see a demo of the following:
       - Document text recognition (Cloud)
       - Landmark recognition (Cloud)
 

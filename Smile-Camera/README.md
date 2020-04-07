@@ -18,8 +18,8 @@ It uses face detection function of Huawei Machine Learning SDK. It uses real-tim
 ## Configuration
 To use functions provided by packages in examples, You need to add the dependencies to the build.gradle file as follows:
 
-    implementation 'com.huawei.hms:ml-computer-vision-face-recognition-model:1.0.2.300'
-    implementation 'com.huawei.hms:ml-computer-vision:1.0.2.300'
+    implementation 'com.huawei.hms:ml-computer-vision-face-recognition-model:1.0.3.300'
+    implementation 'com.huawei.hms:ml-computer-vision-face:1.0.3.300'
 
 ## Supported Environments
 android 4.4 or a later version is recommended.

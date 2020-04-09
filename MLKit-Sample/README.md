@@ -51,20 +51,9 @@ Download the HUAWEI-HMS-MLKit-Sample code and open in Android Studio, after ensu
 
 
 ## Configuration
-To use functions provided by packages in examples, You need to add the dependencies to the build.gradle file as follows:
+To use functions provided by packages in examples, You need to add the dependencies to the build.gradle. 
+You can refer to MLKit-Sample / module-text / build.gradle to introduce SDK for text services and related capability packages, and you can refer to MLKit-Sample / module-vision / build.gradle to introduce SDK for image services and related capability packages.
 
-    implementation 'com.huawei.hms:ml-computer-vision-ocr-cn-model:1.0.3.300'
-    implementation 'com.huawei.hms:ml-computer-vision-ocr-jk-model:1.0.3.300'
-    implementation 'com.huawei.hms:ml-computer-vision-ocr-latin-model:1.0.3.300'
-    implementation 'com.huawei.hms:ml-computer-vision-image-classification-model:1.0.3.300'
-    implementation 'com.huawei.hms:ml-computer-vision-object-detection-model:1.0.3.300'
-    implementation 'com.huawei.hms:ml-computer-vision-face-recognition-model:1.0.3.300'
-    implementation 'com.huawei.hms:ml-computer-card-icr-cn-model:1.0.3.300'
-    implementation 'com.huawei.hms:ml-computer-vision-image-segmentation-model:1.0.3.300'
-    implementation 'com.huawei.hms:ml-computer-vision:1.0.3.300'
-    implementation 'com.huawei.hms:ml-computer-translate:1.0.3.300'
-    implementation 'com.huawei.hms:ml-computer-card-icr-cn-plugin:1.0.3.300'
-    implementation 'com.huawei.hms:ml-computer-language-detection:1.0.3.300'
 
 ## Supported Environments
 android 4.4 or a later version is recommended.

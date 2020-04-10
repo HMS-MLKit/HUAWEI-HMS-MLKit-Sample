@@ -102,9 +102,9 @@ public class TakePhotoActivity extends BaseActivity implements CompoundButton.On
         this.initAction();
         this.cameraConfiguration = new CameraConfiguration();
         this.cameraConfiguration.setCameraFacing(this.facing);
-        this.cameraConfiguration.setFps(6.0f);
-        this.cameraConfiguration.setPreviewWidth(CameraConfiguration.DEFAULT_WIDTH);
-        this.cameraConfiguration.setPreviewHeight(CameraConfiguration.DEFAULT_HEIGHT);
+        this.cameraConfiguration.setFps(20.0f);
+        this.cameraConfiguration.setPreviewWidth(CameraConfiguration.MAX_WIDTH);
+        this.cameraConfiguration.setPreviewHeight(CameraConfiguration.MAX_HEIGHT);
         this.createLensEngine();
         this.startLensEngine();
     }

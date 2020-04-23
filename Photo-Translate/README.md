@@ -15,7 +15,7 @@ The sample code mainly shows the use of Huawei Machine Learning SDK.
 It uses text recognition and translation of Huawei Machine Learning SDK. It uses still image of text to translate words in the photo into the language you want. Currently, the following languages are supported: Simplified Chinese (zh), English (en), French (fr), Arabic (ar), Thai (th), Spanish (es), and Turkish (tr).
 
 You need to use cloud analyzer, such as cloud text analyzer and translator.
-So you need to apply for an agconnect-services.json file in the developer alliance(https://developer.huawei.com/consumer/en/doc/development/HMS-Guides/ml-preparations-4), replacing the sample-agconnect-services.json in the project.
+So you need to apply for an agconnect-services.json file in the developer alliance(https://developer.huawei.com/consumer/en/doc/development/HMS-Guides/ml-add-agc), replacing the sample-agconnect-services.json in the project.
 
 Attention: The package name in this project can not be used to apply for agconnect-services.json. You can use a custom package name to apply for agconnect-services.json.
 

@@ -1,20 +1,17 @@
-/*
- * Copyright (C) The Android Open Source Project
- *
+/**
+ * Copyright 2020. Huawei Technologies Co., Ltd. All rights reserved.
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- *   2019.12.15-Changed modify to use LensEngine
- *                  Huawei Technologies Co., Ltd.
  */
 
 package com.mlkit.sample.camera;
@@ -29,6 +26,7 @@ import android.view.ViewGroup;
 
 import com.huawei.hms.common.size.Size;
 import com.huawei.hms.mlsdk.common.LensEngine;
+import com.mlkit.sample.overlay.GraphicOverlay;
 
 import java.io.IOException;
 
@@ -45,6 +43,8 @@ public class LensEnginePreview extends ViewGroup {
 
     private LensEngine mLensEngine;
 
+    private GraphicOverlay mOverlay;
+
     public LensEnginePreview(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.mContext = context;
@@ -54,6 +54,11 @@ public class LensEnginePreview extends ViewGroup {
         this.mSurfaceView = new SurfaceView(context);
         this.mSurfaceView.getHolder().addCallback(new SurfaceCallback());
         this.addView(this.mSurfaceView);
+    }
+
+    public void start(LensEngine lensEngine, GraphicOverlay overlay) throws IOException {
+        mOverlay = overlay;
+        start(lensEngine);
     }
 
     public void start(LensEngine lensEngine) throws IOException {
@@ -86,6 +91,19 @@ public class LensEnginePreview extends ViewGroup {
     private void startIfReady() throws IOException {
         if (this.mStartRequested && this.mSurfaceAvailable) {
             this.mLensEngine.run(this.mSurfaceView.getHolder());
+            if (mOverlay != null) {
+                Size size = mLensEngine.getDisplayDimension();
+                int min = Math.min(size.getWidth(), size.getHeight());
+                int max = Math.max(size.getWidth(), size.getHeight());
+                if (this.mContext.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    // Swap width and height sizes when in portrait, since it will be rotated by
+                    // 90 degrees
+                    mOverlay.setCameraInfo(min, max, mLensEngine.getLensType());
+                } else {
+                    mOverlay.setCameraInfo(max, min, mLensEngine.getLensType());
+                }
+                mOverlay.clear();
+            }
             this.mStartRequested = false;
         }
     }
@@ -124,7 +142,7 @@ public class LensEnginePreview extends ViewGroup {
         }
 
         // Swap width and height sizes when in portrait, since it will be rotated 90 degrees
-        if (this.isPortraitMode()) {
+        if (this.mContext.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             int tmp = previewWidth;
             previewWidth = previewHeight;
             previewHeight = tmp;
@@ -166,18 +184,5 @@ public class LensEnginePreview extends ViewGroup {
         } catch (IOException e) {
             Log.e(LensEnginePreview.TAG, "Could not start camera source.", e);
         }
-    }
-
-    private boolean isPortraitMode() {
-        int orientation = this.mContext.getResources().getConfiguration().orientation;
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            return false;
-        }
-        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-            return true;
-        }
-
-        Log.d(LensEnginePreview.TAG, "isPortraitMode returning false by default");
-        return false;
     }
 }

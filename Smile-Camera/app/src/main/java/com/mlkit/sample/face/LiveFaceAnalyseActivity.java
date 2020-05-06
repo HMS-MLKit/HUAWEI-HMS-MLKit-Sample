@@ -1,25 +1,23 @@
-/*
+/**
  * Copyright 2020. Huawei Technologies Co., Ltd. All rights reserved.
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.mlkit.sample.face;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -31,34 +29,39 @@ import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 import com.huawei.hms.mlsdk.MLAnalyzerFactory;
 import com.huawei.hms.mlsdk.common.LensEngine;
 import com.huawei.hms.mlsdk.common.MLAnalyzer;
+import com.huawei.hms.mlsdk.common.MLResultTrailer;
+import com.huawei.hms.mlsdk.common.internal.client.SmartLog;
 import com.huawei.hms.mlsdk.face.MLFace;
 import com.huawei.hms.mlsdk.face.MLFaceAnalyzer;
 import com.huawei.hms.mlsdk.face.MLFaceAnalyzerSetting;
 import com.huawei.hms.mlsdk.face.MLFaceEmotion;
+import com.huawei.hms.mlsdk.face.MLMaxSizeFaceTransactor;
 import com.mlkit.sample.R;
 import com.mlkit.sample.camera.LensEnginePreview;
+import com.mlkit.sample.overlay.GraphicOverlay;
+import com.mlkit.sample.overlay.LocalFaceGraphic;
+import com.mlkit.sample.util.Constant;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class LiveFaceAnalyseActivity extends AppCompatActivity implements View.OnClickListener {
-    private static final String TAG = "LiveFaceAnalyse";
 
-    private static final int CAMERA_PERMISSION_CODE = 2;
+public class LiveFaceAnalyseActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = "LiveFaceAnalyseActivity";
 
     private MLFaceAnalyzer analyzer;
 
     private LensEngine mLensEngine;
 
     private LensEnginePreview mPreview;
+
+    private GraphicOverlay overlay;
 
     private int lensType = LensEngine.BACK_LENS;
 
@@ -78,6 +81,8 @@ public class LiveFaceAnalyseActivity extends AppCompatActivity implements View.O
 
     private Button restart;
 
+    private int detectMode;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,24 +91,17 @@ public class LiveFaceAnalyseActivity extends AppCompatActivity implements View.O
             this.lensType = savedInstanceState.getInt("lensType");
         }
         this.mPreview = this.findViewById(R.id.preview);
+        Intent intent = this.getIntent();
+        try {
+            this.detectMode = intent.getIntExtra(Constant.DETECT_MODE, -1);
+        } catch (RuntimeException e) {
+            SmartLog.e(LiveFaceAnalyseActivity.TAG, "Get intent value failed:" + e.getMessage());
+        }
         this.createFaceAnalyzer();
+        this.overlay = findViewById(R.id.face_overlay);
         this.findViewById(R.id.facingSwitch).setOnClickListener(this);
         this.restart = findViewById(R.id.restart);
-        // Checking Camera Permissions
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-            this.createLensEngine();
-        } else {
-            this.requestCameraPermission();
-        }
-    }
-
-    private void requestCameraPermission() {
-        final String[] permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-
-        if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
-            ActivityCompat.requestPermissions(this, permissions, LiveFaceAnalyseActivity.CAMERA_PERMISSION_CODE);
-            return;
-        }
+        this.createLensEngine();
     }
 
     @Override
@@ -134,19 +132,6 @@ public class LiveFaceAnalyseActivity extends AppCompatActivity implements View.O
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        if (requestCode != LiveFaceAnalyseActivity.CAMERA_PERMISSION_CODE) {
-            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-            return;
-        }
-        if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            this.createLensEngine();
-            return;
-        }
-    }
-
-    @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         savedInstanceState.putInt("lensType", this.lensType);
         super.onSaveInstanceState(savedInstanceState);
@@ -163,8 +148,7 @@ public class LiveFaceAnalyseActivity extends AppCompatActivity implements View.O
         if (this.mLensEngine != null) {
             this.mLensEngine.close();
         }
-        this.createLensEngine();
-        this.startLensEngine();
+        this.startPreview(v);
     }
 
     private Handler mHandler = new Handler() {
@@ -195,27 +179,77 @@ public class LiveFaceAnalyseActivity extends AppCompatActivity implements View.O
                         .setTracingAllowed(true)
                         .create();
         this.analyzer = MLAnalyzerFactory.getInstance().getFaceAnalyzer(setting);
-        this.analyzer.setTransactor(new MLAnalyzer.MLTransactor<MLFace>() {
-            @Override
-            public void destroy() {
-            }
+        if (this.detectMode == Constant.NEAREST_PEOPLE) {
 
-            @Override
-            public void transactResult(MLAnalyzer.Result<MLFace> result) {
-                SparseArray<MLFace> faceSparseArray = result.getAnalyseList();
-                int flag = 0;
-                for (int i = 0; i < faceSparseArray.size(); i++) {
-                    MLFaceEmotion emotion = faceSparseArray.valueAt(i).getEmotions();
+            MLMaxSizeFaceTransactor transactor = new MLMaxSizeFaceTransactor.Creator(analyzer, new MLResultTrailer<MLFace>() {
+                @Override
+                public void objectCreateCallback(int itemId, MLFace obj) {
+                    LiveFaceAnalyseActivity.this.overlay.clear();
+                    if (obj == null) {
+                        return;
+                    }
+                    LocalFaceGraphic faceGraphic =
+                            new LocalFaceGraphic(LiveFaceAnalyseActivity.this.overlay, obj, LiveFaceAnalyseActivity.this);
+                    LiveFaceAnalyseActivity.this.overlay.addGraphic(faceGraphic);
+                    MLFaceEmotion emotion = obj.getEmotions();
                     if (emotion.getSmilingProbability() > smilingPossibility) {
-                        flag++;
+                        safeToTakePicture = false;
+                        mHandler.sendEmptyMessage(TAKE_PHOTO);
                     }
                 }
-                if (flag > faceSparseArray.size() * smilingRate && safeToTakePicture) {
-                    safeToTakePicture = false;
-                    mHandler.sendEmptyMessage(TAKE_PHOTO);
+
+                @Override
+                public void objectUpdateCallback(MLAnalyzer.Result<MLFace> var1, MLFace obj) {
+                    LiveFaceAnalyseActivity.this.overlay.clear();
+                    if (obj == null) {
+                        return;
+                    }
+                    LocalFaceGraphic faceGraphic =
+                            new LocalFaceGraphic(LiveFaceAnalyseActivity.this.overlay, obj, LiveFaceAnalyseActivity.this);
+                    LiveFaceAnalyseActivity.this.overlay.addGraphic(faceGraphic);
+                    MLFaceEmotion emotion = obj.getEmotions();
+                    if (emotion.getSmilingProbability() > smilingPossibility && safeToTakePicture) {
+                        safeToTakePicture = false;
+                        mHandler.sendEmptyMessage(TAKE_PHOTO);
+                    }
                 }
-            }
-        });
+
+                @Override
+                public void lostCallback(MLAnalyzer.Result<MLFace> result) {
+                    LiveFaceAnalyseActivity.this.overlay.clear();
+                }
+
+                @Override
+                public void completeCallback() {
+                    LiveFaceAnalyseActivity.this.overlay.clear();
+
+                }
+            }).create();
+            this.analyzer.setTransactor(transactor);
+
+        } else {
+            this.analyzer.setTransactor(new MLAnalyzer.MLTransactor<MLFace>() {
+                @Override
+                public void destroy() {
+                }
+
+                @Override
+                public void transactResult(MLAnalyzer.Result<MLFace> result) {
+                    SparseArray<MLFace> faceSparseArray = result.getAnalyseList();
+                    int flag = 0;
+                    for (int i = 0; i < faceSparseArray.size(); i++) {
+                        MLFaceEmotion emotion = faceSparseArray.valueAt(i).getEmotions();
+                        if (emotion.getSmilingProbability() > smilingPossibility) {
+                            flag++;
+                        }
+                    }
+                    if (flag > faceSparseArray.size() * smilingRate && safeToTakePicture) {
+                        safeToTakePicture = false;
+                        mHandler.sendEmptyMessage(TAKE_PHOTO);
+                    }
+                }
+            });
+        }
     }
 
     private void createLensEngine() {
@@ -232,7 +266,12 @@ public class LiveFaceAnalyseActivity extends AppCompatActivity implements View.O
         this.restart.setVisibility(View.GONE);
         if (this.mLensEngine != null) {
             try {
-                this.mPreview.start(this.mLensEngine);
+                if (this.detectMode == Constant.NEAREST_PEOPLE) {
+                    this.mPreview.start(this.mLensEngine, this.overlay);
+                } else {
+                    this.mPreview.start(this.mLensEngine);
+                }
+
                 this.safeToTakePicture = true;
             } catch (IOException e) {
                 Log.e(LiveFaceAnalyseActivity.TAG, "Failed to start lens engine.", e);
@@ -255,10 +294,10 @@ public class LiveFaceAnalyseActivity extends AppCompatActivity implements View.O
     }
 
     public void startPreview(View view) {
-        createFaceAnalyzer();
-        mPreview.release();
-        createLensEngine();
-        startLensEngine();
+        this.createFaceAnalyzer();
+        this.mPreview.release();
+        this.createLensEngine();
+        this.startLensEngine();
     }
 
     private void stopPreview() {

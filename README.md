@@ -2,6 +2,9 @@
 
 ![Android CI](https://github.com/HMS-MLKit/HUAWEI-HMS-MLKit-Sample/workflows/Android%20CI/badge.svg)
 
+## From now on, the GitHub repository address of HUAWEI ML Kit Demo is changed to https://github.com/HMS-Core/hms-ml-demo. Then, code in the old repository will not be maintained or updated. We will update our features of HUAWEI ML Kit, such as, automatic speech recognition(ASR) and audio file transcription(TTS), in the new repository. Welcome to use HUAWEI ML Kit.
+
+
 ## Introduction
 
 This project contains examples of using the machine learning APIs provided by Huawei mlkit
